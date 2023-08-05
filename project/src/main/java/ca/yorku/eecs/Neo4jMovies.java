@@ -1,9 +1,6 @@
 package ca.yorku.eecs;
 
-import org.neo4j.driver.v1.AuthTokens;
-import org.neo4j.driver.v1.Config;
-import org.neo4j.driver.v1.Driver;
-import org.neo4j.driver.v1.GraphDatabase;
+import org.neo4j.driver.v1.*;
 
 public class Neo4jMovies {
 
@@ -27,8 +24,13 @@ public class Neo4jMovies {
 	public void addMovie() {
 
 	}
-	public void addRelationship() {
-
+	public void addRelationship(String actorId, String movieId) {
+		try(Session session = driver.session()){
+			session.writeTransaction(tx -> tx.run("MERGE (a:Actor {actorId: $actorId} ) MERGE (m:Movie {movieId: $movieId}) MERGE (a)-[:ACTED_IN]->(m)"), (TransactionConfig) Values.parameters("actorId", actorId, "movieId", movieId ));
+			
+			session.close();
+			
+		}
 	}
 	public void getActor() {
 
