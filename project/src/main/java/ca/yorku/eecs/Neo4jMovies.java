@@ -6,7 +6,7 @@ import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
 
 public class Neo4jMovies {
-	
+
 	private Driver driver;
 	private String URIdatabase;
 
@@ -17,7 +17,33 @@ public class Neo4jMovies {
 		Config config = Config.build().withoutEncryption().build();
 		driver = GraphDatabase.driver(URIdatabase, AuthTokens.basic("neo4j", "12345678"), config);
 	}
-	
+
 	//here: methods
+
+	public void addActor() {
+
+	}
+
+	public void addMovie() {
+
+	}
+	public void addRelationship() {
+
+	}
+	public void getActor() {
+
+	}
+	public void getMovie() {
+
+	}
+	public void hasRelationship() {
+
+	}
+	public void computeBaconNumber() {
+
+	}
+	public void computeBaconPath() {
+
+	}
 
 }
