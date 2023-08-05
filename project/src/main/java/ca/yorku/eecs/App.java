@@ -14,7 +14,7 @@ public class App
         // please refer to the HTML server example 
         
         
-        //two lines of code from the BasicHttpServerExample (Ekaterina)
+        //two lines of code from the BasicHttpServerExample
         Utils utils = new Utils();
 	    server.createContext("/api/addTwoNumbers", utils::handle);
         
