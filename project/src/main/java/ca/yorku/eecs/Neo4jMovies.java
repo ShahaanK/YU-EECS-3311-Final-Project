@@ -11,7 +11,7 @@ public class Neo4jMovies {
 	private String URIdatabase;
 
 	//introducing the database for the program
-	//based on the videos provided on eClass: https://www.youtube.com/playlist?list=PLIc63sqj_WAtxX-tYj7zyX9GRYT-IhUFw (Ekaterina) 
+	//based on the videos provided on eClass: https://www.youtube.com/playlist?list=PLIc63sqj_WAtxX-tYj7zyX9GRYT-IhUFw 
 	public Neo4jMovies() {
 		URIdatabase = "bolt://localhost:7687";
 		Config config = Config.build().withoutEncryption().build();
