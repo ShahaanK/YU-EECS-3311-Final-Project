@@ -1,47 +1,65 @@
 package ca.yorku.eecs;
 
+import java.security.Policy.Parameters;
+
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Config;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
+import org.neo4j.driver.v1.StatementResult;
+import org.neo4j.driver.v1.Session;
+import org.neo4j.driver.v1.Transaction;
+import org.neo4j.driver.v1.Values;
 
 public class Neo4jMovies {
 
 	private Driver driver;
 	private String URIdatabase;
 
-	//introducing the database for the program
-	//based on the videos provided on eClass: https://www.youtube.com/playlist?list=PLIc63sqj_WAtxX-tYj7zyX9GRYT-IhUFw 
+	// introducing the database for the program
+	// based on the videos provided on eClass:
+	// https://www.youtube.com/playlist?list=PLIc63sqj_WAtxX-tYj7zyX9GRYT-IhUFw
 	public Neo4jMovies() {
 		URIdatabase = "bolt://localhost:7687";
 		Config config = Config.build().withoutEncryption().build();
 		driver = GraphDatabase.driver(URIdatabase, AuthTokens.basic("neo4j", "12345678"), config);
 	}
 
-	//here: methods
+	// here: methods
 
 	public void addActor() {
-
 	}
 
 	public void addMovie() {
+		String movieName = "Parasite";
+		String movieId = "nm7001453";
+		try (Session session = driver.session()) {
+			session.run("MERGE (m:Movie {id: $movieId, name: $movieName})",
+					Values.parameters("movieId", movieId, "movieName", movieName));
+		}
 
 	}
+
 	public void addRelationship() {
 
 	}
+
 	public void getActor() {
 
 	}
+
 	public void getMovie() {
 
 	}
+
 	public void hasRelationship() {
 
 	}
+
 	public void computeBaconNumber() {
 
 	}
+
 	public void computeBaconPath() {
 
 	}
