@@ -1,7 +1,5 @@
 package ca.yorku.eecs;
 
-import java.security.Policy.Parameters;
-
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Config;
 import org.neo4j.driver.v1.Driver;
@@ -10,6 +8,9 @@ import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.Transaction;
 import org.neo4j.driver.v1.Values;
+
+import org.neo4j.driver.v1.*;
+
 
 public class Neo4jMovies {
 
@@ -27,9 +28,17 @@ public class Neo4jMovies {
 
 	// here: methods
 
-	public void addActor() {
-	}
 
+	public void addActor(String name, String actorId) {
+		try (Session session = driver.session()) {
+			session.writeTransaction(tx -> 
+			tx.run("CREATE (a:Actor { name: $name, actorId: $actorId })",
+					Values.parameters("name", name, "actorId", actorId)));
+			session.close();    
+			
+		}
+	}
+	
 	public void addMovie() {
 		String movieName = "Parasite";
 		String movieId = "nm7001453";
@@ -40,8 +49,13 @@ public class Neo4jMovies {
 
 	}
 
-	public void addRelationship() {
-
+	public void addRelationship(String actorId, String movieId) {
+		try(Session session = driver.session()){
+			session.writeTransaction(tx -> tx.run("MERGE (a:Actor {actorId: $actorId} ) MERGE (m:Movie {movieId: $movieId}) MERGE (a)-[:ACTED_IN]->(m)"), (TransactionConfig) Values.parameters("actorId", actorId, "movieId", movieId ));
+			
+			session.close();
+			
+		}
 	}
 
 	public void getActor() {
