@@ -17,10 +17,16 @@ public class Neo4jMovies {
 
 	//here: methods
 
-	public void addActor() {
-
+	public void addActor(String name, String actorId) {
+		try (Session session = driver.session()) {
+			session.writeTransaction(tx -> 
+			tx.run("CREATE (a:Actor { name: $name, actorId: $actorId })",
+					Values.parameters("name", name, "actorId", actorId)));
+			session.close();    
+			
+		}
 	}
-
+	
 	public void addMovie() {
 
 	}
