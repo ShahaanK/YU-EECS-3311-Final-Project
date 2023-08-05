@@ -19,7 +19,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 //added implements HttpHandler (Ekaterina)
-class Utils implements HttpHandler {       
+public class Utils implements HttpHandler {       
     // use for extracting query params
     public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
         Map<String, String> query_pairs = new LinkedHashMap<String, String>();
@@ -41,7 +41,7 @@ class Utils implements HttpHandler {
 
     // another option for extracting JSON body as String
     public static String getBody(HttpExchange he) throws IOException {
-                InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "utf-8");
+            InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "utf-8");
             BufferedReader br = new BufferedReader(isr);
             
             int b;
