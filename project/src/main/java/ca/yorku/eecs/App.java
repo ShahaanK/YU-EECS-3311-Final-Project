@@ -12,11 +12,6 @@ public class App
         HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", PORT), 0);
         // TODO: two lines of code are expected to be added here
         // please refer to the HTML server example 
-        
-        //two lines of code from the BasicHttpServerExample (Ekaterina)
-        Utils utils = new Utils();
-	    server.createContext("/api/addTwoNumbers", utils::handle);
-        
         server.start();
         System.out.printf("Server started on port %d...\n", PORT);
     }
