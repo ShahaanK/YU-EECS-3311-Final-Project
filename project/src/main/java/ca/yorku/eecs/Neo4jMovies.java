@@ -42,19 +42,11 @@ public class Neo4jMovies {
 	}
 
 	public void addRelationship(String actorId, String movieId) {
-<<<<<<< Updated upstream
 
 		try (Session session = driver.session()) {
 			session.writeTransaction(tx -> tx.run(
 					"MERGE (a:actor {actorId: $actorId} ) MERGE (m:Movie {movieId: $movieId}) MERGE (a)-[:ACTED_IN]->(m)"),
 					(TransactionConfig) Values.parameters("actorId", actorId, "movieId", movieId));
-
-=======
-		try(Session session = driver.session()){
-			session.writeTransaction(tx -> tx.run("MERGE (a:Actor {actorId: $actorId} ) MERGE (m:Movie {movieId: $movieId}) MERGE (a)-[:ACTED_IN]->(m)"), 
-					(TransactionConfig) Values.parameters("actorId", actorId, "movieId", movieId ));
->>>>>>> Stashed changes
-			session.close();
 
 		}
 	}
