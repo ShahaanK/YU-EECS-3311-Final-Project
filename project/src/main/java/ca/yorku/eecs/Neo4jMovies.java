@@ -25,17 +25,18 @@ public class Neo4jMovies {
 
 	public void addActor(String name, String actorId) {
 		try (Session session = driver.session()) {
-			session.writeTransaction(tx -> tx.run("CREATE (a:Actor { name: $name, actorId: $actorId })",
+			session.writeTransaction(tx -> tx.run("CREATE (a:actor { name: $name, actorId: $actorId })",
 					Values.parameters("name", name, "actorId", actorId)));
 			session.close();
 		}
 	}
 
-	public void addMovie(String name, String movieId) {
+	public void addMovie(String movieName, String movieId) {
 
 		try (Session session = driver.session()) {
-			session.writeTransaction(tx -> tx.run("MERGE (m:Movie {id: $movieId, name: $movieName})",
-					Values.parameters("movieId", movieId, "movieName", name)));
+			session.writeTransaction(tx -> 
+			tx.run("MERGE (m:movie {id: $movieId, name: $movieName})",
+					Values.parameters("movieId", movieId, "movieName", movieName)));
 			session.close();
 		}
 	}
@@ -44,8 +45,11 @@ public class Neo4jMovies {
 
 		try (Session session = driver.session()) {
 			session.writeTransaction(tx -> tx.run(
-					"MERGE (a:Actor {actorId: $actorId} ) MERGE (m:Movie {movieId: $movieId}) MERGE (a)-[:ACTED_IN]->(m)"),
+					"MERGE (a:actor {actorId: $actorId} ) MERGE (m:Movie {movieId: $movieId}) MERGE (a)-[:ACTED_IN]->(m)"),
 					(TransactionConfig) Values.parameters("actorId", actorId, "movieId", movieId));
+
+			session.close();
+
 		}
 	}
 
@@ -91,12 +95,27 @@ public class Neo4jMovies {
 
 	}
 
-	public void computeBaconNumber() {
-
+	public void computeBaconNumber(String actorId) {
+		try (Session session = driver.session()) {
+			if (!actorId.equals("nm0000102")) {
+				session.writeTransaction(tx -> 
+				tx.run("MATCH p=shortestPath((a:actor {actorId: nm0000102})-[*]-(a:actor {actorId: $actorId}))\n"
+						+ "RETURN length(p) as baconNumber",
+						Values.parameters("actorId", actorId)));
+				session.close();
+			}
+		}
 	}
 
-	public void computeBaconPath() {
-
+	public void computeBaconPath(String actorId) {
+		try (Session session = driver.session()) {
+			if (!actorId.equals("nm0000102")) {
+				session.writeTransaction(tx -> 
+				tx.run("MATCH p=shortestPath((a:actor {actorId: nm0000102})-[*]-(a:actor {actorId: $actorId}))\n"
+						+ "RETURN p as baconPath",
+						Values.parameters("actorId", actorId)));
+				session.close();
+			}
+		}
 	}
-
 }
