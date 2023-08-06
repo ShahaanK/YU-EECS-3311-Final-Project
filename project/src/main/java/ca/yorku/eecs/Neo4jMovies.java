@@ -35,7 +35,6 @@ public class Neo4jMovies {
 			tx.run("CREATE (a:Actor { name: $name, actorId: $actorId })",
 					Values.parameters("name", name, "actorId", actorId)));
 			session.close();    
-			
 		}
 	}
 	
@@ -45,16 +44,16 @@ public class Neo4jMovies {
 		try (Session session = driver.session()) {
 			session.run("MERGE (m:Movie {id: $movieId, name: $movieName})",
 					Values.parameters("movieId", movieId, "movieName", movieName));
+			session.close();
 		}
 
 	}
 
 	public void addRelationship(String actorId, String movieId) {
 		try(Session session = driver.session()){
-			session.writeTransaction(tx -> tx.run("MERGE (a:Actor {actorId: $actorId} ) MERGE (m:Movie {movieId: $movieId}) MERGE (a)-[:ACTED_IN]->(m)"), (TransactionConfig) Values.parameters("actorId", actorId, "movieId", movieId ));
-			
+			session.writeTransaction(tx -> tx.run("MERGE (a:Actor {actorId: $actorId} ) MERGE (m:Movie {movieId: $movieId}) MERGE (a)-[:ACTED_IN]->(m)"), (TransactionConfig) 
+					Values.parameters("actorId", actorId, "movieId", movieId ));
 			session.close();
-			
 		}
 	}
 
