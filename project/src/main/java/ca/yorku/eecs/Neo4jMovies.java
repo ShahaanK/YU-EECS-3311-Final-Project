@@ -61,6 +61,7 @@ public class Neo4jMovies {
 	                StatementResult result = tx.run("MATCH (m:Movie {id: $movieId})-[:ACTED_IN]-(a:Actor) RETURN m, collect(a.id) as actors",
 	                                       Values.parameters("movieId", movieId));
 	                
+	                //if statement ensures that data processing only occurs when there's actual data present
 	                if (!result.hasNext()) {
 	                    return null; // or throw an exception if the movie doesn't exist
 	                }
