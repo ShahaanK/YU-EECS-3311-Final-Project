@@ -91,7 +91,15 @@ public class Neo4jMovies {
 	    }
 	}
 
-	public void hasRelationship() {
+	public void hasRelationship(String actorId, String movieId) {
+		
+		try (Session session = driver.session()) {
+				session.writeTransaction(tx -> 
+				tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
+						+ "RETURN actorId as actorId, movieId as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
+						Values.parameters("actorName", actorId, "movieName", movieId)));
+				session.close();
+		}
 
 	}
 
