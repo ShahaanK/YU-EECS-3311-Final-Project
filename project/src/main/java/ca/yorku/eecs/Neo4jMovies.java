@@ -1,15 +1,11 @@
 package ca.yorku.eecs;
 
-import org.neo4j.driver.v1.AuthTokens;
-import org.neo4j.driver.v1.Config;
-import org.neo4j.driver.v1.Driver;
-import org.neo4j.driver.v1.GraphDatabase;
-import org.neo4j.driver.v1.StatementResult;
-import org.neo4j.driver.v1.Session;
-import org.neo4j.driver.v1.Transaction;
-import org.neo4j.driver.v1.Values;
+import org.neo4j.driver.v1.types.Node;
+
+import java.util.List;
 
 import org.neo4j.driver.v1.*;
+import org.neo4j.driver.v1.Record;
 
 public class Neo4jMovies {
 
@@ -35,12 +31,11 @@ public class Neo4jMovies {
 		}
 	}
 
-	public void addMovie(String movieName, String movieId) {
-		
+	public void addMovie(String name, String movieId) {
+
 		try (Session session = driver.session()) {
-			session.writeTransaction(tx -> 
-			tx.run("MERGE (m:Movie {id: $movieId, name: $movieName})",
-					Values.parameters("movieId", movieId, "movieName", movieName)));
+			session.writeTransaction(tx -> tx.run("MERGE (m:Movie {id: $movieId, name: $movieName})",
+					Values.parameters("movieId", movieId, "movieName", name)));
 			session.close();
 		}
 	}
@@ -58,8 +53,26 @@ public class Neo4jMovies {
 
 	}
 
-	public void getMovie() {
+	public Movie getMovie(String movieId) {
+	    try (Session session = driver.session()) {
+	        return session.readTransaction(new TransactionWork<Movie>() {
+	            @Override
+	            public Movie execute(Transaction tx) {
+	                StatementResult result = tx.run("MATCH (m:Movie {id: $movieId})-[:ACTED_IN]-(a:Actor) RETURN m, collect(a.id) as actors",
+	                                       Values.parameters("movieId", movieId));
+	                
+	                if (!result.hasNext()) {
+	                    return null; // or throw an exception if the movie doesn't exist
+	                }
 
+	                Record record = result.next();
+	                Node movieNode = record.get("m").asNode();
+	                List<String> actorIds = record.get("actors").asList(Value::asString);
+	                
+	                return new Movie(movieNode.get("id").asString(), movieNode.get("name").asString(), actorIds);
+	            }
+	        });
+	    }
 	}
 
 	public void hasRelationship() {
