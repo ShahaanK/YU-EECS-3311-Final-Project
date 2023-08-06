@@ -41,16 +41,35 @@ public class Neo4jMovies {
 	}
 
 	public void addRelationship(String actorId, String movieId) {
+<<<<<<< Updated upstream
 		try (Session session = driver.session()) {
 			session.writeTransaction(tx -> tx.run(
 					"MERGE (a:Actor {actorId: $actorId} ) MERGE (m:Movie {movieId: $movieId}) MERGE (a)-[:ACTED_IN]->(m)"),
 					(TransactionConfig) Values.parameters("actorId", actorId, "movieId", movieId));
+=======
+		try(Session session = driver.session()){
+			session.writeTransaction(tx -> tx.run("MERGE (a:Actor {actorId: $actorId} ) MERGE (m:Movie {movieId: $movieId}) MERGE (a)-[:ACTED_IN]->(m)"), 
+					(TransactionConfig) Values.parameters("actorId", actorId, "movieId", movieId ));
+>>>>>>> Stashed changes
 			session.close();
 		}
 	}
 
-	public void getActor() {
-
+	public Actor getActor(String actorId) {
+		try(Session session = driver.session()){
+			StatementResult info = session.writeTransaction(tx -> tx.run("MATCH (a:Actor {actorId: $actorId} OPTIONAL MATCH (a)-[:ACTED_IN]->(m:Movie) RETURN a.actorId, a.name, COLLECT(m.movieId) AS movies"),
+					(TransactionConfig) Values.parameters("actorId", actorId));
+		session.close();
+		 
+		if(info.hasNext()) {
+			Record actor = info.next();
+			return new Actor(actorId, actor.get("a.name").toString(), actor.get("movies").asList(Value::asString));
+		}
+		else {
+			return null;
+		}
+		
+		}
 	}
 
 	public Movie getMovie(String movieId) {
