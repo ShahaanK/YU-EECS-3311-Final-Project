@@ -11,6 +11,8 @@ import java.net.URLDecoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.json.*;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Config;
 import org.neo4j.driver.v1.Driver;
@@ -80,5 +82,27 @@ public class Utils implements HttpHandler {
         	sendString(request, "Server error\n", 500);
         }
 		
+	}
+	
+	public void handleGet(HttpExchange request) throws IOException {
+		String body = Utils.convert(request.getRequestBody());
+		try {
+			JSONObject deserialized = new JSONObject(body);
+			
+			String actorId, actorName, movieId, movieName;
+			
+			if(request.getRequestMethod().equals("GET") && (deserialized.length() == 1 || deserialized.length() == 2) && (deserialized.has("actorId") || deserialized.has("actorName") || deserialized.has("movieId") || deserialized.has("movieName"))) {
+				actorId = deserialized.has("actorId") ? deserialized.getString("actorId") : null;
+				actorName = deserialized.has("actorName") ? deserialized.getString("actorName") : null;
+				movieId = deserialized.has("movieId") ? deserialized.getString("movieId") : null;
+				movieName = deserialized.has("movieName") ? deserialized.getString("movieName") : null;
+			}
+			else {
+				request.sendResponseHeaders(400, -1);
+				return;
+			}
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 }
