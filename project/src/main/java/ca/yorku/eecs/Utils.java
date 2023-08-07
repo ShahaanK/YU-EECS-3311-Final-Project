@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Config;
 import org.neo4j.driver.v1.Driver;
@@ -105,4 +107,41 @@ public class Utils implements HttpHandler {
 			e.printStackTrace();
 		}
 	}
+
+	
+	//booleam function that checks if the request is a PUT method
+	private boolean isPutMethod(HttpExchange request) {
+		return "PUT".equalsIgnoreCase(request.getRequestMethod());
+	}
+	
+	//method to handle PUT requests and update the database
+	public void handlePut(HttpExchange request) throws IOException {
+		
+		//checks if the method is a PUT
+		if (isPutMethod(request)) {
+			String body = Utils.convert(request.getRequestBody());
+			try {
+				JSONObject deserialized = new JSONObject(body);
+				//Validate and extract data from the JSOB Object
+				
+				//Perform the update operation, e.g. update a databse record
+				request.sendResponseHeaders(200,-1); // OK response
+			}
+			catch (JSONException e) {
+				//Handling any JSON parsing exceptions
+				e.printStackTrace();
+				request.sendResponseHeaders(400,-1); // Bad Request response
+			}
+			catch (Exception e) {
+				//Handling all other exceptions
+				e.printStackTrace();
+				request.sendResponseHeaders(500,-1); // Internal Server Error Response
+			}
+		}
+		else {
+			//If the request method is not PUT
+			request.sendResponseHeaders(405,-1);
+		}
+	}
+	
 }
