@@ -98,27 +98,19 @@ public class Utils implements HttpHandler {
 			
 			if(request.getRequestMethod().equals("GET") && (deserialized.length() == 1 || deserialized.length() == 2) && (deserialized.has("actorId") || deserialized.has("actorName") || deserialized.has("movieId") || deserialized.has("movieName") || deserialized.has("award"))) {
 
-
-			String actorId, actorName, movieId, movieName;
-
-			if (request.getRequestMethod().equals("GET") && (deserialized.length() == 1 || deserialized.length() == 2)
-					&& (deserialized.has("actorId") || deserialized.has("actorName") || deserialized.has("movieId")
-							|| deserialized.has("movieName"))) {
-
 				actorId = deserialized.has("actorId") ? deserialized.getString("actorId") : null;
 				actorName = deserialized.has("actorName") ? deserialized.getString("actorName") : null;
 				movieId = deserialized.has("movieId") ? deserialized.getString("movieId") : null;
 				movieName = deserialized.has("movieName") ? deserialized.getString("movieName") : null;
 
 				award = deserialized.has("award") ? deserialized.getString("award") : null;
-			}
-			else {
-
+			
 			} else {
 
 				request.sendResponseHeaders(400, -1);
 				return;
 			}
+	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
