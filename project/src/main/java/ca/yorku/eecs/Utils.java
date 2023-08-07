@@ -89,13 +89,14 @@ public class Utils implements HttpHandler {
 		try {
 			JSONObject deserialized = new JSONObject(body);
 			
-			String actorId, actorName, movieId, movieName;
+			String actorId, actorName, movieId, movieName, award;
 			
-			if(request.getRequestMethod().equals("GET") && (deserialized.length() == 1 || deserialized.length() == 2) && (deserialized.has("actorId") || deserialized.has("actorName") || deserialized.has("movieId") || deserialized.has("movieName"))) {
+			if(request.getRequestMethod().equals("GET") && (deserialized.length() == 1 || deserialized.length() == 2) && (deserialized.has("actorId") || deserialized.has("actorName") || deserialized.has("movieId") || deserialized.has("movieName") || deserialized.has("award"))) {
 				actorId = deserialized.has("actorId") ? deserialized.getString("actorId") : null;
 				actorName = deserialized.has("actorName") ? deserialized.getString("actorName") : null;
 				movieId = deserialized.has("movieId") ? deserialized.getString("movieId") : null;
 				movieName = deserialized.has("movieName") ? deserialized.getString("movieName") : null;
+				award = deserialized.has("award") ? deserialized.getString("award") : null;
 			}
 			else {
 				request.sendResponseHeaders(400, -1);

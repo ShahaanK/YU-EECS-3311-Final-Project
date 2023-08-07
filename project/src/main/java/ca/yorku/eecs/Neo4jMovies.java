@@ -123,4 +123,22 @@ public class Neo4jMovies {
 			}
 		}
 	}
+	
+	public void addAward(String award) {
+		try (Session session = driver.session()) {
+			session.writeTransaction(tx -> tx.run("CREATE (w:award {award: $award})",
+					Values.parameters("award", award)));
+			session.close();
+		}
+	}
+	
+	public void addAwardWinner(String award, String movieId) {
+		try (Session session = driver.session()) {
+			session.writeTransaction(tx -> 
+			tx.run("MATCH (w: award {award: $award}), (m: movie {movieId: $movieId})\n"
+					+ "RETURN award as award, movieId as movieId, EXISTS ((w)-[:WON_BY]-(m)) as addAwardWinner",
+					Values.parameters("award", award, "movieId", movieId)));
+			session.close();
+	}
+	}
 }
