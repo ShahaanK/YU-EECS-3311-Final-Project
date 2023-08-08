@@ -101,7 +101,7 @@ public class Neo4jMovies {
 			return tx.run("MATCH (a:actor {actorId: $actorId})\n"
 					+ "OPTIONAL MATCH (a)-[:ACTED_IN]->(m:movie)\n"
 					+ "RETURN a.actorId, a.name, COLLECT(m.movieId) AS movies",
-					Values.parameters("actorId", actorId)).single().get("_fields");
+					Values.parameters("actorId", actorId)).consume();
 			});
 			session.close();
 		}
@@ -121,7 +121,7 @@ public class Neo4jMovies {
 			return tx.run("MATCH (m:movie {movieId: $movieId})\n"
 					+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
 					+ "RETURN m, collect(a.id) as actors",
-					Values.parameters("movieId", movieId)).single().get("_fields");
+					Values.parameters("movieId", movieId)).consume();
 			});
 			session.close();
 		}
