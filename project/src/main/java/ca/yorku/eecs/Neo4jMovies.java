@@ -136,21 +136,21 @@ public class Neo4jMovies {
 			{
 				tx.run("MATCH (m:movie {movieId: $movieId})\n"
 						+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
-						+ "RETURN m",
+						+ "RETURN m.name as name, m.movieId as movieId, collect(a.id) as actors",
 						Values.parameters("movieId", movieId));
 
 				StatementResult result = tx.run("MATCH (m:movie {movieId: $movieId})\n"
 						+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
-						+ "RETURN m, collect(a.id) as actors",
+						+ "RETURN m.name as name, m.movieId as movieId, collect(a.id) as actors",
 						Values.parameters("movieId", movieId));
 				
 				Record record = result.next();
 				
 				JSONObject json = new JSONObject();
 				try {
-					json.put("actorId", record.get("movieId"));
+					json.put("movieId", record.get("movieId"));
 					json.put("name", record.get("name"));
-					json.put("movies", record.get("actors"));
+					json.put("actors", record.get("actors"));
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
