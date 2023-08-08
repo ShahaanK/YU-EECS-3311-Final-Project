@@ -281,10 +281,10 @@ public class Neo4jMovies {
 		try (Session session = driver.session()) {
 			if (!actorId.equals("nm0000102")) {
 				session.writeTransaction(tx -> {
-					tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
+					tx.run("MATCH p=shortestPath((k:actor {actorId: $kevin})-[ACTED_IN*]-(k:actor {actorId: $actorId}))\n"
 							+ "RETURN length(p) as baconNumber",
 							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
-					StatementResult result = tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
+					StatementResult result = tx.run("MATCH p=shortestPath((k:actor {actorId: $kevin})-[ACTED_IN*]-(a:actor {actorId: $actorId}))\n"
 							+ "RETURN length(p) as baconNumber",
 							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
 
@@ -315,18 +315,18 @@ public class Neo4jMovies {
 		try (Session session = driver.session()) {
 			if (!actorId.equals("nm0000102")) {
 				session.writeTransaction(tx -> {
-					tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
+					tx.run("MATCH p=shortestPath((k:actor {actorId: $kevin})-[ACTED_IN*]-(a:actor {actorId: $actorId}))\n"
 							+ "RETURN p as baconPath",
 							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
 
-					StatementResult result = tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
+					StatementResult result = tx.run("MATCH p=shortestPath((k:actor {actorId: $kevin})-[ACTED_IN*]-(a:actor {actorId: $actorId}))\n"
 							+ "RETURN p as baconPath",
 							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
 
 					Record record = result.next();
 
 					System.out.print("{\n\t \"baconPath\": [");
-					List<Object> newList = new ArrayList<Object>(record.get("actors").asList());
+					List<Object> newList = new ArrayList<Object>(record.get("_fields").asList());
 
 					if (newList.size() > 1) {
 						int i = 0;
