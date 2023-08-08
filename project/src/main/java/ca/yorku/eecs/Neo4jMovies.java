@@ -215,35 +215,35 @@ public class Neo4jMovies {
 
 		try (Session session = driver.session()) {
 			session.writeTransaction(tx -> {
-			tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
-					+ "RETURN (a).actorId as actorId, (m).movieId as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
-					Values.parameters("actorId", actorId, "movieId", movieId));
-			StatementResult result = tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
-					+ "RETURN (a).actorId as actorId, (m).movieId as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
-					Values.parameters("actorId", actorId, "movieId", movieId));
+				tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
+						+ "RETURN (a).actorId as actorId, (m).movieId as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
+						Values.parameters("actorId", actorId, "movieId", movieId));
+				StatementResult result = tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
+						+ "RETURN (a).actorId as actorId, (m).movieId as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
+						Values.parameters("actorId", actorId, "movieId", movieId));
 
-			Record record = result.next();
+				Record record = result.next();
 
-			JSONObject json = new JSONObject();
-			try {
-				json.put("actorId", record.get("actorId"));
-				json.put("movieId", record.get("movieId"));
-				json.put("hasRelationship", record.get("hasRelationship"));
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				System.out.print("{\n\t \"actorId\": " + json.get("actorId") + ",\n");
-				System.out.print("\t \"movieId\": " + json.get("movieId") + ",\n");
-				System.out.print("\t \"hasRelationship\": " + json.get("hasRelationship").toString().toLowerCase() + "\n}");
+				JSONObject json = new JSONObject();
+				try {
+					json.put("actorId", record.get("actorId"));
+					json.put("movieId", record.get("movieId"));
+					json.put("hasRelationship", record.get("hasRelationship"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					System.out.print("{\n\t \"actorId\": " + json.get("actorId") + ",\n");
+					System.out.print("\t \"movieId\": " + json.get("movieId") + ",\n");
+					System.out.print("\t \"hasRelationship\": " + json.get("hasRelationship").toString().toLowerCase() + "\n}");
 
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return result;		
-		});
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return result;		
+			});
 			session.close();
 		}
 
@@ -253,31 +253,31 @@ public class Neo4jMovies {
 		try (Session session = driver.session()) {
 			if (!actorId.equals("nm0000102")) {
 				session.writeTransaction(tx -> {
-				tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
-						+ "RETURN length(p) as baconNumber",
-						Values.parameters("actorId", actorId, "kevin", "nm0000102"));
-				StatementResult result = tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
-						+ "RETURN length(p) as baconNumber",
-						Values.parameters("actorId", actorId, "kevin", "nm0000102"));
+					tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
+							+ "RETURN length(p) as baconNumber",
+							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
+					StatementResult result = tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
+							+ "RETURN length(p) as baconNumber",
+							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
 
-				Record record = result.next();
+					Record record = result.single();
 
-				JSONObject json = new JSONObject();
-				try {
-					json.put("baconNumber", record.get("baconNumber"));
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				try {
-					System.out.print("{\n\t \"baconNumber\": " + json.get("baconNumber") + "\n}");
+					JSONObject json = new JSONObject();
+					try {
+						json.put("baconNumber", record.get("baconNumber"));
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					try {
+						System.out.print("{\n\t \"baconNumber\": " + json.get("baconNumber") + "\n}");
 
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return result;		
-			});
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return result;		
+				});
 				session.close();
 			}
 		}
@@ -286,10 +286,42 @@ public class Neo4jMovies {
 	public void computeBaconPath(String actorId) {
 		try (Session session = driver.session()) {
 			if (!actorId.equals("nm0000102")) {
-				session.writeTransaction(tx -> 
-				tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
-						+ "RETURN p as baconPath",
-						Values.parameters("actorId", actorId, "kevin", "nm0000102")));
+				session.writeTransaction(tx -> {
+					tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
+							+ "RETURN p as baconPath",
+							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
+
+					StatementResult result = tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
+							+ "RETURN p as baconPath",
+							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
+
+					Record record = result.next();
+
+					System.out.print("{\n\t \"baconPath\": [");
+					List<Object> newList = new ArrayList<Object>(record.get("actors").asList());
+
+					if (newList.size() > 1) {
+						int i = 0;
+						System.out.print("\n");
+						while (i < newList.size()) {
+							System.out.print("\t\t\"" + newList.get(i) + "\"");
+							if (i + 1 != newList.size()) {
+								System.out.print(",\n");
+							}
+							i++;
+						}
+						System.out.print("\n\t]\n}");
+					}
+					else if (newList.size() == 1) {
+						System.out.print("\"" + newList.get(0) + "\"]\n}");
+					}
+					else {
+						System.out.print("]\n}");
+					}
+
+					return result;	
+
+				});
 				session.close();
 			}
 		}
