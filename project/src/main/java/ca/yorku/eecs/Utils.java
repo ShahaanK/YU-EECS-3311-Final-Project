@@ -222,10 +222,10 @@ public class Utils implements HttpHandler {
 					return;
 				}
 
-				String name = jsonObject.getString("name");
+				String actorName = jsonObject.getString("name");
 				String actorId = jsonObject.getString("actorId");
 
-				neo4jMovies.addActor(name, actorId);
+				neo4jMovies.addActor(actorName, actorId);
 				sendString(request, "200 OK\n", 200);
 
 			} 
