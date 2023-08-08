@@ -3,7 +3,10 @@ package ca.yorku.eecs;
 import org.neo4j.driver.v1.types.Node;
 
 import java.util.List;
+import java.lang.*;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.neo4j.driver.v1.*;
 import org.neo4j.driver.v1.Record;
 
@@ -11,7 +14,7 @@ public class Neo4jMovies {
 
 	private Driver driver;
 	private String URIdatabase;
-	
+
 	/*
 	 * 
 	 * INTRODUCING THE DATABASE
@@ -19,7 +22,7 @@ public class Neo4jMovies {
 	 * https://www.youtube.com/playlist?list=PLIc63sqj_WAtxX-tYj7zyX9GRYT-IhUFw
 	 * 
 	 */
-	
+
 	public Neo4jMovies() {
 		URIdatabase = "bolt://localhost:7687";
 		Config config = Config.build().withoutEncryption().build();
@@ -27,7 +30,7 @@ public class Neo4jMovies {
 	}
 
 
-	
+
 	/*
 	 * 
 	 * ADD METHODS
@@ -63,7 +66,7 @@ public class Neo4jMovies {
 			session.close();
 		}
 	}
-	
+
 	public void addAward(String award) {
 		try (Session session = driver.session()) {
 			session.writeTransaction(tx -> tx.run("CREATE (w:award {award: $award})",
@@ -81,47 +84,84 @@ public class Neo4jMovies {
 			session.close();
 		}
 	}
-	
-	
+
+
 	/*
 	 * 
 	 * GET METHODS
 	 * 
 	 */
-	
+
 	public void getActor(String actorId) {
 		try(Session session = driver.session()){
 			session.writeTransaction(tx -> 
 			{
-			tx.run("MATCH (a:actor {actorId: $actorId})\n"
-					+ "OPTIONAL MATCH (a)-[:ACTED_IN]->(m:movie)\n"
-					+ "RETURN a.actorId, a.name, COLLECT(m.movieId) AS movies",
-					Values.parameters("actorId", actorId));
-			
-			return tx.run("MATCH (a:actor {actorId: $actorId})\n"
-					+ "OPTIONAL MATCH (a)-[:ACTED_IN]->(m:movie)\n"
-					+ "RETURN a.actorId, a.name, COLLECT(m.movieId) AS movies",
-					Values.parameters("actorId", actorId)).consume();
+				tx.run("MATCH (a:actor {actorId: $actorId})\n"
+						+ "OPTIONAL MATCH (a)-[:ACTED_IN]->(m:movie)\n"
+						+ "RETURN a.actorId, a.name, COLLECT(m.movieId) AS movies",
+						Values.parameters("actorId", actorId));
+
+				StatementResult result = tx.run("MATCH (a:actor {actorId: $actorId})\n"
+						+ "OPTIONAL MATCH (a)-[:ACTED_IN]->(m:movie)\n"
+						+ "RETURN a.actorId as actorId, a.name as name, COLLECT(m.movieId) AS movies",
+						Values.parameters("actorId", actorId));
+				Record record = result.next();
+				
+				JSONObject json = new JSONObject();
+				try {
+					json.put("actorId", record.get("actorId"));
+					json.put("name", record.get("name"));
+					json.put("movies", record.get("movies"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					System.out.print(json.toString(3));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return result;
 			});
 			session.close();
 		}
-		
+
 	}
 
 	public void getMovie(String movieId) {
-		
+
 		try(Session session = driver.session()){
 			session.writeTransaction(tx -> 
 			{
-			tx.run("MATCH (m:movie {movieId: $movieId})\n"
-					+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
-					+ "RETURN m",
-					Values.parameters("movieId", movieId));
-			
-			return tx.run("MATCH (m:movie {movieId: $movieId})\n"
-					+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
-					+ "RETURN m, collect(a.id) as actors",
-					Values.parameters("movieId", movieId)).consume();
+				tx.run("MATCH (m:movie {movieId: $movieId})\n"
+						+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
+						+ "RETURN m",
+						Values.parameters("movieId", movieId));
+
+				StatementResult result = tx.run("MATCH (m:movie {movieId: $movieId})\n"
+						+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
+						+ "RETURN m, collect(a.id) as actors",
+						Values.parameters("movieId", movieId));
+				
+				Record record = result.next();
+				
+				JSONObject json = new JSONObject();
+				try {
+					json.put("actorId", record.get("movieId"));
+					json.put("name", record.get("name"));
+					json.put("movies", record.get("actors"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					System.out.print(json.toString(3));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return result;
 			});
 			session.close();
 		}
