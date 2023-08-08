@@ -136,12 +136,12 @@ public class Neo4jMovies {
 			{
 				tx.run("MATCH (m:movie {movieId: $movieId})\n"
 						+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
-						+ "RETURN m.name as name, m.movieId as movieId, collect(a.id) as actors",
+						+ "RETURN m.name as name, m.movieId as movieId, collect(a.actorId) as actors",
 						Values.parameters("movieId", movieId));
 
 				StatementResult result = tx.run("MATCH (m:movie {movieId: $movieId})\n"
 						+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
-						+ "RETURN m.name as name, m.movieId as movieId, collect(a.id) as actors",
+						+ "RETURN m.name as name, m.movieId as movieId, collect(a.actorId) as actors",
 						Values.parameters("movieId", movieId));
 				
 				Record record = result.next();
