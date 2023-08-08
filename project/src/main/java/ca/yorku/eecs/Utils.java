@@ -90,55 +90,103 @@ public class Utils implements HttpHandler {
 	}
 
 	public void handleGet(HttpExchange request) throws IOException {
-		
+
+		Neo4jMovies neo4jmovies = new Neo4jMovies();
+
 		URI uriFromRequest = request.getRequestURI();
 		String pathFromRequest = uriFromRequest.getPath();
 		String queryFromURI = uriFromRequest.getQuery();
 		System.out.print(queryFromURI + "\n");
-		
-		Map<String, String> queryParameters = splitQuery(queryFromURI);
-		System.out.print(queryParameters);
-		
+
+		Map<String, String> queryParameters = new LinkedHashMap<String, String>();
+
 		try {
-			if (pathFromRequest.equals("/api/v1/addActor")) {
-				String response = "i am done";
-				sendString(request, response, 200);
+
+			queryParameters = splitQuery(queryFromURI);
+			System.out.print(queryParameters);
+
+
+			try {
+				if (pathFromRequest.equals("/api/v1/getActor")) {
+					if (!queryParameters.containsKey("actorId")) {
+						sendString(request, "400 BAD REQUEST\n", 400);
+					}
+					else {
+						neo4jmovies.getActor(queryParameters.get("actorId").toString());
+						sendString(request, "200 OK", 200);
+					}
+				}
+				else if (pathFromRequest.equals("/api/v1/getMovie")) {
+					if (!queryParameters.containsKey("movieId")) {
+						sendString(request, "400 BAD REQUEST\n", 400);
+					}
+					else {
+						neo4jmovies.getMovie(queryParameters.get("getMovie").toString());
+						sendString(request, "200 OK", 200);
+					}
+				}
+
+				else if (pathFromRequest.equals("/api/v1/hasRelationship")) {
+					if (!queryParameters.containsKey("actorId") || !queryParameters.containsKey("movieId")) {
+						sendString(request, "400 BAD REQUEST\n", 400);
+					}
+					else {
+						neo4jmovies.hasRelationship(queryParameters.get("actorId").toString(), 
+								queryParameters.get("movieId").toString());
+						sendString(request, "200 OK", 200);
+					}
+				}
+
+				else if (pathFromRequest.equals("/api/v1/computeBaconNumber")) {
+					if (!queryParameters.containsKey("actorId")) {
+						sendString(request, "400 BAD REQUEST\n", 400);
+					}
+					else {
+						neo4jmovies.computeBaconNumber(queryParameters.get("actorId").toString());
+						sendString(request, "200 OK", 200);
+					}
+				}
+
+				else if (pathFromRequest.equals("/api/v1/computeBaconPath")) {
+					if (!queryParameters.containsKey("actorId")) {
+						sendString(request, "400 BAD REQUEST\n", 400);
+					}
+					else {
+						neo4jmovies.computeBaconPath(queryParameters.get("actorId").toString());
+						sendString(request, "200 OK", 200);
+					}
+				}
 			}
-			else if (pathFromRequest.equals("/api/v1/addMovie")) {
-				String response = "";
-				sendString(request, response, 200);
-			}
-			
-			else if (pathFromRequest.equals(queryParameters)) {
-				String response = "";
-				sendString(request, response, 200);
+
+
+			catch (Exception e) {
+				e.printStackTrace();
+				sendString(request, "Server error\n", 500);
 			}
 		}
-		
 		catch (Exception e) {
-			e.printStackTrace();
-			sendString(request, "Server error\n", 500);
+			sendString(request, "400 BAD REQUEST\n", 400);
 		}
 	}
 
 	//Creating an instance of the Neo4jMovies class to use the public addActor, addMovie, and addRelationship methods
 	private Neo4jMovies neo4jMovies;
-	
+
 	public Utils() {
 		neo4jMovies = new Neo4jMovies();
 	}
 
 	// method to handle PUT requests and update the database
 	public void handlePut(HttpExchange request) throws IOException {
-		
-		
+
+
 		URI uriFromRequest = request.getRequestURI();
 		String pathFromRequest = uriFromRequest.getPath();
 		String body = convert(request.getRequestBody());
-		
+
 		System.out.print(body + "\n");
 		System.out.print(pathFromRequest + "\n");
-		
+
 
 		try {
 			JSONObject deserialized = new JSONObject(body);
@@ -149,7 +197,7 @@ public class Utils implements HttpHandler {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
-				
+
 				String name = deserialized.getString("name");
 				String actorId = deserialized.getString("actorId");
 
@@ -163,24 +211,24 @@ public class Utils implements HttpHandler {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
-				
+
 				String movieName = deserialized.getString("name");
 				String movieId = deserialized.getString("movieId");
-				
+
 				neo4jMovies.addMovie(movieName, movieId);
 				sendString(request, "200 OK\n", 200);
 
 			} 
-			
+
 			else if (pathFromRequest.equals("/api/v1/addRelationship")) {
-	
+
 				if (!deserialized.has("actorId") || !deserialized.has("movieId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
 				String actorId = deserialized.getString("actorId");
 				String movieId = deserialized.getString("movieId");
-				
+
 				neo4jMovies.addRelationship(actorId, movieId);
 				sendString(request, "200 OK\n", 200);
 			}
