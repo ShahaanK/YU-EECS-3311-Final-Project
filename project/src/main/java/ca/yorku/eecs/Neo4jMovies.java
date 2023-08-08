@@ -109,9 +109,10 @@ public class Neo4jMovies {
 			return result;		
 		});
 			session.close();
-		}}
-		
+		}
 	}
+		
+
 
 
 	/*
