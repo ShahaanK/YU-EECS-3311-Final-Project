@@ -37,21 +37,21 @@ public class Neo4jMovies {
 	 * 
 	 */
 
-	public void addActor(String actorName, String actorId) {
+	public void addActor(String name, String actorId) {
 
 		try (Session session = driver.session()) {
-			session.writeTransaction(tx -> tx.run("CREATE (a:actor { name: $actorName, actorId: $actorId })",
-					Values.parameters("actorName", actorName, "actorId", actorId)));
+			session.writeTransaction(tx -> tx.run("CREATE (a:actor { name: $name, actorId: $actorId })",
+					Values.parameters("name", name, "actorId", actorId)));
 			session.close();
 		}
 	}
 
-	public void addMovie(String movieName, String movieId) {
+	public void addMovie(String name, String movieId) {
 
 		try (Session session = driver.session()) {
 			session.writeTransaction(tx -> 
-			tx.run("MERGE (m:movie {name: $movieName, movieId: $movieId})",
-					Values.parameters("movieId", movieId, "movieName", movieName)));
+			tx.run("MERGE (m:movie {name: $name, movieId: $movieId})",
+					Values.parameters("movieId", movieId, "name", name)));
 			session.close();
 		}
 	}
