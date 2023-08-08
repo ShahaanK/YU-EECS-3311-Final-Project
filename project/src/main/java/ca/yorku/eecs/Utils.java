@@ -98,12 +98,9 @@ public class Utils implements HttpHandler {
 		String queryFromURI = uriFromRequest.getQuery();
 		System.out.print(queryFromURI + "\n");
 
-		Map<String, String> queryParameters = new LinkedHashMap<String, String>();
-
 		try {
 
-			queryParameters = splitQuery(queryFromURI);
-			System.out.print(queryParameters);
+			Map<String, String> queryParameters = splitQuery(queryFromURI);
 
 
 			try {
@@ -112,8 +109,14 @@ public class Utils implements HttpHandler {
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
-						neo4jmovies.getActor(queryParameters.get("actorId").toString());
-						sendString(request, "200 OK", 200);
+						try {
+							neo4jmovies.getActor(queryParameters.get("actorId").toString());
+							sendString(request, "200 OK", 200);
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+							sendString(request, "404 NOT FOUND", 404);
+						}
 					}
 				}
 				else if (pathFromRequest.equals("/api/v1/getMovie")) {
@@ -121,8 +124,14 @@ public class Utils implements HttpHandler {
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
-						neo4jmovies.getMovie(queryParameters.get("getMovie").toString());
-						sendString(request, "200 OK", 200);
+						try {
+							neo4jmovies.getMovie(queryParameters.get("movieId").toString());
+							sendString(request, "200 OK", 200);
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+							sendString(request, "404 NOT FOUND", 404);
+						}
 					}
 				}
 
@@ -131,9 +140,15 @@ public class Utils implements HttpHandler {
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
-						neo4jmovies.hasRelationship(queryParameters.get("actorId").toString(), 
-								queryParameters.get("movieId").toString());
-						sendString(request, "200 OK", 200);
+						try {
+							neo4jmovies.hasRelationship(queryParameters.get("actorId").toString(), 
+									queryParameters.get("movieId").toString());
+							sendString(request, "200 OK", 200);
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+							sendString(request, "404 NOT FOUND", 404);
+						}
 					}
 				}
 
@@ -142,8 +157,14 @@ public class Utils implements HttpHandler {
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
-						neo4jmovies.computeBaconNumber(queryParameters.get("actorId").toString());
-						sendString(request, "200 OK", 200);
+						try {
+							neo4jmovies.computeBaconNumber(queryParameters.get("actorId").toString());
+							sendString(request, "200 OK", 200);
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+							sendString(request, "404 NOT FOUND", 404);
+						}
 					}
 				}
 
@@ -152,8 +173,14 @@ public class Utils implements HttpHandler {
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
-						neo4jmovies.computeBaconPath(queryParameters.get("actorId").toString());
-						sendString(request, "200 OK", 200);
+						try {
+							neo4jmovies.computeBaconPath(queryParameters.get("actorId").toString());
+							sendString(request, "200 OK", 200);
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+							sendString(request, "404 NOT FOUND", 404);
+						}
 					}
 				}
 			}
@@ -165,6 +192,7 @@ public class Utils implements HttpHandler {
 			}
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			sendString(request, "400 BAD REQUEST\n", 400);
 		}
 	}

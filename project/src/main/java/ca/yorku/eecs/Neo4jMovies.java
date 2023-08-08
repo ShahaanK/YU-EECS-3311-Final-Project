@@ -88,25 +88,6 @@ public class Neo4jMovies {
 	 * GET METHODS
 	 * 
 	 */
-
-	/*
-	public Actor getActor(String actorId) {
-		try(Session session = driver.session()){
-			StatementResult info = session.writeTransaction(tx -> tx.run("MATCH (a:actor {actorId: $actorId} OPTIONAL MATCH (a)-[:ACTED_IN]->(m:Movie) RETURN a.actorId, a.name, COLLECT(m.movieId) AS movies"),
-					(TransactionConfig) Values.parameters("actorId", actorId));
-			session.close();
-
-			if(info.hasNext()) {
-				Record actor = info.next();
-				return new Actor(actorId, actor.get("a.name").toString(), actor.get("movies").asList(Value::asString));
-			}
-			else {
-				return null;
-			}
-
-		}
-	}
-	*/
 	
 	public void getActor(String actorId) {
 		try(Session session = driver.session()){
@@ -132,11 +113,13 @@ public class Neo4jMovies {
 		try(Session session = driver.session()){
 			session.writeTransaction(tx -> 
 			{
-			tx.run("MATCH (m:movie {id: $movieId})-[:ACTED_IN]-(a:Actor)\n"
-					+ "RETURN m, collect(a.id) as actors",
+			tx.run("MATCH (m:movie {movieId: $movieId})\n"
+					+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
+					+ "RETURN m",
 					Values.parameters("movieId", movieId));
 			
-			return tx.run("MATCH (m:movie {id: $movieId})-[:ACTED_IN]-(a:Actor)\n"
+			return tx.run("MATCH (m:movie {movieId: $movieId})\n"
+					+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
 					+ "RETURN m, collect(a.id) as actors",
 					Values.parameters("movieId", movieId)).single().get("_fields");
 			});
@@ -149,8 +132,8 @@ public class Neo4jMovies {
 		try (Session session = driver.session()) {
 			session.writeTransaction(tx -> 
 			tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
-					+ "RETURN actorId as actorId, movieId as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
-					Values.parameters("actorName", actorId, "movieName", movieId)));
+					+ "RETURN (a).actorId as actorId, (m).movieId as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
+					Values.parameters("actorId", actorId, "movieId", movieId)));
 			session.close();
 		}
 
@@ -160,9 +143,9 @@ public class Neo4jMovies {
 		try (Session session = driver.session()) {
 			if (!actorId.equals("nm0000102")) {
 				session.writeTransaction(tx -> 
-				tx.run("MATCH p=shortestPath((a:actor {actorId: nm0000102})-[*]-(a:actor {actorId: $actorId}))\n"
+				tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
 						+ "RETURN length(p) as baconNumber",
-						Values.parameters("actorId", actorId)));
+						Values.parameters("actorId", actorId, "kevin", "nm0000102")));
 				session.close();
 			}
 		}
@@ -172,9 +155,9 @@ public class Neo4jMovies {
 		try (Session session = driver.session()) {
 			if (!actorId.equals("nm0000102")) {
 				session.writeTransaction(tx -> 
-				tx.run("MATCH p=shortestPath((a:actor {actorId: nm0000102})-[*]-(a:actor {actorId: $actorId}))\n"
+				tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
 						+ "RETURN p as baconPath",
-						Values.parameters("actorId", actorId)));
+						Values.parameters("actorId", actorId, "kevin", "nm0000102")));
 				session.close();
 			}
 		}
