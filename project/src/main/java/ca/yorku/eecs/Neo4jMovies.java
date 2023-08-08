@@ -2,6 +2,7 @@ package ca.yorku.eecs;
 
 import org.neo4j.driver.v1.types.Node;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.lang.*;
 
@@ -106,7 +107,7 @@ public class Neo4jMovies {
 						+ "RETURN a.actorId as actorId, a.name as name, COLLECT(m.movieId) AS movies",
 						Values.parameters("actorId", actorId));
 				Record record = result.next();
-				
+
 				JSONObject json = new JSONObject();
 				try {
 					json.put("actorId", record.get("actorId"));
@@ -117,7 +118,28 @@ public class Neo4jMovies {
 					e.printStackTrace();
 				}
 				try {
-					System.out.print(json.toString(3));
+					System.out.print("{\n\t \"actorId\": " + json.get("actorId") + ",\n");
+					System.out.print("\t \"name\": " + json.get("name") + ",\n");
+					System.out.print("\t \"movies\": [");
+					List<Object> newList = new ArrayList<Object>(record.get("movies").asList());
+					if (newList.size() > 1) {
+						int i = 0;
+						System.out.print("\n");
+						while (i < newList.size()) {
+							System.out.print("\t\t\"" + newList.get(i) + "\"");
+							if (i + 1 != newList.size()) {
+								System.out.print(",\n");
+							}
+							i++;
+						}
+						System.out.print("\n\t]\n}");
+					}
+					else if (newList.size() == 1) {
+						System.out.print("\"" + newList.get(0) + "\"]\n}");
+					}
+					else {
+						System.out.print("]\n}");
+					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -143,9 +165,9 @@ public class Neo4jMovies {
 						+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
 						+ "RETURN m.name as name, m.movieId as movieId, collect(a.actorId) as actors",
 						Values.parameters("movieId", movieId));
-				
+
 				Record record = result.next();
-				
+
 				JSONObject json = new JSONObject();
 				try {
 					json.put("movieId", record.get("movieId"));
@@ -156,7 +178,29 @@ public class Neo4jMovies {
 					e.printStackTrace();
 				}
 				try {
-					System.out.print(json.toString(3));
+					System.out.print("{\n\t \"movieId\": " + json.get("movieId") + ",\n");
+					System.out.print("\t \"name\": " + json.get("name") + ",\n");
+					System.out.print("\t \"actors\": [");
+					List<Object> newList = new ArrayList<Object>(record.get("actors").asList());
+
+					if (newList.size() > 1) {
+						int i = 0;
+						System.out.print("\n");
+						while (i < newList.size()) {
+							System.out.print("\t\t\"" + newList.get(i) + "\"");
+							if (i + 1 != newList.size()) {
+								System.out.print(",\n");
+							}
+							i++;
+						}
+						System.out.print("\n\t]\n}");
+					}
+					else if (newList.size() == 1) {
+						System.out.print("\"" + newList.get(0) + "\"]\n}");
+					}
+					else {
+						System.out.print("]\n}");
+					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -170,10 +214,36 @@ public class Neo4jMovies {
 	public void hasRelationship(String actorId, String movieId) {
 
 		try (Session session = driver.session()) {
-			session.writeTransaction(tx -> 
+			session.writeTransaction(tx -> {
 			tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
 					+ "RETURN (a).actorId as actorId, (m).movieId as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
-					Values.parameters("actorId", actorId, "movieId", movieId)));
+					Values.parameters("actorId", actorId, "movieId", movieId));
+			StatementResult result = tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
+					+ "RETURN (a).actorId as actorId, (m).movieId as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
+					Values.parameters("actorId", actorId, "movieId", movieId));
+
+			Record record = result.next();
+
+			JSONObject json = new JSONObject();
+			try {
+				json.put("actorId", record.get("actorId"));
+				json.put("movieId", record.get("movieId"));
+				json.put("hasRelationship", record.get("hasRelationship"));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				System.out.print("{\n\t \"actorId\": " + json.get("actorId") + ",\n");
+				System.out.print("\t \"movieId\": " + json.get("movieId") + ",\n");
+				System.out.print("\t \"hasRelationship\": " + json.get("hasRelationship").toString().toLowerCase() + "\n}");
+
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return result;		
+		});
 			session.close();
 		}
 
@@ -182,10 +252,32 @@ public class Neo4jMovies {
 	public void computeBaconNumber(String actorId) {
 		try (Session session = driver.session()) {
 			if (!actorId.equals("nm0000102")) {
-				session.writeTransaction(tx -> 
+				session.writeTransaction(tx -> {
 				tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
 						+ "RETURN length(p) as baconNumber",
-						Values.parameters("actorId", actorId, "kevin", "nm0000102")));
+						Values.parameters("actorId", actorId, "kevin", "nm0000102"));
+				StatementResult result = tx.run("MATCH p=shortestPath((a:actor {actorId: $kevin})-[*]-(a:actor {actorId: $actorId}))\n"
+						+ "RETURN length(p) as baconNumber",
+						Values.parameters("actorId", actorId, "kevin", "nm0000102"));
+
+				Record record = result.next();
+
+				JSONObject json = new JSONObject();
+				try {
+					json.put("baconNumber", record.get("baconNumber"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					System.out.print("{\n\t \"baconNumber\": " + json.get("baconNumber") + "\n}");
+
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return result;		
+			});
 				session.close();
 			}
 		}

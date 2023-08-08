@@ -77,10 +77,8 @@ public class Utils implements HttpHandler {
 		try {
 			if (request.getRequestMethod().equals("GET")) {
 				handleGet(request);
-				System.out.println("get");
 			} else if (request.getRequestMethod().equals("PUT")) {
 				handlePut(request);
-				System.out.println("put");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -183,11 +181,10 @@ public class Utils implements HttpHandler {
 					}
 				}
 			}
-
-
+			
 			catch (Exception e) {
 				e.printStackTrace();
-				sendString(request, "Server error\n", 500);
+				sendString(request, "500 INTERNAL SERVER ERROR\n", 500);
 			}
 		}
 		catch (Exception e) {
@@ -216,17 +213,17 @@ public class Utils implements HttpHandler {
 
 
 		try {
-			JSONObject deserialized = new JSONObject(body);
+			JSONObject jsonObject = new JSONObject(body);
 			//add: check whether that actor exists
 			if (pathFromRequest.equals("/api/v1/addActor")) {
 				System.out.print("here1");
-				if (!deserialized.has("name") || !deserialized.has("actorId")) {
+				if (!jsonObject.has("name") || !jsonObject.has("actorId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
 
-				String name = deserialized.getString("name");
-				String actorId = deserialized.getString("actorId");
+				String name = jsonObject.getString("name");
+				String actorId = jsonObject.getString("actorId");
 
 				neo4jMovies.addActor(name, actorId);
 				sendString(request, "200 OK\n", 200);
@@ -234,13 +231,13 @@ public class Utils implements HttpHandler {
 			} 
 			else if (pathFromRequest.equals("/api/v1/addMovie")) {
 				//add: check whether that movie exists
-				if (!deserialized.has("name") || !deserialized.has("movieId")) {
+				if (!jsonObject.has("name") || !jsonObject.has("movieId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
 
-				String movieName = deserialized.getString("name");
-				String movieId = deserialized.getString("movieId");
+				String movieName = jsonObject.getString("name");
+				String movieId = jsonObject.getString("movieId");
 
 				neo4jMovies.addMovie(movieName, movieId);
 				sendString(request, "200 OK\n", 200);
@@ -249,12 +246,12 @@ public class Utils implements HttpHandler {
 
 			else if (pathFromRequest.equals("/api/v1/addRelationship")) {
 
-				if (!deserialized.has("actorId") || !deserialized.has("movieId")) {
+				if (!jsonObject.has("actorId") || !jsonObject.has("movieId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
-				String actorId = deserialized.getString("actorId");
-				String movieId = deserialized.getString("movieId");
+				String actorId = jsonObject.getString("actorId");
+				String movieId = jsonObject.getString("movieId");
 
 				neo4jMovies.addRelationship(actorId, movieId);
 				sendString(request, "200 OK\n", 200);
