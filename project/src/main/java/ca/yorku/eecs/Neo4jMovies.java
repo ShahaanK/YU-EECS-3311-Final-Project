@@ -38,21 +38,21 @@ public class Neo4jMovies {
 	 * 
 	 */
 
-	public void addActor(String actorName, String actorId) {
+	public void addActor(String name, String actorId) {
 
 		try (Session session = driver.session()) {
-			session.writeTransaction(tx -> tx.run("CREATE (a:actor { name: $actorName, actorId: $actorId })",
-					Values.parameters("actorName", actorName, "actorId", actorId)));
+			session.writeTransaction(tx -> tx.run("CREATE (a:actor { name: $name, actorId: $actorId })",
+					Values.parameters("name", name, "actorId", actorId)));
 			session.close();
 		}
 	}
 
-	public void addMovie(String movieName, String movieId) {
+	public void addMovie(String name, String movieId) {
 
 		try (Session session = driver.session()) {
 			session.writeTransaction(tx -> 
-			tx.run("MERGE (m:movie {name: $movieName, movieId: $movieId})",
-					Values.parameters("movieId", movieId, "movieName", movieName)));
+			tx.run("MERGE (m:movie {name: $name, movieId: $movieId})",
+					Values.parameters("movieId", movieId, "name", name)));
 			session.close();
 		}
 	}
@@ -68,23 +68,51 @@ public class Neo4jMovies {
 		}
 	}
 
-	public void addAward(String award) {
+	public void addAward(String awardId, String name) {
 		try (Session session = driver.session()) {
-			session.writeTransaction(tx -> tx.run("CREATE (w:award {award: $award})",
-					Values.parameters("award", award)));
+			session.writeTransaction(tx -> tx.run("CREATE (w:award { name: $name, awardId: $awardId })",
+					Values.parameters("name", name, "awardId", awardId)));
 			session.close();
 		}
 	}
 
-	public void addAwardWinner(String award, String movieId) {
+	public void addAwardWinner(String awardId, String movieId) {
 		try (Session session = driver.session()) {
-			session.writeTransaction(tx -> 
-			tx.run("MATCH (w: award {award: $award}), (m: movie {movieId: $movieId})\n"
-					+ "RETURN award as award, movieId as movieId, EXISTS ((w)-[:WON_BY]-(m)) as addAwardWinner",
-					Values.parameters("award", award, "movieId", movieId)));
+			session.writeTransaction(tx -> {
+			tx.run("MATCH (w: award {awardId: $awardId}), (m: movie {movieId: $movieId})\n"
+					+ "RETURN (w).awardId as awardId, (m).movieId as movieId, EXISTS ((w)-[:WON_BY]-(m)) as addAwardWinner",
+					Values.parameters("awardId", awardId, "movieId", movieId));
+			StatementResult result = tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
+					+ "RETURN (w).awardId as awardId, (m).movieId as movieId, EXISTS ((w)-[:WON_BY]-(m)) as addAwardWinner",
+					Values.parameters("awardId", awardId, "movieId", movieId));
+
+			Record record = result.next();
+
+			JSONObject json = new JSONObject();
+			try {
+				json.put("awardId", record.get("awardId"));
+				json.put("movieId", record.get("movieId"));
+				json.put("addAwardWinner", record.get("addAwardWinner"));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				System.out.print("{\n\t \"awardId\": " + json.get("awardId") + ",\n");
+				System.out.print("\t \"movieId\": " + json.get("movieId") + ",\n");
+				System.out.print("\t \"addAwardWinner\": " + json.get("addAwardWinner").toString().toLowerCase() + "\n}");
+
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return result;		
+		});
 			session.close();
 		}
 	}
+		
+
 
 
 	/*
