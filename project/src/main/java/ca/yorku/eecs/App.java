@@ -16,7 +16,7 @@ public class App
         
         //two lines of code from the BasicHttpServerExample
         Utils utils = new Utils();
-	    server.createContext("/api/addTwoNumbers", utils::handle);
+	    server.createContext("/api/v1", utils::handle);
         
         
         server.start();

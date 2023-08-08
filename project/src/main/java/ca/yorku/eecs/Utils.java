@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLDecoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -75,10 +76,10 @@ public class Utils implements HttpHandler {
 
 		try {
 			if (request.getRequestMethod().equals("GET")) {
-				getBody(request);
+				handleGet(request);
 				System.out.println("get");
 			} else if (request.getRequestMethod().equals("PUT")) {
-				getBody(request);
+				handlePut(request);
 				System.out.println("put");
 			}
 		} catch (Exception e) {
@@ -89,30 +90,34 @@ public class Utils implements HttpHandler {
 	}
 
 	public void handleGet(HttpExchange request) throws IOException {
-		String body = Utils.convert(request.getRequestBody());
+		
+		URI uriFromRequest = request.getRequestURI();
+		String pathFromRequest = uriFromRequest.getPath();
+		String queryFromURI = uriFromRequest.getQuery();
+		System.out.print(queryFromURI + "\n");
+		
+		Map<String, String> queryParameters = splitQuery(queryFromURI);
+		System.out.print(queryParameters);
+		
 		try {
-			JSONObject deserialized = new JSONObject(body);
-
-			
-			String actorId, actorName, movieId, movieName, award;
-			
-			if(request.getRequestMethod().equals("GET") && (deserialized.length() == 1 || deserialized.length() == 2) && (deserialized.has("actorId") || deserialized.has("actorName") || deserialized.has("movieId") || deserialized.has("movieName") || deserialized.has("award"))) {
-
-				actorId = deserialized.has("actorId") ? deserialized.getString("actorId") : null;
-				actorName = deserialized.has("actorName") ? deserialized.getString("actorName") : null;
-				movieId = deserialized.has("movieId") ? deserialized.getString("movieId") : null;
-				movieName = deserialized.has("movieName") ? deserialized.getString("movieName") : null;
-
-				award = deserialized.has("award") ? deserialized.getString("award") : null;
-			
-			} else {
-
-				request.sendResponseHeaders(400, -1);
-				return;
+			if (pathFromRequest.equals("/api/v1/addActor")) {
+				String response = "i am done";
+				sendString(request, response, 200);
 			}
-	
-		} catch (Exception e) {
+			else if (pathFromRequest.equals("/api/v1/addMovie")) {
+				String response = "";
+				sendString(request, response, 200);
+			}
+			
+			else if (pathFromRequest.equals(queryParameters)) {
+				String response = "";
+				sendString(request, response, 200);
+			}
+		}
+		
+		catch (Exception e) {
 			e.printStackTrace();
+			sendString(request, "Server error\n", 500);
 		}
 	}
 
@@ -122,72 +127,70 @@ public class Utils implements HttpHandler {
 	public Utils() {
 		neo4jMovies = new Neo4jMovies();
 	}
-	
-	
-	// booleam function that checks if the request is a PUT method
-	private boolean isPutMethod(HttpExchange request) {
-		return "PUT".equalsIgnoreCase(request.getRequestMethod());
-	}
 
 	// method to handle PUT requests and update the database
 	public void handlePut(HttpExchange request) throws IOException {
-		String path = request.getRequestURI().getPath();
-		String body = Utils.convert(request.getRequestBody());
+		
+		
+		URI uriFromRequest = request.getRequestURI();
+		String pathFromRequest = uriFromRequest.getPath();
+		String body = convert(request.getRequestBody());
+		
+		System.out.print(body + "\n");
+		System.out.print(pathFromRequest + "\n");
+		
 
 		try {
 			JSONObject deserialized = new JSONObject(body);
-
-			if (path.equals("/actor")) {
-				// Validate and extract actor details
+			//add: check whether that actor exists
+			if (pathFromRequest.equals("/api/v1/addActor")) {
+				System.out.print("here1");
 				if (!deserialized.has("name") || !deserialized.has("actorId")) {
-					request.sendResponseHeaders(400, -1); // Bad Request
+					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
+				
 				String name = deserialized.getString("name");
 				String actorId = deserialized.getString("actorId");
 
-				// Update actor
 				neo4jMovies.addActor(name, actorId);
-				request.sendResponseHeaders(200, -1); // OK
+				sendString(request, "200 OK\n", 200);
 
-			} else if (path.equals("/movie")) {
-				// Validate and extract movie details
-				if (!deserialized.has("movieName") || !deserialized.has("movieId")) {
-					request.sendResponseHeaders(400, -1); // Bad Request
+			} 
+			else if (pathFromRequest.equals("/api/v1/addMovie")) {
+				//add: check whether that movie exists
+				if (!deserialized.has("name") || !deserialized.has("movieId")) {
+					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
-				String movieName = deserialized.getString("movieName");
+				
+				String movieName = deserialized.getString("name");
 				String movieId = deserialized.getString("movieId");
-
-				// Update movie
+				
 				neo4jMovies.addMovie(movieName, movieId);
-				request.sendResponseHeaders(200, -1); // OK
+				sendString(request, "200 OK\n", 200);
 
-			} else if (path.equals("/relationship")) {
-				// Validate and extract relationship details
+			} 
+			
+			else if (pathFromRequest.equals("/api/v1/addRelationship")) {
+	
 				if (!deserialized.has("actorId") || !deserialized.has("movieId")) {
-					request.sendResponseHeaders(400, -1); // Bad Request
+					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
 				String actorId = deserialized.getString("actorId");
 				String movieId = deserialized.getString("movieId");
-
-				// Update relationship
+				
 				neo4jMovies.addRelationship(actorId, movieId);
-				request.sendResponseHeaders(200, -1); // OK
-
-			} else {
-				request.sendResponseHeaders(404, -1); // Not Found
+				sendString(request, "200 OK\n", 200);
 			}
 
 		} catch (JSONException e) {
-			// Handle any JSON parsing exceptions
 			e.printStackTrace();
-			request.sendResponseHeaders(400, -1); // Bad Request
+			sendString(request, "400 BAD REQUEST\n", 400);
 		} catch (Exception e) {
-			// Handle other exceptions
 			e.printStackTrace();
-			request.sendResponseHeaders(500, -1); // Internal Server Error
+			sendString(request, "500 INTERNAL SERVER ERROR\n", 500);
 		}
 	}
 

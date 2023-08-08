@@ -24,8 +24,9 @@ public class Neo4jMovies {
 	// here: methods
 
 	public void addActor(String actorName, String actorId) {
+		
 		try (Session session = driver.session()) {
-			session.writeTransaction(tx -> tx.run("CREATE (a:actor { actorName: $actorName, actorId: $actorId })",
+			session.writeTransaction(tx -> tx.run("CREATE (a:actor { name: $actorName, actorId: $actorId })",
 					Values.parameters("actorName", actorName, "actorId", actorId)));
 			session.close();
 		}
@@ -35,7 +36,7 @@ public class Neo4jMovies {
 
 		try (Session session = driver.session()) {
 			session.writeTransaction(tx -> 
-			tx.run("MERGE (m:movie {id: $movieId, name: $movieName})",
+			tx.run("MERGE (m:movie {name: $movieName, movieId: $movieId})",
 					Values.parameters("movieId", movieId, "movieName", movieName)));
 			session.close();
 		}
@@ -43,16 +44,18 @@ public class Neo4jMovies {
 
 	public void addRelationship(String actorId, String movieId) {
 		
-		try(Session session = driver.session()){
-			session.writeTransaction(tx -> tx.run("MERGE (a:Actor {actorId: $actorId} ) MERGE (m:Movie {movieId: $movieId}) MERGE (a)-[:ACTED_IN]->(m)"), 
-					(TransactionConfig) Values.parameters("actorId", actorId, "movieId", movieId ));
+		try (Session session = driver.session()) {
+			session.writeTransaction(tx -> tx.run("MATCH (a:actor {actorId: $actorId})\n"
+					+ "MATCH (m:movie {movieId: $movieId})\n"
+					+ "MERGE (a)-[:ACTED_IN]->(m)",
+					Values.parameters("actorId", actorId, "movieId", movieId)));
 			session.close();
 		}
 	}
 
 	public Actor getActor(String actorId) {
 		try(Session session = driver.session()){
-			StatementResult info = session.writeTransaction(tx -> tx.run("MATCH (a:Actor {actorId: $actorId} OPTIONAL MATCH (a)-[:ACTED_IN]->(m:Movie) RETURN a.actorId, a.name, COLLECT(m.movieId) AS movies"),
+			StatementResult info = session.writeTransaction(tx -> tx.run("MATCH (a:actor {actorId: $actorId} OPTIONAL MATCH (a)-[:ACTED_IN]->(m:Movie) RETURN a.actorId, a.name, COLLECT(m.movieId) AS movies"),
 					(TransactionConfig) Values.parameters("actorId", actorId));
 		session.close();
 		 
