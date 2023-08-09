@@ -6,25 +6,25 @@ Test Timeout      30 seconds
 Suite Setup    Create Session    localhost    http://localhost:8080
 
 *** Test Cases ***
-addAuthorPass
+addActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    author=George Orwell    authorId=nm1
-    ${resp}=    PUT On Session    localhost    /api/book/addAuthor    json=${params}    headers=${headers}    expected_status=200
+    ${params}=    Create Dictionary    name=George Orwell    actorId=nm1
+    ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    expected_status=200
 
-addAuthorFail
+addActorFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    name=Devin
-    ${resp}=    PUT On Session    localhost    /api/book/addAuthor    json=${params}    headers=${headers}    expected_status=400
+    ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    expected_status=400
 
-addTitlePass
+addMoviePass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    title=1984    movieId=tt1
-    ${resp}=    PUT On Session    localhost    /api/book/addTitle    json=${params}    headers=${headers}    expected_status=200
+    ${params}=    Create Dictionary    name=Parasite    movieId=tt1
+    ${resp}=    PUT On Session    localhost    /api/v1/addMovie    json=${params}    headers=${headers}    expected_status=200
 
-addTitleFail
+addMovieFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    name=Animal Farm    movieId=tt2
-    ${resp}=    PUT On Session    localhost    /api/book/addTitle    json=${params}    headers=${headers}    expected_status=400
+    ${resp}=    PUT On Session    localhost    /api/v1/addMovie    json=${params}    headers=${headers}    expected_status=400
 
 addBookPass
     ${headers}=    Create Dictionary    Content-Type=application/json
