@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.2.2 (Python 3.10.4 on win32)" generated="20230809 12:58:38.886" rpa="false">
+<robot generator="Robot 3.2.2 (Python 3.10.4 on win32)" generated="20230809 13:05:28.988" rpa="false">
 <suite id="s1" name="Project" source="C:\Users\shaha\OneDrive\Documents\GitHub\EECS-3311-Final-Project\project">
 <suite id="s1-s1" name="Src" source="C:\Users\shaha\OneDrive\Documents\GitHub\EECS-3311-Final-Project\project\src">
 <suite id="s1-s1-s1" name="Main" source="C:\Users\shaha\OneDrive\Documents\GitHub\EECS-3311-Final-Project\project\src\main">
@@ -14,8 +14,8 @@
 <arg>localhost</arg>
 <arg>http://localhost:7474</arg>
 </arguments>
-<msg timestamp="20230809 12:58:39.146" level="INFO">Creating Session using : alias=localhost, url=http://localhost:7474, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20230809 12:58:39.146" endtime="20230809 12:58:39.146"></status>
+<msg timestamp="20230809 13:05:29.230" level="INFO">Creating Session using : alias=localhost, url=http://localhost:7474, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230809 13:05:29.230" endtime="20230809 13:05:29.230"></status>
 </kw>
 <test id="s1-s1-s1-s1-s1-s1-s1-s1-t1" name="addActorPass">
 <kw name="Create Dictionary" library="BuiltIn">
@@ -26,8 +26,8 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230809 12:58:39.148" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230809 12:58:39.148" endtime="20230809 12:58:39.149"></status>
+<msg timestamp="20230809 13:05:29.232" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230809 13:05:29.231" endtime="20230809 13:05:29.232"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
@@ -38,8 +38,8 @@
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230809 12:58:39.149" level="INFO">${params} = {'name': 'George Orwell', 'actorId': 'nm1'}</msg>
-<status status="PASS" starttime="20230809 12:58:39.149" endtime="20230809 12:58:39.149"></status>
+<msg timestamp="20230809 13:05:29.232" level="INFO">${params} = {'name': 'George Orwell', 'actorId': 'nm1'}</msg>
+<status status="PASS" starttime="20230809 13:05:29.232" endtime="20230809 13:05:29.232"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -53,14 +53,14 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.160" level="INFO">PUT Request : url=http://localhost:7474/api/v1/addActor 
+<msg timestamp="20230809 13:05:31.243" level="INFO">PUT Request : url=http://localhost:7474/api/v1/addActor 
  path_url=/api/v1/addActor 
  headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '43'} 
  body=b'{"name": "George Orwell", "actorId": "nm1"}' 
  </msg>
-<msg timestamp="20230809 12:58:41.160" level="INFO">PUT Response : url=http://localhost:7474/api/v1/addActor 
+<msg timestamp="20230809 13:05:31.243" level="INFO">PUT Response : url=http://localhost:7474/api/v1/addActor 
  status=401, reason=Unauthorized 
- headers={'Date': 'Wed, 09 Aug 2023 16:58:41 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
+ headers={'Date': 'Wed, 09 Aug 2023 17:05:31 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
  body={
   "errors" : [ {
     "code" : "Neo.ClientError.Security.Unauthorized",
@@ -68,11 +68,11 @@
   } ]
 } 
  </msg>
-<msg timestamp="20230809 12:58:41.174" level="FAIL">Url: http://localhost:7474/api/v1/addActor Expected status: 401 != 200</msg>
-<status status="FAIL" starttime="20230809 12:58:39.149" endtime="20230809 12:58:41.174"></status>
+<msg timestamp="20230809 13:05:31.252" level="FAIL">Url: http://localhost:7474/api/v1/addActor Expected status: 401 != 200</msg>
+<status status="FAIL" starttime="20230809 13:05:29.233" endtime="20230809 13:05:31.252"></status>
 </kw>
 <timeout value="30 seconds"></timeout>
-<status status="FAIL" starttime="20230809 12:58:39.146" endtime="20230809 12:58:41.175" critical="yes">Url: http://localhost:7474/api/v1/addActor Expected status: 401 != 200</status>
+<status status="FAIL" starttime="20230809 13:05:29.231" endtime="20230809 13:05:31.253" critical="yes">Url: http://localhost:7474/api/v1/addActor Expected status: 401 != 200</status>
 </test>
 <test id="s1-s1-s1-s1-s1-s1-s1-s1-t2" name="addActorFail">
 <kw name="Create Dictionary" library="BuiltIn">
@@ -83,8 +83,8 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.177" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230809 12:58:41.176" endtime="20230809 12:58:41.177"></status>
+<msg timestamp="20230809 13:05:31.257" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.256" endtime="20230809 13:05:31.257"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
@@ -94,8 +94,8 @@
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.177" level="INFO">${params} = {'name': 'Devin actorId=nm1'}</msg>
-<status status="PASS" starttime="20230809 12:58:41.177" endtime="20230809 12:58:41.177"></status>
+<msg timestamp="20230809 13:05:31.259" level="INFO">${params} = {'name': 'Devin actorId=nm1'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.258" endtime="20230809 13:05:31.259"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -109,14 +109,14 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.180" level="INFO">PUT Request : url=http://localhost:7474/api/v1/addActor 
+<msg timestamp="20230809 13:05:31.262" level="INFO">PUT Request : url=http://localhost:7474/api/v1/addActor 
  path_url=/api/v1/addActor 
  headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '29'} 
  body=b'{"name": "Devin actorId=nm1"}' 
  </msg>
-<msg timestamp="20230809 12:58:41.180" level="INFO">PUT Response : url=http://localhost:7474/api/v1/addActor 
+<msg timestamp="20230809 13:05:31.262" level="INFO">PUT Response : url=http://localhost:7474/api/v1/addActor 
  status=401, reason=Unauthorized 
- headers={'Date': 'Wed, 09 Aug 2023 16:58:41 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
+ headers={'Date': 'Wed, 09 Aug 2023 17:05:31 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
  body={
   "errors" : [ {
     "code" : "Neo.ClientError.Security.Unauthorized",
@@ -124,11 +124,11 @@
   } ]
 } 
  </msg>
-<msg timestamp="20230809 12:58:41.180" level="FAIL">Url: http://localhost:7474/api/v1/addActor Expected status: 401 != 400</msg>
-<status status="FAIL" starttime="20230809 12:58:41.178" endtime="20230809 12:58:41.181"></status>
+<msg timestamp="20230809 13:05:31.263" level="FAIL">Url: http://localhost:7474/api/v1/addActor Expected status: 401 != 400</msg>
+<status status="FAIL" starttime="20230809 13:05:31.259" endtime="20230809 13:05:31.264"></status>
 </kw>
 <timeout value="30 seconds"></timeout>
-<status status="FAIL" starttime="20230809 12:58:41.176" endtime="20230809 12:58:41.181" critical="yes">Url: http://localhost:7474/api/v1/addActor Expected status: 401 != 400</status>
+<status status="FAIL" starttime="20230809 13:05:31.253" endtime="20230809 13:05:31.264" critical="yes">Url: http://localhost:7474/api/v1/addActor Expected status: 401 != 400</status>
 </test>
 <test id="s1-s1-s1-s1-s1-s1-s1-s1-t3" name="addMoviePass">
 <kw name="Create Dictionary" library="BuiltIn">
@@ -139,8 +139,8 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.183" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230809 12:58:41.181" endtime="20230809 12:58:41.183"></status>
+<msg timestamp="20230809 13:05:31.266" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.264" endtime="20230809 13:05:31.266"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
@@ -151,8 +151,8 @@
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.183" level="INFO">${params} = {'name': 'Parasite', 'movieId': 'tt1'}</msg>
-<status status="PASS" starttime="20230809 12:58:41.183" endtime="20230809 12:58:41.183"></status>
+<msg timestamp="20230809 13:05:31.266" level="INFO">${params} = {'name': 'Parasite', 'movieId': 'tt1'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.266" endtime="20230809 13:05:31.267"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -166,14 +166,14 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.187" level="INFO">PUT Request : url=http://localhost:7474/api/v1/addMovie 
+<msg timestamp="20230809 13:05:31.270" level="INFO">PUT Request : url=http://localhost:7474/api/v1/addMovie 
  path_url=/api/v1/addMovie 
  headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '38'} 
  body=b'{"name": "Parasite", "movieId": "tt1"}' 
  </msg>
-<msg timestamp="20230809 12:58:41.187" level="INFO">PUT Response : url=http://localhost:7474/api/v1/addMovie 
+<msg timestamp="20230809 13:05:31.270" level="INFO">PUT Response : url=http://localhost:7474/api/v1/addMovie 
  status=401, reason=Unauthorized 
- headers={'Date': 'Wed, 09 Aug 2023 16:58:41 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
+ headers={'Date': 'Wed, 09 Aug 2023 17:05:31 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
  body={
   "errors" : [ {
     "code" : "Neo.ClientError.Security.Unauthorized",
@@ -181,11 +181,11 @@
   } ]
 } 
  </msg>
-<msg timestamp="20230809 12:58:41.187" level="FAIL">Url: http://localhost:7474/api/v1/addMovie Expected status: 401 != 200</msg>
-<status status="FAIL" starttime="20230809 12:58:41.184" endtime="20230809 12:58:41.187"></status>
+<msg timestamp="20230809 13:05:31.272" level="FAIL">Url: http://localhost:7474/api/v1/addMovie Expected status: 401 != 200</msg>
+<status status="FAIL" starttime="20230809 13:05:31.267" endtime="20230809 13:05:31.272"></status>
 </kw>
 <timeout value="30 seconds"></timeout>
-<status status="FAIL" starttime="20230809 12:58:41.181" endtime="20230809 12:58:41.187" critical="yes">Url: http://localhost:7474/api/v1/addMovie Expected status: 401 != 200</status>
+<status status="FAIL" starttime="20230809 13:05:31.264" endtime="20230809 13:05:31.272" critical="yes">Url: http://localhost:7474/api/v1/addMovie Expected status: 401 != 200</status>
 </test>
 <test id="s1-s1-s1-s1-s1-s1-s1-s1-t4" name="addMovieFail">
 <kw name="Create Dictionary" library="BuiltIn">
@@ -196,8 +196,8 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.188" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230809 12:58:41.188" endtime="20230809 12:58:41.188"></status>
+<msg timestamp="20230809 13:05:31.273" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.273" endtime="20230809 13:05:31.274"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
@@ -208,8 +208,8 @@
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.190" level="INFO">${params} = {'name': 'Animal Farm', 'movieId': 'tt1'}</msg>
-<status status="PASS" starttime="20230809 12:58:41.188" endtime="20230809 12:58:41.190"></status>
+<msg timestamp="20230809 13:05:31.274" level="INFO">${params} = {'name': 'Animal Farm', 'movieId': 'tt1'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.274" endtime="20230809 13:05:31.274"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -223,14 +223,14 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.193" level="INFO">PUT Request : url=http://localhost:7474/api/v1/addMovie 
+<msg timestamp="20230809 13:05:31.277" level="INFO">PUT Request : url=http://localhost:7474/api/v1/addMovie 
  path_url=/api/v1/addMovie 
  headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '41'} 
  body=b'{"name": "Animal Farm", "movieId": "tt1"}' 
  </msg>
-<msg timestamp="20230809 12:58:41.193" level="INFO">PUT Response : url=http://localhost:7474/api/v1/addMovie 
+<msg timestamp="20230809 13:05:31.277" level="INFO">PUT Response : url=http://localhost:7474/api/v1/addMovie 
  status=401, reason=Unauthorized 
- headers={'Date': 'Wed, 09 Aug 2023 16:58:41 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
+ headers={'Date': 'Wed, 09 Aug 2023 17:05:31 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
  body={
   "errors" : [ {
     "code" : "Neo.ClientError.Security.Unauthorized",
@@ -238,13 +238,13 @@
   } ]
 } 
  </msg>
-<msg timestamp="20230809 12:58:41.194" level="FAIL">Url: http://localhost:7474/api/v1/addMovie Expected status: 401 != 400</msg>
-<status status="FAIL" starttime="20230809 12:58:41.190" endtime="20230809 12:58:41.194"></status>
+<msg timestamp="20230809 13:05:31.278" level="FAIL">Url: http://localhost:7474/api/v1/addMovie Expected status: 401 != 400</msg>
+<status status="FAIL" starttime="20230809 13:05:31.275" endtime="20230809 13:05:31.278"></status>
 </kw>
 <timeout value="30 seconds"></timeout>
-<status status="FAIL" starttime="20230809 12:58:41.188" endtime="20230809 12:58:41.195" critical="yes">Url: http://localhost:7474/api/v1/addMovie Expected status: 401 != 400</status>
+<status status="FAIL" starttime="20230809 13:05:31.273" endtime="20230809 13:05:31.278" critical="yes">Url: http://localhost:7474/api/v1/addMovie Expected status: 401 != 400</status>
 </test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t5" name="addBookPass">
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t5" name="addRelationshipPass">
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
@@ -253,26 +253,26 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.197" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230809 12:58:41.196" endtime="20230809 12:58:41.197"></status>
+<msg timestamp="20230809 13:05:31.280" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.280" endtime="20230809 13:05:31.280"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
-<arg>author=George Orwell</arg>
-<arg>title=1984</arg>
+<arg>actorId=nm123</arg>
+<arg>movieId=tt1</arg>
 </arguments>
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.201" level="INFO">${params} = {'author': 'George Orwell', 'title': '1984'}</msg>
-<status status="PASS" starttime="20230809 12:58:41.198" endtime="20230809 12:58:41.201"></status>
+<msg timestamp="20230809 13:05:31.281" level="INFO">${params} = {'actorId': 'nm123', 'movieId': 'tt1'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.280" endtime="20230809 13:05:31.281"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
 <arguments>
 <arg>localhost</arg>
-<arg>/api/book/addBook</arg>
+<arg>/api/v1/addRelationship</arg>
 <arg>json=${params}</arg>
 <arg>headers=${headers}</arg>
 <arg>expected_status=200</arg>
@@ -280,14 +280,14 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.205" level="INFO">PUT Request : url=http://localhost:7474/api/book/addBook 
- path_url=/api/book/addBook 
- headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '44'} 
- body=b'{"author": "George Orwell", "title": "1984"}' 
+<msg timestamp="20230809 13:05:31.286" level="INFO">PUT Request : url=http://localhost:7474/api/v1/addRelationship 
+ path_url=/api/v1/addRelationship 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '38'} 
+ body=b'{"actorId": "nm123", "movieId": "tt1"}' 
  </msg>
-<msg timestamp="20230809 12:58:41.206" level="INFO">PUT Response : url=http://localhost:7474/api/book/addBook 
+<msg timestamp="20230809 13:05:31.287" level="INFO">PUT Response : url=http://localhost:7474/api/v1/addRelationship 
  status=401, reason=Unauthorized 
- headers={'Date': 'Wed, 09 Aug 2023 16:58:41 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
+ headers={'Date': 'Wed, 09 Aug 2023 17:05:31 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
  body={
   "errors" : [ {
     "code" : "Neo.ClientError.Security.Unauthorized",
@@ -295,13 +295,13 @@
   } ]
 } 
  </msg>
-<msg timestamp="20230809 12:58:41.207" level="FAIL">Url: http://localhost:7474/api/book/addBook Expected status: 401 != 200</msg>
-<status status="FAIL" starttime="20230809 12:58:41.202" endtime="20230809 12:58:41.207"></status>
+<msg timestamp="20230809 13:05:31.289" level="FAIL">Url: http://localhost:7474/api/v1/addRelationship Expected status: 401 != 200</msg>
+<status status="FAIL" starttime="20230809 13:05:31.281" endtime="20230809 13:05:31.290"></status>
 </kw>
 <timeout value="30 seconds"></timeout>
-<status status="FAIL" starttime="20230809 12:58:41.195" endtime="20230809 12:58:41.208" critical="yes">Url: http://localhost:7474/api/book/addBook Expected status: 401 != 200</status>
+<status status="FAIL" starttime="20230809 13:05:31.278" endtime="20230809 13:05:31.291" critical="yes">Url: http://localhost:7474/api/v1/addRelationship Expected status: 401 != 200</status>
 </test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t6" name="addBookFail">
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t6" name="addRelationshipFail">
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
@@ -310,26 +310,26 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.210" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230809 12:58:41.210" endtime="20230809 12:58:41.210"></status>
+<msg timestamp="20230809 13:05:31.298" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.296" endtime="20230809 13:05:31.298"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
-<arg>author=George Orwell</arg>
-<arg>name=Animal Farm</arg>
+<arg>actorId=nm123</arg>
+<arg>movieId=tt1</arg>
 </arguments>
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.211" level="INFO">${params} = {'author': 'George Orwell', 'name': 'Animal Farm'}</msg>
-<status status="PASS" starttime="20230809 12:58:41.211" endtime="20230809 12:58:41.211"></status>
+<msg timestamp="20230809 13:05:31.301" level="INFO">${params} = {'actorId': 'nm123', 'movieId': 'tt1'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.299" endtime="20230809 13:05:31.301"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
 <arguments>
 <arg>localhost</arg>
-<arg>/api/book/addBook</arg>
+<arg>/api/v1/addRelationship</arg>
 <arg>json=${params}</arg>
 <arg>headers=${headers}</arg>
 <arg>expected_status=400</arg>
@@ -337,14 +337,14 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.214" level="INFO">PUT Request : url=http://localhost:7474/api/book/addBook 
- path_url=/api/book/addBook 
- headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '50'} 
- body=b'{"author": "George Orwell", "name": "Animal Farm"}' 
+<msg timestamp="20230809 13:05:31.306" level="INFO">PUT Request : url=http://localhost:7474/api/v1/addRelationship 
+ path_url=/api/v1/addRelationship 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '38'} 
+ body=b'{"actorId": "nm123", "movieId": "tt1"}' 
  </msg>
-<msg timestamp="20230809 12:58:41.214" level="INFO">PUT Response : url=http://localhost:7474/api/book/addBook 
+<msg timestamp="20230809 13:05:31.306" level="INFO">PUT Response : url=http://localhost:7474/api/v1/addRelationship 
  status=401, reason=Unauthorized 
- headers={'Date': 'Wed, 09 Aug 2023 16:58:41 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
+ headers={'Date': 'Wed, 09 Aug 2023 17:05:31 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
  body={
   "errors" : [ {
     "code" : "Neo.ClientError.Security.Unauthorized",
@@ -352,13 +352,13 @@
   } ]
 } 
  </msg>
-<msg timestamp="20230809 12:58:41.215" level="FAIL">Url: http://localhost:7474/api/book/addBook Expected status: 401 != 400</msg>
-<status status="FAIL" starttime="20230809 12:58:41.211" endtime="20230809 12:58:41.215"></status>
+<msg timestamp="20230809 13:05:31.306" level="FAIL">Url: http://localhost:7474/api/v1/addRelationship Expected status: 401 != 400</msg>
+<status status="FAIL" starttime="20230809 13:05:31.301" endtime="20230809 13:05:31.308"></status>
 </kw>
 <timeout value="30 seconds"></timeout>
-<status status="FAIL" starttime="20230809 12:58:41.208" endtime="20230809 12:58:41.216" critical="yes">Url: http://localhost:7474/api/book/addBook Expected status: 401 != 400</status>
+<status status="FAIL" starttime="20230809 13:05:31.294" endtime="20230809 13:05:31.308" critical="yes">Url: http://localhost:7474/api/v1/addRelationship Expected status: 401 != 400</status>
 </test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t7" name="printBookPass">
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t7" name="getActorPass">
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
@@ -367,8 +367,232 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.217" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230809 12:58:41.217" endtime="20230809 12:58:41.217"></status>
+<msg timestamp="20230809 13:05:31.310" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.309" endtime="20230809 13:05:31.310"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>actorId=nm456</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.311" level="INFO">${params} = {'actorId': 'nm456'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.310" endtime="20230809 13:05:31.311"></status>
+</kw>
+<kw name="PUT On Session" library="RequestsLibrary">
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/getActor</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=200</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.313" level="INFO">PUT Request : url=http://localhost:7474/api/v1/getActor 
+ path_url=/api/v1/getActor 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '20'} 
+ body=b'{"actorId": "nm456"}' 
+ </msg>
+<msg timestamp="20230809 13:05:31.313" level="INFO">PUT Response : url=http://localhost:7474/api/v1/getActor 
+ status=401, reason=Unauthorized 
+ headers={'Date': 'Wed, 09 Aug 2023 17:05:31 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
+ body={
+  "errors" : [ {
+    "code" : "Neo.ClientError.Security.Unauthorized",
+    "message" : "No authentication header supplied."
+  } ]
+} 
+ </msg>
+<msg timestamp="20230809 13:05:31.315" level="FAIL">Url: http://localhost:7474/api/v1/getActor Expected status: 401 != 200</msg>
+<status status="FAIL" starttime="20230809 13:05:31.311" endtime="20230809 13:05:31.315"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230809 13:05:31.309" endtime="20230809 13:05:31.315" critical="yes">Url: http://localhost:7474/api/v1/getActor Expected status: 401 != 200</status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t8" name="getActorFail">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.317" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.316" endtime="20230809 13:05:31.317"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>actorId=nm456</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.317" level="INFO">${params} = {'actorId': 'nm456'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.317" endtime="20230809 13:05:31.317"></status>
+</kw>
+<kw name="PUT On Session" library="RequestsLibrary">
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/getActor</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=400</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.321" level="INFO">PUT Request : url=http://localhost:7474/api/v1/getActor 
+ path_url=/api/v1/getActor 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '20'} 
+ body=b'{"actorId": "nm456"}' 
+ </msg>
+<msg timestamp="20230809 13:05:31.321" level="INFO">PUT Response : url=http://localhost:7474/api/v1/getActor 
+ status=401, reason=Unauthorized 
+ headers={'Date': 'Wed, 09 Aug 2023 17:05:31 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
+ body={
+  "errors" : [ {
+    "code" : "Neo.ClientError.Security.Unauthorized",
+    "message" : "No authentication header supplied."
+  } ]
+} 
+ </msg>
+<msg timestamp="20230809 13:05:31.321" level="FAIL">Url: http://localhost:7474/api/v1/getActor Expected status: 401 != 400</msg>
+<status status="FAIL" starttime="20230809 13:05:31.317" endtime="20230809 13:05:31.321"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230809 13:05:31.316" endtime="20230809 13:05:31.323" critical="yes">Url: http://localhost:7474/api/v1/getActor Expected status: 401 != 400</status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t9" name="getMoviePass">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.324" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.323" endtime="20230809 13:05:31.324"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>movieId=mov123</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.324" level="INFO">${params} = {'movieId': 'mov123'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.324" endtime="20230809 13:05:31.324"></status>
+</kw>
+<kw name="PUT On Session" library="RequestsLibrary">
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/getMovie</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=200</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.331" level="INFO">PUT Request : url=http://localhost:7474/api/v1/getMovie 
+ path_url=/api/v1/getMovie 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '21'} 
+ body=b'{"movieId": "mov123"}' 
+ </msg>
+<msg timestamp="20230809 13:05:31.331" level="INFO">PUT Response : url=http://localhost:7474/api/v1/getMovie 
+ status=401, reason=Unauthorized 
+ headers={'Date': 'Wed, 09 Aug 2023 17:05:31 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
+ body={
+  "errors" : [ {
+    "code" : "Neo.ClientError.Security.Unauthorized",
+    "message" : "No authentication header supplied."
+  } ]
+} 
+ </msg>
+<msg timestamp="20230809 13:05:31.334" level="FAIL">Url: http://localhost:7474/api/v1/getMovie Expected status: 401 != 200</msg>
+<status status="FAIL" starttime="20230809 13:05:31.325" endtime="20230809 13:05:31.334"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230809 13:05:31.323" endtime="20230809 13:05:31.335" critical="yes">Url: http://localhost:7474/api/v1/getMovie Expected status: 401 != 200</status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t10" name="getMovieFail">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.339" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.339" endtime="20230809 13:05:31.339"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>movieId=mov123</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.340" level="INFO">${params} = {'movieId': 'mov123'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.339" endtime="20230809 13:05:31.340"></status>
+</kw>
+<kw name="PUT On Session" library="RequestsLibrary">
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/getMovie</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=400</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.344" level="INFO">PUT Request : url=http://localhost:7474/api/v1/getMovie 
+ path_url=/api/v1/getMovie 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '21'} 
+ body=b'{"movieId": "mov123"}' 
+ </msg>
+<msg timestamp="20230809 13:05:31.344" level="INFO">PUT Response : url=http://localhost:7474/api/v1/getMovie 
+ status=401, reason=Unauthorized 
+ headers={'Date': 'Wed, 09 Aug 2023 17:05:31 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
+ body={
+  "errors" : [ {
+    "code" : "Neo.ClientError.Security.Unauthorized",
+    "message" : "No authentication header supplied."
+  } ]
+} 
+ </msg>
+<msg timestamp="20230809 13:05:31.345" level="FAIL">Url: http://localhost:7474/api/v1/getMovie Expected status: 401 != 400</msg>
+<status status="FAIL" starttime="20230809 13:05:31.340" endtime="20230809 13:05:31.345"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230809 13:05:31.337" endtime="20230809 13:05:31.346" critical="yes">Url: http://localhost:7474/api/v1/getMovie Expected status: 401 != 400</status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t11" name="hasRelationshipPass">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.346" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.346" endtime="20230809 13:05:31.348"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
@@ -379,14 +603,14 @@
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.217" level="INFO">${params} = {'author': 'George Orwell', 'title': '1984'}</msg>
-<status status="PASS" starttime="20230809 12:58:41.217" endtime="20230809 12:58:41.217"></status>
+<msg timestamp="20230809 13:05:31.348" level="INFO">${params} = {'author': 'George Orwell', 'title': '1984'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.348" endtime="20230809 13:05:31.348"></status>
 </kw>
 <kw name="GET On Session" library="RequestsLibrary">
 <doc>Sends a GET request on a previously created HTTP Session.</doc>
 <arguments>
 <arg>localhost</arg>
-<arg>/api/book/printBook</arg>
+<arg>/api/v1/hasRelationship</arg>
 <arg>params=${params}</arg>
 <arg>headers=${headers}</arg>
 <arg>expected_status=200</arg>
@@ -394,14 +618,14 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230809 12:58:41.221" level="INFO">GET Request : url=http://localhost:7474/api/book/printBook?author=George+Orwell&amp;title=1984 
- path_url=/api/book/printBook?author=George+Orwell&amp;title=1984 
+<msg timestamp="20230809 13:05:31.352" level="INFO">GET Request : url=http://localhost:7474/api/v1/hasRelationship?author=George+Orwell&amp;title=1984 
+ path_url=/api/v1/hasRelationship?author=George+Orwell&amp;title=1984 
  headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json'} 
  body=None 
  </msg>
-<msg timestamp="20230809 12:58:41.221" level="INFO">GET Response : url=http://localhost:7474/api/book/printBook?author=George+Orwell&amp;title=1984 
+<msg timestamp="20230809 13:05:31.352" level="INFO">GET Response : url=http://localhost:7474/api/v1/hasRelationship?author=George+Orwell&amp;title=1984 
  status=401, reason=Unauthorized 
- headers={'Date': 'Wed, 09 Aug 2023 16:58:41 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
+ headers={'Date': 'Wed, 09 Aug 2023 17:05:31 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
  body={
   "errors" : [ {
     "code" : "Neo.ClientError.Security.Unauthorized",
@@ -409,44 +633,101 @@
   } ]
 } 
  </msg>
-<msg timestamp="20230809 12:58:41.222" level="FAIL">Url: http://localhost:7474/api/book/printBook?author=George+Orwell&amp;title=1984 Expected status: 401 != 200</msg>
-<status status="FAIL" starttime="20230809 12:58:41.218" endtime="20230809 12:58:41.222"></status>
+<msg timestamp="20230809 13:05:31.352" level="FAIL">Url: http://localhost:7474/api/v1/hasRelationship?author=George+Orwell&amp;title=1984 Expected status: 401 != 200</msg>
+<status status="FAIL" starttime="20230809 13:05:31.348" endtime="20230809 13:05:31.353"></status>
 </kw>
 <timeout value="30 seconds"></timeout>
-<status status="FAIL" starttime="20230809 12:58:41.216" endtime="20230809 12:58:41.223" critical="yes">Url: http://localhost:7474/api/book/printBook?author=George+Orwell&amp;title=1984 Expected status: 401 != 200</status>
+<status status="FAIL" starttime="20230809 13:05:31.346" endtime="20230809 13:05:31.353" critical="yes">Url: http://localhost:7474/api/v1/hasRelationship?author=George+Orwell&amp;title=1984 Expected status: 401 != 200</status>
 </test>
-<status status="FAIL" starttime="20230809 12:58:38.987" endtime="20230809 12:58:41.224"></status>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t12" name="hasRelationshipFail">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.354" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.354" endtime="20230809 13:05:31.354"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>author=George Orwell</arg>
+<arg>title=1984</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.355" level="INFO">${params} = {'author': 'George Orwell', 'title': '1984'}</msg>
+<status status="PASS" starttime="20230809 13:05:31.354" endtime="20230809 13:05:31.355"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/hasRelationship</arg>
+<arg>params=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=200</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230809 13:05:31.357" level="INFO">GET Request : url=http://localhost:7474/api/v1/hasRelationship?author=George+Orwell&amp;title=1984 
+ path_url=/api/v1/hasRelationship?author=George+Orwell&amp;title=1984 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json'} 
+ body=None 
+ </msg>
+<msg timestamp="20230809 13:05:31.357" level="INFO">GET Response : url=http://localhost:7474/api/v1/hasRelationship?author=George+Orwell&amp;title=1984 
+ status=401, reason=Unauthorized 
+ headers={'Date': 'Wed, 09 Aug 2023 17:05:31 GMT', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json;charset=utf-8', 'WWW-Authenticate': 'Basic realm="Neo4j"', 'Content-Length': '138'} 
+ body={
+  "errors" : [ {
+    "code" : "Neo.ClientError.Security.Unauthorized",
+    "message" : "No authentication header supplied."
+  } ]
+} 
+ </msg>
+<msg timestamp="20230809 13:05:31.359" level="FAIL">Url: http://localhost:7474/api/v1/hasRelationship?author=George+Orwell&amp;title=1984 Expected status: 401 != 200</msg>
+<status status="FAIL" starttime="20230809 13:05:31.355" endtime="20230809 13:05:31.359"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230809 13:05:31.353" endtime="20230809 13:05:31.359" critical="yes">Url: http://localhost:7474/api/v1/hasRelationship?author=George+Orwell&amp;title=1984 Expected status: 401 != 200</status>
+</test>
+<status status="FAIL" starttime="20230809 13:05:29.081" endtime="20230809 13:05:31.360"></status>
 </suite>
-<status status="FAIL" starttime="20230809 12:58:38.984" endtime="20230809 12:58:41.225"></status>
+<status status="FAIL" starttime="20230809 13:05:29.078" endtime="20230809 13:05:31.362"></status>
 </suite>
-<status status="FAIL" starttime="20230809 12:58:38.980" endtime="20230809 12:58:41.228"></status>
+<status status="FAIL" starttime="20230809 13:05:29.076" endtime="20230809 13:05:31.365"></status>
 </suite>
-<status status="FAIL" starttime="20230809 12:58:38.972" endtime="20230809 12:58:41.230"></status>
+<status status="FAIL" starttime="20230809 13:05:29.073" endtime="20230809 13:05:31.367"></status>
 </suite>
-<status status="FAIL" starttime="20230809 12:58:38.966" endtime="20230809 12:58:41.232"></status>
+<status status="FAIL" starttime="20230809 13:05:29.070" endtime="20230809 13:05:31.371"></status>
 </suite>
-<status status="FAIL" starttime="20230809 12:58:38.963" endtime="20230809 12:58:41.234"></status>
+<status status="FAIL" starttime="20230809 13:05:29.066" endtime="20230809 13:05:31.376"></status>
 </suite>
-<status status="FAIL" starttime="20230809 12:58:38.961" endtime="20230809 12:58:41.236"></status>
+<status status="FAIL" starttime="20230809 13:05:29.062" endtime="20230809 13:05:31.381"></status>
 </suite>
-<status status="FAIL" starttime="20230809 12:58:38.943" endtime="20230809 12:58:41.238"></status>
+<status status="FAIL" starttime="20230809 13:05:29.037" endtime="20230809 13:05:31.384"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="7">Critical Tests</stat>
-<stat pass="0" fail="7">All Tests</stat>
+<stat pass="0" fail="12">Critical Tests</stat>
+<stat pass="0" fail="12">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="0" fail="7" id="s1" name="Project">Project</stat>
-<stat pass="0" fail="7" id="s1-s1" name="Src">Project.Src</stat>
-<stat pass="0" fail="7" id="s1-s1-s1" name="Main">Project.Src.Main</stat>
-<stat pass="0" fail="7" id="s1-s1-s1-s1" name="Java">Project.Src.Main.Java</stat>
-<stat pass="0" fail="7" id="s1-s1-s1-s1-s1" name="Ca">Project.Src.Main.Java.Ca</stat>
-<stat pass="0" fail="7" id="s1-s1-s1-s1-s1-s1" name="Yorku">Project.Src.Main.Java.Ca.Yorku</stat>
-<stat pass="0" fail="7" id="s1-s1-s1-s1-s1-s1-s1" name="Eecs">Project.Src.Main.Java.Ca.Yorku.Eecs</stat>
-<stat pass="0" fail="7" id="s1-s1-s1-s1-s1-s1-s1-s1" name="testRobot">Project.Src.Main.Java.Ca.Yorku.Eecs.testRobot</stat>
+<stat pass="0" fail="12" id="s1" name="Project">Project</stat>
+<stat pass="0" fail="12" id="s1-s1" name="Src">Project.Src</stat>
+<stat pass="0" fail="12" id="s1-s1-s1" name="Main">Project.Src.Main</stat>
+<stat pass="0" fail="12" id="s1-s1-s1-s1" name="Java">Project.Src.Main.Java</stat>
+<stat pass="0" fail="12" id="s1-s1-s1-s1-s1" name="Ca">Project.Src.Main.Java.Ca</stat>
+<stat pass="0" fail="12" id="s1-s1-s1-s1-s1-s1" name="Yorku">Project.Src.Main.Java.Ca.Yorku</stat>
+<stat pass="0" fail="12" id="s1-s1-s1-s1-s1-s1-s1" name="Eecs">Project.Src.Main.Java.Ca.Yorku.Eecs</stat>
+<stat pass="0" fail="12" id="s1-s1-s1-s1-s1-s1-s1-s1" name="testRobot">Project.Src.Main.Java.Ca.Yorku.Eecs.testRobot</stat>
 </suite>
 </statistics>
 <errors>
