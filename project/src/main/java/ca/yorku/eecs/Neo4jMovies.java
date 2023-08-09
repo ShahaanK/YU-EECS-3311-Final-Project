@@ -315,37 +315,13 @@ public class Neo4jMovies {
 		try (Session session = driver.session()) {
 			if (!actorId.equals("nm0000102")) {
 				session.writeTransaction(tx -> {
-					tx.run("MATCH p=shortestPath((k:actor {actorId: $kevin})-[ACTED_IN*]-(a:actor {actorId: $actorId}))\n"
-							+ "RETURN p as baconPath",
+					tx.run("MATCH p=shortestPath((a:actor {actorId: $actorId})-[ACTED_IN*]-(k:actor {actorId: $kevin}))\n"
+							+ "RETURN nodes(p) as baconPath",
 							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
 
-					StatementResult result = tx.run("MATCH p=shortestPath((k:actor {actorId: $kevin})-[ACTED_IN*]-(a:actor {actorId: $actorId}))\n"
-							+ "RETURN p as baconPath",
+					StatementResult result = tx.run("MATCH p=shortestPath((a:actor {actorId: $actorId})-[ACTED_IN*]-(k:actor {actorId: $kevin}))\n"
+							+ "RETURN nodes(p) as baconPath",
 							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
-
-					Record record = result.next();
-
-					System.out.print("{\n\t \"baconPath\": [");
-					List<Object> newList = new ArrayList<Object>(record.get("_fields").asList());
-
-					if (newList.size() > 1) {
-						int i = 0;
-						System.out.print("\n");
-						while (i < newList.size()) {
-							System.out.print("\t\t\"" + newList.get(i) + "\"");
-							if (i + 1 != newList.size()) {
-								System.out.print(",\n");
-							}
-							i++;
-						}
-						System.out.print("\n\t]\n}");
-					}
-					else if (newList.size() == 1) {
-						System.out.print("\"" + newList.get(0) + "\"]\n}");
-					}
-					else {
-						System.out.print("]\n}");
-					}
 
 					return result;	
 
