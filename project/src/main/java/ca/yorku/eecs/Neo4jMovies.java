@@ -25,7 +25,7 @@ public class Neo4jMovies {
 	 */
 
 	public Neo4jMovies() {
-		URIdatabase = "bolt://localhost:7687";
+		URIdatabase = "bolt://localhost:8080";
 		Config config = Config.build().withoutEncryption().build();
 		driver = GraphDatabase.driver(URIdatabase, AuthTokens.basic("neo4j", "12345678"), config);
 	}
