@@ -3,7 +3,7 @@ Library           Collections
 Library           RequestsLibrary
 Test Timeout      30 seconds
 #https://www.youtube.com/watch?v=2CSXMMqfPt0 if there is an error
-Suite Setup    Create Session    localhost    http://localhost:8080
+Suite Setup    Create Session    localhost    http://localhost:7474
 
 *** Test Cases ***
 addActorPass
