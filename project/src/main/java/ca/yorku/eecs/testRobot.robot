@@ -13,7 +13,7 @@ addActorPass
 
 addActorFail
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=Devin
+    ${params}=    Create Dictionary    name=Devin actorId=nm1
     ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    expected_status=400
 
 addMoviePass
@@ -23,7 +23,7 @@ addMoviePass
 
 addMovieFail
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=Animal Farm    movieId=tt2
+    ${params}=    Create Dictionary    name=Animal Farm    movieId=tt1
     ${resp}=    PUT On Session    localhost    /api/v1/addMovie    json=${params}    headers=${headers}    expected_status=400
 
 addBookPass
