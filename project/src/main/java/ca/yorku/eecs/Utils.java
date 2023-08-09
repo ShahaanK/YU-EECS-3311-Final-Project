@@ -217,7 +217,7 @@ public class Utils implements HttpHandler {
 			//add: check whether that actor exists
 			if (pathFromRequest.equals("/api/v1/addActor")) {
 				System.out.print("here1");
-				if (!jsonObject.has("name") || !jsonObject.has("actorId")) {
+				if (jsonObject.has("name") || jsonObject.has("actorId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
@@ -231,7 +231,7 @@ public class Utils implements HttpHandler {
 			} 
 			else if (pathFromRequest.equals("/api/v1/addMovie")) {
 				//add: check whether that movie exists
-				if (!jsonObject.has("name") || !jsonObject.has("movieId")) {
+				if (jsonObject.has("name") || jsonObject.has("movieId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
@@ -256,6 +256,33 @@ public class Utils implements HttpHandler {
 				neo4jMovies.addRelationship(actorId, movieId);
 				sendString(request, "200 OK\n", 200);
 			}
+			
+			else if (pathFromRequest.equals("/api/v1/addAward")) {
+				if (jsonObject.has("name") || jsonObject.has("awardId")) {
+					sendString(request, "400 BAD REQUEST\n", 400);
+					return;
+				}
+
+				String awardName = jsonObject.getString("name");
+				String awardId = jsonObject.getString("awardId");
+
+				neo4jMovies.addMovie(awardName, awardId);
+				sendString(request, "200 OK\n", 200);
+			} 
+			
+			else if (pathFromRequest.equals("/api/v1/addAwardWinner")) {
+
+				if (!jsonObject.has("movieId") || !jsonObject.has("awardId")) {
+					sendString(request, "400 BAD REQUEST\n", 400);
+					return;
+				}
+				String movieId = jsonObject.getString("movieId");
+				String awardId = jsonObject.getString("awardId");
+
+				neo4jMovies.addRelationship(awardId, movieId);
+				sendString(request, "200 OK\n", 200);
+			}
+			
 
 		} catch (JSONException e) {
 			e.printStackTrace();
