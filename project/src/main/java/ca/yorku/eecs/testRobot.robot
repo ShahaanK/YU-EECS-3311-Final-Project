@@ -7,16 +7,8 @@ Suite Setup       Setup Session
 
 *** Keywords ***
 Setup Session
-    Create Session    localhost    http://localhost:7474
     ${auth}=    Create List    neo4j    12345678
-    ${auth}=    Convert To Tuple    ${auth}
-    Set Suite Variable    ${auth}
-
-*** Test Cases ***
-addActorPass
-    ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=George Orwell    actorId=nm1
-    ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    auth=${auth}    expected_status=200
+    Create Session    localhost    http://localhost:7474    auth=${auth}
 
 *** Test Cases ***
 addActorPass
