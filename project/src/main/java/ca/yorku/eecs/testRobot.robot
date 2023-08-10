@@ -10,6 +10,12 @@ Setup Session
     ${auth}=    Create List    neo4j    12345678
     Create Session    localhost    http://localhost:7474    auth=${auth}
 
+*** Test Cases ***
+addActorPass
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    name=George Orwell    actorId=nm1
+    ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    auth=${auth}    expected_status=200
+    
 addActorFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    name=Devin actorId=nm1
