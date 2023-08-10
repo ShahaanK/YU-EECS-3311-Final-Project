@@ -8,7 +8,7 @@ Suite Setup       Setup Session
 *** Keywords ***
 Setup Session
     ${auth}=    Create List    neo4j    12345678
-    Create Session    localhost    http://localhost:7474    auth=${auth}
+    Create Session    localhost    http://localhost:8080    auth=${auth}
 
 *** Test Cases ***
 addActorPass
