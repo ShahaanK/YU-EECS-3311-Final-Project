@@ -3,13 +3,19 @@ Library           Collections
 Library           RequestsLibrary
 Test Timeout      30 seconds
 #https://www.youtube.com/watch?v=2CSXMMqfPt0 if there is an error
-Suite Setup    Create Session    localhost    http://localhost:7474    auth=('neo4j', '12345678')
+Suite Setup       Setup Session
+
+*** Keywords ***
+Setup Session
+    Create Session    localhost    http://localhost:7474
+    ${auth}=    Create List    neo4j    12345678
+    Set Suite Variable    ${auth}
 
 *** Test Cases ***
 addActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    name=George Orwell    actorId=nm1
-    ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    expected_status=200
+    ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    auth=${auth}    expected_status=200
 
 addActorFail
     ${headers}=    Create Dictionary    Content-Type=application/json
