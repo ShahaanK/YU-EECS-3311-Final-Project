@@ -82,7 +82,7 @@ public class Utils implements HttpHandler {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			sendString(request, "Server error\n", 500);
+			sendString(request, "500 INTERNAL SERVER ERROR\n", 500);
 		}
 
 	}
