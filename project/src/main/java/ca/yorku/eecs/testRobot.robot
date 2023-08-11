@@ -85,9 +85,23 @@ hasRelationshipFail
     
     
 computeBaconNumberPass
+	${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    baconNumber=3
+    ${resp}=    GET On Session    localhost    /api/v1/computerBaconNumber    params=${params}    headers=${headers}    expected_status=200
 
 computeBaconNumberFail
-
+	${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    baconNumber=3
+    ${resp}=    PUT On Session    localhost    /api/v1/computeBaconNumber    json=${params}    headers=${headers}    expected_status=400
+    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/getMovie    params=${params}    headers=${headers}    expected_status=404
+    
 computeBaconPathPass
-
+	${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    baconPath=nm1991271,nm9112231,nm9191136,nm9894331,nm0000102
+    ${resp}=    GET On Session    localhost    /api/v1/computeBaconPath    params=${params}    headers=${headers}    expected_status=200
+    
 computeBaconPathFail
+	${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    baconPath=nm1991271,nm9112231,nm1234,nm9894331,nm0000102
+    ${resp}=    GET On Session    localhost    /api/v1/computeBaconPath    params=${params}    headers=${headers}    expected_status=400
+    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/computeBaconPath    params=${params}    headers=${headers}    expected_status=404
