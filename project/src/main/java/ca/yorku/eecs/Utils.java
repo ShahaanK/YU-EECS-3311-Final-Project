@@ -214,11 +214,10 @@ public class Utils implements HttpHandler {
 
 		try {
 			JSONObject jsonObject = new JSONObject(body);
-			//add: check whether that actor exists
 			if (pathFromRequest.equals("/api/v1/addActor")) {
-				System.out.print("here1");
 				if (jsonObject.has("name") || jsonObject.has("actorId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
+					System.out.print("no input, utils 220");
 					return;
 				}
 
@@ -230,9 +229,9 @@ public class Utils implements HttpHandler {
 
 			} 
 			else if (pathFromRequest.equals("/api/v1/addMovie")) {
-				//add: check whether that movie exists
 				if (jsonObject.has("name") || jsonObject.has("movieId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
+					System.out.print("no input, utils 234");
 					return;
 				}
 
@@ -248,6 +247,7 @@ public class Utils implements HttpHandler {
 
 				if (!jsonObject.has("actorId") || !jsonObject.has("movieId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
+					System.out.print("no input, utils 250");
 					return;
 				}
 				String actorId = jsonObject.getString("actorId");
