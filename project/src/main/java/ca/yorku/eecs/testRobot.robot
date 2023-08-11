@@ -50,23 +50,23 @@ addRelationshipFail
 getActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm903001923
-    ${resp}=    PUT On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=200
+    ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=200
 
 getActorFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm456
-    ${resp}=    PUT On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=400
+    ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=400
     Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/getActor    params=${params}    headers=${headers}    expected_status=404
 
 getMoviePass
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    movieId=tt1
-    ${resp}=    PUT On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=200
+    ${resp}=    GET On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=200
 
 getMovieFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    movieId=mov123
-    ${resp}=    PUT On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=400
+    ${resp}=    GET On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=400
     Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/getMovie    params=${params}    headers=${headers}    expected_status=404
     
 
@@ -88,7 +88,7 @@ computeBaconNumberPass
 computeBaconNumberFail
 	${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    baconNumber=3
-    ${resp}=    PUT On Session    localhost    /api/v1/computeBaconNumber    json=${params}    headers=${headers}    expected_status=400
+    ${resp}=    GET On Session    localhost    /api/v1/computeBaconNumber    json=${params}    headers=${headers}    expected_status=400
     Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/getMovie    params=${params}    headers=${headers}    expected_status=404
     
 computeBaconPathPass
