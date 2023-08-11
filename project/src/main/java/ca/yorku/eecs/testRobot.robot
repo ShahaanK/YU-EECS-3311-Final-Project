@@ -50,7 +50,7 @@ addRelationshipFail
 
 getActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    actorId=nm0000102
+    ${params}=    Create Dictionary    actorId=nm903001923
     ${resp}=    PUT On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=200
 
 getActorFail
