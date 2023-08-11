@@ -45,6 +45,8 @@ addRelationshipFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm1    movieId=tt1
     ${resp}=    PUT On Session    localhost    /api/v1/addRelationship    json=${params}    headers=${headers}    expected_status=400
+     Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/addRelationship    params=${params}    headers=${headers}    expected_status=404
+    
 
 getActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
@@ -55,6 +57,8 @@ getActorFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm456
     ${resp}=    PUT On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=400
+    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/getActor    params=${params}    headers=${headers}    expected_status=404
+    
 
 getMoviePass
     ${headers}=    Create Dictionary    Content-Type=application/json
@@ -65,6 +69,8 @@ getMovieFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    movieId=mov123
     ${resp}=    PUT On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=400
+    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/getMovie    params=${params}    headers=${headers}    expected_status=404
+    
 
 hasRelationshipPass
     ${headers}=    Create Dictionary    Content-Type=application/json
@@ -95,3 +101,14 @@ addAwardWinnerFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    awardId=aw999    movieId=tt999
     ${resp}=    PUT On Session    localhost    /api/v1/addAwardWinner    json=${params}    headers=${headers}    expected_status=400
+    ${resp}=    GET On Session    localhost    /api/v1/hasRelationship    params=${params}    headers=${headers}    expected_status=400
+    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/hasRelationship    params=${params}    headers=${headers}    expected_status=404
+    
+    
+computeBaconNumberPass
+
+computeBaconNumberFail
+
+computeBaconPathPass
+
+computeBaconPathFail
