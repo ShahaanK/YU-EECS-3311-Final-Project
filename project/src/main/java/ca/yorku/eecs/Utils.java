@@ -88,69 +88,110 @@ public class Utils implements HttpHandler {
 	}
 
 	public void handleGet(HttpExchange request) throws IOException {
-	    URI uriFromRequest = request.getRequestURI();
-	    String pathFromRequest = uriFromRequest.getPath();
-	    String queryFromURI = uriFromRequest.getQuery();
 
-	    Map<String, String> queryParameters = new LinkedHashMap<>();
-	    if (queryFromURI != null) {
-	        queryParameters = splitQuery(queryFromURI);
-	    }
+		Neo4jMovies neo4jmovies = new Neo4jMovies();
 
-	    try {
-	        Neo4jMovies neo4jmovies = new Neo4jMovies();
-	        
-	        switch (pathFromRequest) {
-	            case "/api/v1/getActor":
-	                if (queryParameters.containsKey("actorId")) {
-	                    neo4jmovies.getActor(queryParameters.get("actorId"));
-	                    sendString(request, "200 OK", 200);
-	                } else {
-	                    sendString(request, "400 BAD REQUEST\n", 400);
-	                }
-	                break;
-	            case "/api/v1/getMovie":
-	                if (queryParameters.containsKey("movieId")) {
-	                    neo4jmovies.getMovie(queryParameters.get("movieId"));
-	                    sendString(request, "200 OK", 200);
-	                } else {
-	                    sendString(request, "400 BAD REQUEST\n", 400);
-	                }
-	                break;
-	            case "/api/v1/hasRelationship":
-	                if (queryParameters.containsKey("actorId") && queryParameters.containsKey("movieId")) {
-	                    neo4jmovies.hasRelationship(queryParameters.get("actorId"), queryParameters.get("movieId"));
-	                    sendString(request, "200 OK", 200);
-	                } else {
-	                    sendString(request, "400 BAD REQUEST\n", 400);
-	                }
-	                break;
-	            case "/api/v1/computeBaconNumber":
-	                if (queryParameters.containsKey("actorId")) {
-	                    neo4jmovies.computeBaconNumber(queryParameters.get("actorId"));
-	                    sendString(request, "200 OK", 200);
-	                } else {
-	                    sendString(request, "400 BAD REQUEST\n", 400);
-	                }
-	                break;
-	            case "/api/v1/computeBaconPath":
-	                if (queryParameters.containsKey("actorId")) {
-	                    neo4jmovies.computeBaconPath(queryParameters.get("actorId"));
-	                    sendString(request, "200 OK", 200);
-	                } else {
-	                    sendString(request, "400 BAD REQUEST\n", 400);
-	                }
-	                break;
-	            default:
-	                sendString(request, "404 NOT FOUND", 404);
-	                break;
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        sendString(request, "500 INTERNAL SERVER ERROR\n", 500);
-	    }
+		URI uriFromRequest = request.getRequestURI();
+		String pathFromRequest = uriFromRequest.getPath();
+		String queryFromURI = uriFromRequest.getQuery();
+
+		try {
+
+			Map<String, String> queryParameters = splitQuery(queryFromURI);
+
+
+			try {
+				if (pathFromRequest.equals("/api/v1/getActor")) {
+					if (!queryParameters.containsKey("actorId")) {
+						sendString(request, "400 BAD REQUEST\n", 400);
+					}
+					else {
+						try {
+							neo4jmovies.getActor(queryParameters.get("actorId").toString());
+							sendString(request, "200 OK", 200);
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+							sendString(request, "404 NOT FOUND", 404);
+						}
+					}
+				}
+				else if (pathFromRequest.equals("/api/v1/getMovie")) {
+					if (!queryParameters.containsKey("movieId")) {
+						sendString(request, "400 BAD REQUEST\n", 400);
+					}
+					else {
+						try {
+							neo4jmovies.getMovie(queryParameters.get("movieId").toString());
+							sendString(request, "200 OK", 200);
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+							sendString(request, "404 NOT FOUND", 404);
+						}
+					}
+				}
+
+				else if (pathFromRequest.equals("/api/v1/hasRelationship")) {
+					if (!queryParameters.containsKey("actorId") || !queryParameters.containsKey("movieId")) {
+						sendString(request, "400 BAD REQUEST\n", 400);
+					}
+					else {
+						try {
+							neo4jmovies.hasRelationship(queryParameters.get("actorId").toString(), 
+									queryParameters.get("movieId").toString());
+							sendString(request, "200 OK", 200);
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+							sendString(request, "404 NOT FOUND", 404);
+						}
+					}
+				}
+
+				else if (pathFromRequest.equals("/api/v1/computeBaconNumber")) {
+					if (!queryParameters.containsKey("actorId")) {
+						sendString(request, "400 BAD REQUEST\n", 400);
+					}
+					else {
+						try {
+							neo4jmovies.computeBaconNumber(queryParameters.get("actorId").toString());
+							sendString(request, "200 OK", 200);
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+							sendString(request, "404 NOT FOUND", 404);
+						}
+					}
+				}
+
+				else if (pathFromRequest.equals("/api/v1/computeBaconPath")) {
+					if (!queryParameters.containsKey("actorId")) {
+						sendString(request, "400 BAD REQUEST\n", 400);
+					}
+					else {
+						try {
+							neo4jmovies.computeBaconPath(queryParameters.get("actorId").toString());
+							sendString(request, "200 OK", 200);
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+							sendString(request, "404 NOT FOUND", 404);
+						}
+					}
+				}
+			}
+			
+			catch (Exception e) {
+				e.printStackTrace();
+				sendString(request, "500 INTERNAL SERVER ERROR\n", 500);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			sendString(request, "400 BAD REQUEST\n", 400);
+		}
 	}
-
 
 	//Creating an instance of the Neo4jMovies class to use the public addActor, addMovie, and addRelationship methods
 	private Neo4jMovies neo4jMovies;

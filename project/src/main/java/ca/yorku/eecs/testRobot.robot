@@ -46,6 +46,7 @@ addRelationshipFail
     ${params}=    Create Dictionary    actorId=nm1    movieId=tt1
     ${resp}=    PUT On Session    localhost    /api/v1/addRelationship    json=${params}    headers=${headers}    expected_status=400
      Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/addRelationship    params=${params}    headers=${headers}    expected_status=404
+    
 
 getActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
@@ -57,6 +58,7 @@ getActorFail
     ${params}=    Create Dictionary    actorId=nm456
     ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=400
     Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/getActor    params=${params}    headers=${headers}    expected_status=404
+    
 
 getMoviePass
     ${headers}=    Create Dictionary    Content-Type=application/json
