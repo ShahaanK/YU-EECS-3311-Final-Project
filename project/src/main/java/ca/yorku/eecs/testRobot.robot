@@ -75,3 +75,23 @@ hasRelationshipFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm123    movieId=nm10491843
     ${resp}=    GET On Session    localhost    /api/v1/hasRelationship    params=${params}    headers=${headers}    expected_status=200
+    
+addAwardPass
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    awardId=aw1    name=Oscar
+    ${resp}=    PUT On Session    localhost    /api/v1/addAward    json=${params}    headers=${headers}    expected_status=200
+
+addAwardFail
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    awardId=aw1    name=Golden Globe
+    ${resp}=    PUT On Session    localhost    /api/v1/addAward    json=${params}    headers=${headers}    expected_status=400
+
+addAwardWinnerPass
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    awardId=aw1    movieId=tt1
+    ${resp}=    PUT On Session    localhost    /api/v1/addAwardWinner    json=${params}    headers=${headers}    expected_status=200
+
+addAwardWinnerFail
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    awardId=aw999    movieId=tt999
+    ${resp}=    PUT On Session    localhost    /api/v1/addAwardWinner    json=${params}    headers=${headers}    expected_status=400
