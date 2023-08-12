@@ -281,12 +281,9 @@ public class Neo4jMovies {
 		try (Session session = driver.session()) {
 			if (!actorId.equals("nm0000102")) {
 				session.writeTransaction(tx -> {
-					tx.run("MATCH p=shortestPath((k:actor {actorId: $kevin})-[ACTED_IN*]-(k:actor {actorId: $actorId}))\n"
+					StatementResult result = tx.run("MATCH p=shortestPath((k:actor {actorId: 'nm0000102'})-[ACTED_IN*]-(a:actor {actorId: $actorId}))\n"
 							+ "RETURN length(p) as baconNumber",
-							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
-					StatementResult result = tx.run("MATCH p=shortestPath((k:actor {actorId: $kevin})-[ACTED_IN*]-(a:actor {actorId: $actorId}))\n"
-							+ "RETURN length(p) as baconNumber",
-							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
+							Values.parameters("actorId", actorId));
 
 					Record record = result.single();
 
@@ -302,12 +299,13 @@ public class Neo4jMovies {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					return result;		
+					return result;
 				});
 				session.close();
 			}
 		}
 	}
+
 
 	public void computeBaconPath(String actorId) {
 		try (Session session = driver.session()) {
