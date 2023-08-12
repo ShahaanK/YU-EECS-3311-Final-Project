@@ -108,7 +108,7 @@ hasRelationshipFail
 computeBaconNumberPass
 	${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm94820392
-    ${resp}=    GET On Session    localhost    /api/v1/computerBaconNumber    json=${params}    headers=${headers}    expected_status=200
+    ${resp}=    GET On Session    localhost    /api/v1/computeBaconNumber    json=${params}    headers=${headers}    expected_status=200
 
 computeBaconNumberFailOne
 	${headers}=    Create Dictionary    Content-Type=application/json
