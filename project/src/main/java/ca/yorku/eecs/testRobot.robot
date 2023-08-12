@@ -95,7 +95,8 @@ hasRelationshipPass
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm10    movieId=nm78
     ${resp}=    GET On Session    localhost    /api/v1/hasRelationship    json=${params}    headers=${headers}    expected_status=200
-    Dictionary Should Contain Value    ${resp.json()}    Margot Robbie acted in Barbie
+    ${response_json}=    Set Variable    ${resp.json()}
+    Should Be Equal As Strings    ${response_json['hasRelationship']}    true
     
 hasRelationshipFail
     ${headers}=    Create Dictionary    Content-Type=application/json
