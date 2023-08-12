@@ -249,16 +249,17 @@ public class Neo4jMovies {
 				StatementResult result = tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
 						+ "RETURN (a).actorId as actorId, (m).movieId as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
 						Values.parameters("actorId", actorId, "movieId", movieId));
-
-				Record record = result.next();
-
+				
 				JSONObject json = new JSONObject();
+				
+				Utils utils = new Utils();
+				
 				try {
+					Record record = result.next();
 					json.put("actorId", record.get("actorId"));
 					json.put("movieId", record.get("movieId"));
 					json.put("hasRelationship", record.get("hasRelationship"));
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				try {
@@ -266,8 +267,7 @@ public class Neo4jMovies {
 					System.out.print("\t \"movieId\": " + json.get("movieId") + ",\n");
 					System.out.print("\t \"hasRelationship\": " + json.get("hasRelationship").toString().toLowerCase() + "\n}");
 
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				return result;		
@@ -293,15 +293,13 @@ public class Neo4jMovies {
 					JSONObject json = new JSONObject();
 					try {
 						json.put("baconNumber", record.get("baconNumber"));
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 					try {
 						System.out.print("{\n\t \"baconNumber\": " + json.get("baconNumber") + "\n}");
 
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 					return result;		
