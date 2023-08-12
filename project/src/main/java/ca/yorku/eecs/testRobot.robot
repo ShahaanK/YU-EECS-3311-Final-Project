@@ -68,7 +68,7 @@ addAwardWinnerFail
     
 getActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    actorId=nm10
+    ${params}=    Create Dictionary    actorId=nm94820392
     ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=200
 
 getActorFail
@@ -78,7 +78,7 @@ getActorFail
 
 getMoviePass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    movieId=nm78
+    ${params}=    Create Dictionary    movieId=nm19930442
     ${resp}=    GET On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=200
 
 getMovieFailOne
