@@ -8,7 +8,7 @@ Suite Setup       Create Session    localhost    http://localhost:8080
 *** Test Cases ***
 addActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=Margot Robbie   actorId=nm10
+    ${params}=    Create Dictionary    name=Ilir Dema   actorId=nm1937491s
     ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    expected_status=200
     
 addActorFail
@@ -18,7 +18,7 @@ addActorFail
 
 addMoviePass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=Parasites    movieId=nm144444
+    ${params}=    Create Dictionary    name=EECS3311    movieId=nm144444d
     ${resp}=    PUT On Session    localhost    /api/v1/addMovie    json=${params}    headers=${headers}    expected_status=200
 
 addMovieFail
@@ -28,7 +28,7 @@ addMovieFail
     
 addRelationshipPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    actorId=nm17482    movieId=nm144444
+    ${params}=    Create Dictionary    actorId=nm1937491s    movieId=nm144444d
     ${resp}=    PUT On Session    localhost    /api/v1/addRelationship    json=${params}    headers=${headers}    expected_status=200
   
 addRelationshipFail
@@ -38,7 +38,7 @@ addRelationshipFail
 
 addAwardPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    awardId=aw2    name=Golden Globe
+    ${params}=    Create Dictionary    awardId=aw2g    name=Golden Globe Two
     ${resp}=    PUT On Session    localhost    /api/v1/addAward    json=${params}    headers=${headers}    expected_status=200
 
 addAwardFail
