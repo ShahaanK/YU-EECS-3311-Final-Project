@@ -93,10 +93,6 @@ public class Utils implements HttpHandler {
 
 		URI uriFromRequest = request.getRequestURI();
 		String pathFromRequest = uriFromRequest.getPath();
-		String queryFromURI = uriFromRequest.getQuery();
-		
-		System.out.print(pathFromRequest + " " + queryFromURI + "\n");
-		
 		String body = convert(request.getRequestBody());
 
 		System.out.print(body + "\n");
