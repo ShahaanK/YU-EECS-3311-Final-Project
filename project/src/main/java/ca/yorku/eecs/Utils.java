@@ -94,16 +94,23 @@ public class Utils implements HttpHandler {
 		URI uriFromRequest = request.getRequestURI();
 		String pathFromRequest = uriFromRequest.getPath();
 		String queryFromURI = uriFromRequest.getQuery();
+		
+		System.out.print(pathFromRequest + " " + queryFromURI + "\n");
+		
+		String body = convert(request.getRequestBody());
+
+		System.out.print(body + "\n");
+		System.out.print(pathFromRequest + "\n");
 
 		try {
 
-			Map<String, String> queryParameters = splitQuery(queryFromURI);
+			JSONObject queryParameters = new JSONObject(body);
 
 
 			try {
 				if (pathFromRequest.equals("/api/v1/getActor")) {
-					if (!queryParameters.containsKey("actorId")) {
-						sendString(request, "400 BAD REQUEST\n", 400);
+					if (!queryParameters.has("actorId")) {
+						System.out.print("for getAct: 400\n");
 					}
 					else {
 						try {
@@ -111,13 +118,15 @@ public class Utils implements HttpHandler {
 							sendString(request, "200 OK", 200);
 						}
 						catch (Exception e) {
+							System.out.print("for getAct: 404\n");
 							e.printStackTrace();
 							sendString(request, "404 NOT FOUND", 404);
 						}
 					}
 				}
 				else if (pathFromRequest.equals("/api/v1/getMovie")) {
-					if (!queryParameters.containsKey("movieId")) {
+					if (!queryParameters.has("movieId")) {
+						System.out.print("for getMov: 400\n");
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
@@ -126,6 +135,7 @@ public class Utils implements HttpHandler {
 							sendString(request, "200 OK", 200);
 						}
 						catch (Exception e) {
+							System.out.print("for getMov: 404\n");
 							e.printStackTrace();
 							sendString(request, "404 NOT FOUND", 404);
 						}
@@ -133,7 +143,8 @@ public class Utils implements HttpHandler {
 				}
 
 				else if (pathFromRequest.equals("/api/v1/hasRelationship")) {
-					if (!queryParameters.containsKey("actorId") || !queryParameters.containsKey("movieId")) {
+					if (!queryParameters.has("actorId") || !queryParameters.has("movieId")) {
+						System.out.print("for hasRelationship: 400\n");
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
@@ -143,6 +154,7 @@ public class Utils implements HttpHandler {
 							sendString(request, "200 OK", 200);
 						}
 						catch (Exception e) {
+							System.out.print("for hasRelationship: 404\n");
 							e.printStackTrace();
 							sendString(request, "404 NOT FOUND", 404);
 						}
@@ -150,7 +162,8 @@ public class Utils implements HttpHandler {
 				}
 
 				else if (pathFromRequest.equals("/api/v1/computeBaconNumber")) {
-					if (!queryParameters.containsKey("actorId")) {
+					if (!queryParameters.has("actorId")) {
+						System.out.print("for computeBaconNumber: 400\n");
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
@@ -159,6 +172,7 @@ public class Utils implements HttpHandler {
 							sendString(request, "200 OK", 200);
 						}
 						catch (Exception e) {
+							System.out.print("for computeBaconNumber: 404\n");
 							e.printStackTrace();
 							sendString(request, "404 NOT FOUND", 404);
 						}
@@ -166,7 +180,8 @@ public class Utils implements HttpHandler {
 				}
 
 				else if (pathFromRequest.equals("/api/v1/computeBaconPath")) {
-					if (!queryParameters.containsKey("actorId")) {
+					if (!queryParameters.has("actorId")) {
+						System.out.print("for computeBaconPath: 400 key\n");
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
@@ -175,6 +190,7 @@ public class Utils implements HttpHandler {
 							sendString(request, "200 OK", 200);
 						}
 						catch (Exception e) {
+							System.out.print("for computeBaconPath: 404 exception\n");
 							e.printStackTrace();
 							sendString(request, "404 NOT FOUND", 404);
 						}
@@ -183,11 +199,13 @@ public class Utils implements HttpHandler {
 			}
 			
 			catch (Exception e) {
+				System.out.print("for all: 500\n");
 				e.printStackTrace();
 				sendString(request, "500 INTERNAL SERVER ERROR\n", 500);
 			}
 		}
 		catch (Exception e) {
+			System.out.print("for all: 400\n");
 			e.printStackTrace();
 			sendString(request, "400 BAD REQUEST\n", 400);
 		}
@@ -217,7 +235,6 @@ public class Utils implements HttpHandler {
 			if (pathFromRequest.equals("/api/v1/addActor")) {
 				if (jsonObject.has("name") || jsonObject.has("actorId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
-					System.out.print("no input, utils 220");
 					return;
 				}
 
@@ -231,7 +248,6 @@ public class Utils implements HttpHandler {
 			else if (pathFromRequest.equals("/api/v1/addMovie")) {
 				if (jsonObject.has("name") || jsonObject.has("movieId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
-					System.out.print("no input, utils 234");
 					return;
 				}
 
@@ -247,7 +263,6 @@ public class Utils implements HttpHandler {
 
 				if (!jsonObject.has("actorId") || !jsonObject.has("movieId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
-					System.out.print("no input, utils 250");
 					return;
 				}
 				String actorId = jsonObject.getString("actorId");

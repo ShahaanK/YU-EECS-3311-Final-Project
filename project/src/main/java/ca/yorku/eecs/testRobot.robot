@@ -8,7 +8,7 @@ Suite Setup       Create Session    localhost    http://localhost:8080
 *** Test Cases ***
 addActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=Margot Robbie    actorId=nm10
+    ${params}=    Create Dictionary    name=Park Seojoon   actorId=nm17482
     ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    expected_status=200
     
 addActorFailOne
@@ -23,7 +23,7 @@ addActorFailTwo
 
 addMoviePass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=Barbie    movieId=nm78
+    ${params}=    Create Dictionary    name=Parasites    movieId=nm144444
     ${resp}=    PUT On Session    localhost    /api/v1/addMovie    json=${params}    headers=${headers}    expected_status=200
 
 addMovieFailOne
@@ -38,13 +38,33 @@ addMovieFailTwo
 
 addRelationshipPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    actorId=nm10    movieId=nm78
+    ${params}=    Create Dictionary    actorId=nm17482    movieId=nm144444
     ${resp}=    PUT On Session    localhost    /api/v1/addRelationship    json=${params}    headers=${headers}    expected_status=200
   
 addRelationshipFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm1    movieId=tt1
     ${resp}=    PUT On Session    localhost    /api/v1/addRelationship    json=${params}    headers=${headers}    expected_status=400
+
+addAwardPass
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    awardId=aw2    name=Golden Globe
+    ${resp}=    PUT On Session    localhost    /api/v1/addAward    json=${params}    headers=${headers}    expected_status=200
+
+addAwardFail
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    awardId=aw1    name=Golden Globe
+    ${resp}=    PUT On Session    localhost    /api/v1/addAward    json=${params}    headers=${headers}    expected_status=400
+
+addAwardWinnerPass
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    awardId=aw2    movieId=nm78
+    ${resp}=    PUT On Session    localhost    /api/v1/addAwardWinner    json=${params}    headers=${headers}    expected_status=200
+
+addAwardWinnerFail
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    awardId=aw999    movieId=tt999
+    ${resp}=    PUT On Session    localhost    /api/v1/addAwardWinner    json=${params}    headers=${headers}    expected_status=404
     
 getActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
@@ -106,24 +126,3 @@ computeBaconPathFail
 	${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm49
     ${resp}=    GET On Session    localhost    /api/v1/computeBaconPath    json=${params}    headers=${headers}    expected_status=404
-    
-addAwardPass
-    ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    awardId=aw2    name=Golden Globe
-    ${resp}=    PUT On Session    localhost    /api/v1/addAward    json=${params}    headers=${headers}    expected_status=200
-
-addAwardFail
-    ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    awardId=aw1    name=Golden Globe
-    ${resp}=    PUT On Session    localhost    /api/v1/addAward    json=${params}    headers=${headers}    expected_status=400
-
-addAwardWinnerPass
-    ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    awardId=aw2    movieId=nm78
-    ${resp}=    PUT On Session    localhost    /api/v1/addAwardWinner    json=${params}    headers=${headers}    expected_status=200
-
-addAwardWinnerFail
-    ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    awardId=aw999    movieId=tt999
-    ${resp}=    PUT On Session    localhost    /api/v1/addAwardWinner    json=${params}    headers=${headers}    expected_status=404
- 
