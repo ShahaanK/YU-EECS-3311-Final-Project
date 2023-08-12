@@ -231,7 +231,7 @@ public class Utils implements HttpHandler {
 		try {
 			JSONObject jsonObject = new JSONObject(body);
 			if (pathFromRequest.equals("/api/v1/addActor")) {
-				if (jsonObject.has("name") || jsonObject.has("actorId")) {
+				if (!jsonObject.has("name") || !jsonObject.has("actorId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
@@ -244,7 +244,7 @@ public class Utils implements HttpHandler {
 
 			} 
 			else if (pathFromRequest.equals("/api/v1/addMovie")) {
-				if (jsonObject.has("name") || jsonObject.has("movieId")) {
+				if (!jsonObject.has("name") || !jsonObject.has("movieId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
@@ -271,7 +271,7 @@ public class Utils implements HttpHandler {
 			}
 			
 			else if (pathFromRequest.equals("/api/v1/addAward")) {
-				if (jsonObject.has("name") || jsonObject.has("awardId")) {
+				if (!jsonObject.has("name") || !jsonObject.has("awardId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
