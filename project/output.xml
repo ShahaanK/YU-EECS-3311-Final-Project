@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.2.2 (Python 3.10.4 on win32)" generated="20230811 11:03:13.040" rpa="false">
+<robot generator="Robot 3.2.2 (Python 3.10.4 on win32)" generated="20230812 11:18:09.745" rpa="false">
 <suite id="s1" name="Project" source="C:\Users\shaha\OneDrive\Documents\GitHub\EECS-3311-Final-Project\project">
 <suite id="s1-s1" name="Src" source="C:\Users\shaha\OneDrive\Documents\GitHub\EECS-3311-Final-Project\project\src">
 <suite id="s1-s1-s1" name="Main" source="C:\Users\shaha\OneDrive\Documents\GitHub\EECS-3311-Final-Project\project\src\main">
@@ -8,30 +8,14 @@
 <suite id="s1-s1-s1-s1-s1-s1" name="Yorku" source="C:\Users\shaha\OneDrive\Documents\GitHub\EECS-3311-Final-Project\project\src\main\java\ca\yorku">
 <suite id="s1-s1-s1-s1-s1-s1-s1" name="Eecs" source="C:\Users\shaha\OneDrive\Documents\GitHub\EECS-3311-Final-Project\project\src\main\java\ca\yorku\eecs">
 <suite id="s1-s1-s1-s1-s1-s1-s1-s1" name="testRobot" source="C:\Users\shaha\OneDrive\Documents\GitHub\EECS-3311-Final-Project\project\src\main\java\ca\yorku\eecs\testRobot.robot">
-<kw name="Setup Session" type="setup">
-<kw name="Create List" library="BuiltIn">
-<doc>Returns a list containing given items.</doc>
-<arguments>
-<arg>neo4j</arg>
-<arg>12345678</arg>
-</arguments>
-<assign>
-<var>${auth}</var>
-</assign>
-<msg timestamp="20230811 11:03:13.229" level="INFO">${auth} = ['neo4j', '12345678']</msg>
-<status status="PASS" starttime="20230811 11:03:13.229" endtime="20230811 11:03:13.229"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
+<kw name="Create Session" library="RequestsLibrary" type="setup">
 <doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
 <arg>localhost</arg>
 <arg>http://localhost:8080</arg>
-<arg>auth=${auth}</arg>
 </arguments>
-<msg timestamp="20230811 11:03:13.230" level="INFO">Creating Session using : alias=localhost, url=http://localhost:8080, headers={},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x00000148C4299D20&gt;, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20230811 11:03:13.229" endtime="20230811 11:03:13.230"></status>
-</kw>
-<status status="PASS" starttime="20230811 11:03:13.228" endtime="20230811 11:03:13.230"></status>
+<msg timestamp="20230812 11:18:10.119" level="INFO">Creating Session using : alias=localhost, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230812 11:18:10.117" endtime="20230812 11:18:10.120"></status>
 </kw>
 <test id="s1-s1-s1-s1-s1-s1-s1-s1-t1" name="addActorPass">
 <kw name="Create Dictionary" library="BuiltIn">
@@ -42,20 +26,20 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.232" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.232" endtime="20230811 11:03:13.232"></status>
+<msg timestamp="20230812 11:18:10.122" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.121" endtime="20230812 11:18:10.123"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
-<arg>name=Rowan Witt</arg>
-<arg>actorId=nm1</arg>
+<arg>name=Margot Robbie</arg>
+<arg>actorId=nm10</arg>
 </arguments>
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.233" level="INFO">${params} = {'name': 'Rowan Witt', 'actorId': 'nm1'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.233" endtime="20230811 11:03:13.233"></status>
+<msg timestamp="20230812 11:18:10.123" level="INFO">${params} = {'name': 'Margot Robbie', 'actorId': 'nm10'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.123" endtime="20230812 11:18:10.123"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -69,24 +53,24 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.238" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addActor 
+<msg timestamp="20230812 11:18:10.134" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addActor 
  path_url=/api/v1/addActor 
- headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '40', 'Authorization': 'Basic bmVvNGo6MTIzNDU2Nzg='} 
- body=b'{"name": "Rowan Witt", "actorId": "nm1"}' 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '44'} 
+ body=b'{"name": "Margot Robbie", "actorId": "nm10"}' 
  </msg>
-<msg timestamp="20230811 11:03:13.239" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addActor 
+<msg timestamp="20230812 11:18:10.137" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addActor 
  status=400, reason=Bad Request 
- headers={'Date': 'Fri, 11 Aug 2023 15:03:13 GMT', 'Content-length': '16'} 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '16'} 
  body=400 BAD REQUEST
  
  </msg>
-<msg timestamp="20230811 11:03:13.243" level="FAIL">Url: http://localhost:8080/api/v1/addActor Expected status: 400 != 200</msg>
-<status status="FAIL" starttime="20230811 11:03:13.233" endtime="20230811 11:03:13.243"></status>
+<msg timestamp="20230812 11:18:10.141" level="FAIL">Url: http://localhost:8080/api/v1/addActor Expected status: 400 != 200</msg>
+<status status="FAIL" starttime="20230812 11:18:10.125" endtime="20230812 11:18:10.141"></status>
 </kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:03:13.231" endtime="20230811 11:03:13.243" critical="yes">Url: http://localhost:8080/api/v1/addActor Expected status: 400 != 200</status>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230812 11:18:10.120" endtime="20230812 11:18:10.142" critical="yes">Url: http://localhost:8080/api/v1/addActor Expected status: 400 != 200</status>
 </test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t2" name="addActorFail">
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t2" name="addActorFailOne">
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
@@ -95,20 +79,19 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.244" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.244" endtime="20230811 11:03:13.244"></status>
+<msg timestamp="20230812 11:18:10.146" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.146" endtime="20230812 11:18:10.147"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
 <arg>name=Kevin Bacon</arg>
-<arg>actorId=nm1</arg>
 </arguments>
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.245" level="INFO">${params} = {'name': 'Kevin Bacon', 'actorId': 'nm1'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.244" endtime="20230811 11:03:13.245"></status>
+<msg timestamp="20230812 11:18:10.148" level="INFO">${params} = {'name': 'Kevin Bacon'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.147" endtime="20230812 11:18:10.148"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -122,22 +105,22 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.248" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addActor 
+<msg timestamp="20230812 11:18:10.153" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addActor 
  path_url=/api/v1/addActor 
- headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '41', 'Authorization': 'Basic bmVvNGo6MTIzNDU2Nzg='} 
- body=b'{"name": "Kevin Bacon", "actorId": "nm1"}' 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '23'} 
+ body=b'{"name": "Kevin Bacon"}' 
  </msg>
-<msg timestamp="20230811 11:03:13.248" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addActor 
+<msg timestamp="20230812 11:18:10.153" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addActor 
  status=400, reason=Bad Request 
- headers={'Date': 'Fri, 11 Aug 2023 15:03:13 GMT', 'Content-length': '16'} 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '16'} 
  body=400 BAD REQUEST
  
  </msg>
-<msg timestamp="20230811 11:03:13.248" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
-<status status="PASS" starttime="20230811 11:03:13.245" endtime="20230811 11:03:13.248"></status>
+<msg timestamp="20230812 11:18:10.154" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:10.148" endtime="20230812 11:18:10.154"></status>
 </kw>
-<timeout value="10 seconds"></timeout>
-<status status="PASS" starttime="20230811 11:03:13.243" endtime="20230811 11:03:13.248" critical="yes"></status>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:10.144" endtime="20230812 11:18:10.155" critical="yes"></status>
 </test>
 <test id="s1-s1-s1-s1-s1-s1-s1-s1-t3" name="addActorFailTwo">
 <kw name="Create Dictionary" library="BuiltIn">
@@ -148,8 +131,8 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.249" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.249" endtime="20230811 11:03:13.249"></status>
+<msg timestamp="20230812 11:18:10.158" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.157" endtime="20230812 11:18:10.158"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
@@ -160,8 +143,8 @@
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.249" level="INFO">${params} = {'name': 'Devin', 'actorId': 'nm0000102'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.249" endtime="20230811 11:03:13.250"></status>
+<msg timestamp="20230812 11:18:10.159" level="INFO">${params} = {'name': 'Devin', 'actorId': 'nm0000102'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.158" endtime="20230812 11:18:10.159"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -175,22 +158,22 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.253" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addActor 
+<msg timestamp="20230812 11:18:10.164" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addActor 
  path_url=/api/v1/addActor 
- headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '41', 'Authorization': 'Basic bmVvNGo6MTIzNDU2Nzg='} 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '41'} 
  body=b'{"name": "Devin", "actorId": "nm0000102"}' 
  </msg>
-<msg timestamp="20230811 11:03:13.253" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addActor 
+<msg timestamp="20230812 11:18:10.164" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addActor 
  status=400, reason=Bad Request 
- headers={'Date': 'Fri, 11 Aug 2023 15:03:13 GMT', 'Content-length': '16'} 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '16'} 
  body=400 BAD REQUEST
  
  </msg>
-<msg timestamp="20230811 11:03:13.253" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
-<status status="PASS" starttime="20230811 11:03:13.250" endtime="20230811 11:03:13.254"></status>
+<msg timestamp="20230812 11:18:10.165" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:10.159" endtime="20230812 11:18:10.165"></status>
 </kw>
-<timeout value="10 seconds"></timeout>
-<status status="PASS" starttime="20230811 11:03:13.249" endtime="20230811 11:03:13.254" critical="yes"></status>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:10.155" endtime="20230812 11:18:10.165" critical="yes"></status>
 </test>
 <test id="s1-s1-s1-s1-s1-s1-s1-s1-t4" name="addMoviePass">
 <kw name="Create Dictionary" library="BuiltIn">
@@ -201,20 +184,20 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.255" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.255" endtime="20230811 11:03:13.255"></status>
+<msg timestamp="20230812 11:18:10.166" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.166" endtime="20230812 11:18:10.167"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
-<arg>name=Parasite</arg>
-<arg>movieId=tt1</arg>
+<arg>name=Parasites</arg>
+<arg>movieId=nm144444</arg>
 </arguments>
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.256" level="INFO">${params} = {'name': 'Parasite', 'movieId': 'tt1'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.255" endtime="20230811 11:03:13.256"></status>
+<msg timestamp="20230812 11:18:10.167" level="INFO">${params} = {'name': 'Parasites', 'movieId': 'nm144444'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.167" endtime="20230812 11:18:10.167"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -228,24 +211,24 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.259" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addMovie 
+<msg timestamp="20230812 11:18:10.172" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addMovie 
  path_url=/api/v1/addMovie 
- headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '38', 'Authorization': 'Basic bmVvNGo6MTIzNDU2Nzg='} 
- body=b'{"name": "Parasite", "movieId": "tt1"}' 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '44'} 
+ body=b'{"name": "Parasites", "movieId": "nm144444"}' 
  </msg>
-<msg timestamp="20230811 11:03:13.259" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addMovie 
+<msg timestamp="20230812 11:18:10.173" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addMovie 
  status=400, reason=Bad Request 
- headers={'Date': 'Fri, 11 Aug 2023 15:03:13 GMT', 'Content-length': '16'} 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '16'} 
  body=400 BAD REQUEST
  
  </msg>
-<msg timestamp="20230811 11:03:13.260" level="FAIL">Url: http://localhost:8080/api/v1/addMovie Expected status: 400 != 200</msg>
-<status status="FAIL" starttime="20230811 11:03:13.256" endtime="20230811 11:03:13.260"></status>
+<msg timestamp="20230812 11:18:10.174" level="FAIL">Url: http://localhost:8080/api/v1/addMovie Expected status: 400 != 200</msg>
+<status status="FAIL" starttime="20230812 11:18:10.168" endtime="20230812 11:18:10.174"></status>
 </kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:03:13.254" endtime="20230811 11:03:13.261" critical="yes">Url: http://localhost:8080/api/v1/addMovie Expected status: 400 != 200</status>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230812 11:18:10.165" endtime="20230812 11:18:10.175" critical="yes">Url: http://localhost:8080/api/v1/addMovie Expected status: 400 != 200</status>
 </test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t5" name="addMovieFail">
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t5" name="addMovieFailOne">
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
@@ -254,20 +237,20 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.262" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.262" endtime="20230811 11:03:13.262"></status>
+<msg timestamp="20230812 11:18:10.178" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.178" endtime="20230812 11:18:10.179"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
-<arg>name=Animal Farm</arg>
-<arg>movieId=tt1</arg>
+<arg>title=Animal Farm</arg>
+<arg>movieId=tt0394</arg>
 </arguments>
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.263" level="INFO">${params} = {'name': 'Animal Farm', 'movieId': 'tt1'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.262" endtime="20230811 11:03:13.263"></status>
+<msg timestamp="20230812 11:18:10.180" level="INFO">${params} = {'title': 'Animal Farm', 'movieId': 'tt0394'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.179" endtime="20230812 11:18:10.180"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -281,24 +264,24 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.266" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addMovie 
+<msg timestamp="20230812 11:18:10.185" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addMovie 
  path_url=/api/v1/addMovie 
- headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '41', 'Authorization': 'Basic bmVvNGo6MTIzNDU2Nzg='} 
- body=b'{"name": "Animal Farm", "movieId": "tt1"}' 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '45'} 
+ body=b'{"title": "Animal Farm", "movieId": "tt0394"}' 
  </msg>
-<msg timestamp="20230811 11:03:13.266" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addMovie 
+<msg timestamp="20230812 11:18:10.186" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addMovie 
  status=400, reason=Bad Request 
- headers={'Date': 'Fri, 11 Aug 2023 15:03:13 GMT', 'Content-length': '16'} 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '16'} 
  body=400 BAD REQUEST
  
  </msg>
-<msg timestamp="20230811 11:03:13.266" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
-<status status="PASS" starttime="20230811 11:03:13.263" endtime="20230811 11:03:13.266"></status>
+<msg timestamp="20230812 11:18:10.186" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:10.180" endtime="20230812 11:18:10.186"></status>
 </kw>
-<timeout value="10 seconds"></timeout>
-<status status="PASS" starttime="20230811 11:03:13.261" endtime="20230811 11:03:13.267" critical="yes"></status>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:10.176" endtime="20230812 11:18:10.188" critical="yes"></status>
 </test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t6" name="addRelationshipPass">
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t6" name="addMovieFailTwo">
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
@@ -307,20 +290,73 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.268" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.268" endtime="20230811 11:03:13.268"></status>
+<msg timestamp="20230812 11:18:10.192" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.190" endtime="20230812 11:18:10.193"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
-<arg>actorId=nm1</arg>
-<arg>movieId=tt1</arg>
+<arg>title=Animal Farm</arg>
+<arg>movieId=nm78</arg>
 </arguments>
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.268" level="INFO">${params} = {'actorId': 'nm1', 'movieId': 'tt1'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.268" endtime="20230811 11:03:13.268"></status>
+<msg timestamp="20230812 11:18:10.194" level="INFO">${params} = {'title': 'Animal Farm', 'movieId': 'nm78'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.194" endtime="20230812 11:18:10.195"></status>
+</kw>
+<kw name="PUT On Session" library="RequestsLibrary">
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/addMovie</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=400</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.200" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addMovie 
+ path_url=/api/v1/addMovie 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '43'} 
+ body=b'{"title": "Animal Farm", "movieId": "nm78"}' 
+ </msg>
+<msg timestamp="20230812 11:18:10.200" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addMovie 
+ status=400, reason=Bad Request 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '16'} 
+ body=400 BAD REQUEST
+ 
+ </msg>
+<msg timestamp="20230812 11:18:10.201" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:10.195" endtime="20230812 11:18:10.201"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:10.189" endtime="20230812 11:18:10.201" critical="yes"></status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t7" name="addRelationshipPass">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.204" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.203" endtime="20230812 11:18:10.204"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>actorId=nm17482</arg>
+<arg>movieId=nm144444</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.205" level="INFO">${params} = {'actorId': 'nm17482', 'movieId': 'nm144444'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.204" endtime="20230812 11:18:10.205"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -334,24 +370,24 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.283" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addRelationship 
+<msg timestamp="20230812 11:18:10.215" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addRelationship 
  path_url=/api/v1/addRelationship 
- headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '36', 'Authorization': 'Basic bmVvNGo6MTIzNDU2Nzg='} 
- body=b'{"actorId": "nm1", "movieId": "tt1"}' 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '45'} 
+ body=b'{"actorId": "nm17482", "movieId": "nm144444"}' 
  </msg>
-<msg timestamp="20230811 11:03:13.283" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addRelationship 
+<msg timestamp="20230812 11:18:10.215" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addRelationship 
  status=200, reason=OK 
- headers={'Date': 'Fri, 11 Aug 2023 15:03:13 GMT', 'Content-length': '7'} 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '7'} 
  body=200 OK
  
  </msg>
-<msg timestamp="20230811 11:03:13.284" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20230811 11:03:13.268" endtime="20230811 11:03:13.284"></status>
+<msg timestamp="20230812 11:18:10.216" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:10.205" endtime="20230812 11:18:10.216"></status>
 </kw>
-<timeout value="10 seconds"></timeout>
-<status status="PASS" starttime="20230811 11:03:13.267" endtime="20230811 11:03:13.284" critical="yes"></status>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:10.202" endtime="20230812 11:18:10.217" critical="yes"></status>
 </test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t7" name="addRelationshipFail">
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t8" name="addRelationshipFail">
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
@@ -360,8 +396,8 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.285" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.285" endtime="20230811 11:03:13.285"></status>
+<msg timestamp="20230812 11:18:10.220" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.219" endtime="20230812 11:18:10.221"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
@@ -372,8 +408,8 @@
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.285" level="INFO">${params} = {'actorId': 'nm1', 'movieId': 'tt1'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.285" endtime="20230811 11:03:13.285"></status>
+<msg timestamp="20230812 11:18:10.221" level="INFO">${params} = {'actorId': 'nm1', 'movieId': 'tt1'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.221" endtime="20230812 11:18:10.221"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -387,24 +423,24 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.298" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addRelationship 
+<msg timestamp="20230812 11:18:10.232" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addRelationship 
  path_url=/api/v1/addRelationship 
- headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '36', 'Authorization': 'Basic bmVvNGo6MTIzNDU2Nzg='} 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '36'} 
  body=b'{"actorId": "nm1", "movieId": "tt1"}' 
  </msg>
-<msg timestamp="20230811 11:03:13.298" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addRelationship 
+<msg timestamp="20230812 11:18:10.233" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addRelationship 
  status=200, reason=OK 
- headers={'Date': 'Fri, 11 Aug 2023 15:03:13 GMT', 'Content-length': '7'} 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '7'} 
  body=200 OK
  
  </msg>
-<msg timestamp="20230811 11:03:13.299" level="FAIL">Url: http://localhost:8080/api/v1/addRelationship Expected status: 200 != 400</msg>
-<status status="FAIL" starttime="20230811 11:03:13.285" endtime="20230811 11:03:13.299"></status>
+<msg timestamp="20230812 11:18:10.234" level="FAIL">Url: http://localhost:8080/api/v1/addRelationship Expected status: 200 != 400</msg>
+<status status="FAIL" starttime="20230812 11:18:10.221" endtime="20230812 11:18:10.235"></status>
 </kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:03:13.284" endtime="20230811 11:03:13.299" critical="yes">Url: http://localhost:8080/api/v1/addRelationship Expected status: 200 != 400</status>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230812 11:18:10.217" endtime="20230812 11:18:10.236" critical="yes">Url: http://localhost:8080/api/v1/addRelationship Expected status: 200 != 400</status>
 </test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t8" name="getActorPass">
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t9" name="addAwardPass">
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
@@ -413,450 +449,20 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.301" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.300" endtime="20230811 11:03:13.301"></status>
+<msg timestamp="20230812 11:18:10.238" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.238" endtime="20230812 11:18:10.238"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
-<arg>actorId=nm0000102</arg>
+<arg>awardId=aw2</arg>
+<arg>name=Golden Globe</arg>
 </arguments>
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230811 11:03:13.301" level="INFO">${params} = {'actorId': 'nm0000102'}</msg>
-<status status="PASS" starttime="20230811 11:03:13.301" endtime="20230811 11:03:13.301"></status>
-</kw>
-<kw name="PUT On Session" library="RequestsLibrary">
-<doc>Sends a PUT request on a previously created HTTP Session.</doc>
-<arguments>
-<arg>localhost</arg>
-<arg>/api/v1/getActor</arg>
-<arg>json=${params}</arg>
-<arg>headers=${headers}</arg>
-<arg>expected_status=200</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20230811 11:04:53.343" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:03:13.301" endtime="20230811 11:04:53.343"></status>
-</kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:03:13.300" endtime="20230811 11:04:53.344" critical="yes">Test timeout 10 seconds exceeded.</status>
-</test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t9" name="getActorFail">
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-</arguments>
-<assign>
-<var>${headers}</var>
-</assign>
-<msg timestamp="20230811 11:04:53.350" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:04:53.347" endtime="20230811 11:04:53.350"></status>
-</kw>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>actorId=nm456</arg>
-</arguments>
-<assign>
-<var>${params}</var>
-</assign>
-<msg timestamp="20230811 11:04:53.350" level="INFO">${params} = {'actorId': 'nm456'}</msg>
-<status status="PASS" starttime="20230811 11:04:53.350" endtime="20230811 11:04:53.351"></status>
-</kw>
-<kw name="PUT On Session" library="RequestsLibrary">
-<doc>Sends a PUT request on a previously created HTTP Session.</doc>
-<arguments>
-<arg>localhost</arg>
-<arg>/api/v1/getActor</arg>
-<arg>json=${params}</arg>
-<arg>headers=${headers}</arg>
-<arg>expected_status=400</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20230811 11:04:57.448" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434A4A0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/getActor</msg>
-<msg timestamp="20230811 11:05:01.731" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4301960&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/getActor</msg>
-<msg timestamp="20230811 11:05:03.785" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:04:53.351" endtime="20230811 11:05:03.785"></status>
-</kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:04:53.345" endtime="20230811 11:05:03.785" critical="yes">Test timeout 10 seconds exceeded.</status>
-</test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t10" name="getMoviePass">
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-</arguments>
-<assign>
-<var>${headers}</var>
-</assign>
-<msg timestamp="20230811 11:05:03.787" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:05:03.786" endtime="20230811 11:05:03.787"></status>
-</kw>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>movieId=tt1</arg>
-</arguments>
-<assign>
-<var>${params}</var>
-</assign>
-<msg timestamp="20230811 11:05:03.787" level="INFO">${params} = {'movieId': 'tt1'}</msg>
-<status status="PASS" starttime="20230811 11:05:03.787" endtime="20230811 11:05:03.787"></status>
-</kw>
-<kw name="PUT On Session" library="RequestsLibrary">
-<doc>Sends a PUT request on a previously created HTTP Session.</doc>
-<arguments>
-<arg>localhost</arg>
-<arg>/api/v1/getMovie</arg>
-<arg>json=${params}</arg>
-<arg>headers=${headers}</arg>
-<arg>expected_status=200</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20230811 11:05:07.870" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434A1D0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/getMovie</msg>
-<msg timestamp="20230811 11:05:12.141" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C43492A0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/getMovie</msg>
-<msg timestamp="20230811 11:05:14.189" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:05:03.787" endtime="20230811 11:05:14.189"></status>
-</kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:05:03.786" endtime="20230811 11:05:14.190" critical="yes">Test timeout 10 seconds exceeded.</status>
-</test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t11" name="getMovieFail">
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-</arguments>
-<assign>
-<var>${headers}</var>
-</assign>
-<msg timestamp="20230811 11:05:14.192" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:05:14.191" endtime="20230811 11:05:14.192"></status>
-</kw>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>movieId=mov123</arg>
-</arguments>
-<assign>
-<var>${params}</var>
-</assign>
-<msg timestamp="20230811 11:05:14.192" level="INFO">${params} = {'movieId': 'mov123'}</msg>
-<status status="PASS" starttime="20230811 11:05:14.192" endtime="20230811 11:05:14.193"></status>
-</kw>
-<kw name="PUT On Session" library="RequestsLibrary">
-<doc>Sends a PUT request on a previously created HTTP Session.</doc>
-<arguments>
-<arg>localhost</arg>
-<arg>/api/v1/getMovie</arg>
-<arg>json=${params}</arg>
-<arg>headers=${headers}</arg>
-<arg>expected_status=400</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20230811 11:05:18.288" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434AEF0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/getMovie</msg>
-<msg timestamp="20230811 11:05:22.581" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434B100&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/getMovie</msg>
-<msg timestamp="20230811 11:05:24.622" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:05:14.193" endtime="20230811 11:05:24.622"></status>
-</kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:05:14.190" endtime="20230811 11:05:24.623" critical="yes">Test timeout 10 seconds exceeded.</status>
-</test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t12" name="hasRelationshipPass">
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-</arguments>
-<assign>
-<var>${headers}</var>
-</assign>
-<msg timestamp="20230811 11:05:24.624" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:05:24.624" endtime="20230811 11:05:24.624"></status>
-</kw>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>actorId=nm1</arg>
-<arg>movieId=tt1</arg>
-</arguments>
-<assign>
-<var>${params}</var>
-</assign>
-<msg timestamp="20230811 11:05:24.625" level="INFO">${params} = {'actorId': 'nm1', 'movieId': 'tt1'}</msg>
-<status status="PASS" starttime="20230811 11:05:24.625" endtime="20230811 11:05:24.625"></status>
-</kw>
-<kw name="GET On Session" library="RequestsLibrary">
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<arguments>
-<arg>localhost</arg>
-<arg>/api/v1/hasRelationship</arg>
-<arg>params=${params}</arg>
-<arg>headers=${headers}</arg>
-<arg>expected_status=200</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20230811 11:05:28.717" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C43481F0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/hasRelationship?actorId=nm1&amp;movieId=tt1</msg>
-<msg timestamp="20230811 11:05:33.010" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4348FD0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/hasRelationship?actorId=nm1&amp;movieId=tt1</msg>
-<msg timestamp="20230811 11:05:35.055" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:05:24.625" endtime="20230811 11:05:35.055"></status>
-</kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:05:24.623" endtime="20230811 11:05:35.056" critical="yes">Test timeout 10 seconds exceeded.</status>
-</test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t13" name="hasRelationshipFail">
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-</arguments>
-<assign>
-<var>${headers}</var>
-</assign>
-<msg timestamp="20230811 11:05:35.057" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:05:35.057" endtime="20230811 11:05:35.058"></status>
-</kw>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>actorId=nm123</arg>
-<arg>movieId=nm10491843</arg>
-</arguments>
-<assign>
-<var>${params}</var>
-</assign>
-<msg timestamp="20230811 11:05:35.058" level="INFO">${params} = {'actorId': 'nm123', 'movieId': 'nm10491843'}</msg>
-<status status="PASS" starttime="20230811 11:05:35.058" endtime="20230811 11:05:35.058"></status>
-</kw>
-<kw name="GET On Session" library="RequestsLibrary">
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<arguments>
-<arg>localhost</arg>
-<arg>/api/v1/hasRelationship</arg>
-<arg>params=${params}</arg>
-<arg>headers=${headers}</arg>
-<arg>expected_status=200</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20230811 11:05:39.147" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C436C520&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/hasRelationship?actorId=nm123&amp;movieId=nm10491843</msg>
-<msg timestamp="20230811 11:05:43.462" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C436C7F0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/hasRelationship?actorId=nm123&amp;movieId=nm10491843</msg>
-<msg timestamp="20230811 11:05:45.517" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:05:35.058" endtime="20230811 11:05:45.517"></status>
-</kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:05:35.056" endtime="20230811 11:05:45.518" critical="yes">Test timeout 10 seconds exceeded.</status>
-</test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t14" name="computeBaconNumberPass">
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-</arguments>
-<assign>
-<var>${headers}</var>
-</assign>
-<msg timestamp="20230811 11:05:45.520" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:05:45.520" endtime="20230811 11:05:45.520"></status>
-</kw>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>baconNumber=3</arg>
-</arguments>
-<assign>
-<var>${params}</var>
-</assign>
-<msg timestamp="20230811 11:05:45.522" level="INFO">${params} = {'baconNumber': '3'}</msg>
-<status status="PASS" starttime="20230811 11:05:45.521" endtime="20230811 11:05:45.522"></status>
-</kw>
-<kw name="GET On Session" library="RequestsLibrary">
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<arguments>
-<arg>localhost</arg>
-<arg>/api/v1/computerBaconNumber</arg>
-<arg>params=${params}</arg>
-<arg>headers=${headers}</arg>
-<arg>expected_status=200</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20230811 11:05:49.609" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4302B30&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computerBaconNumber?baconNumber=3</msg>
-<msg timestamp="20230811 11:05:53.911" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4303310&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computerBaconNumber?baconNumber=3</msg>
-<msg timestamp="20230811 11:05:55.964" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:05:45.522" endtime="20230811 11:05:55.964"></status>
-</kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:05:45.519" endtime="20230811 11:05:55.965" critical="yes">Test timeout 10 seconds exceeded.</status>
-</test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t15" name="computeBaconNumberFail">
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-</arguments>
-<assign>
-<var>${headers}</var>
-</assign>
-<msg timestamp="20230811 11:05:55.970" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:05:55.969" endtime="20230811 11:05:55.970"></status>
-</kw>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>baconNumber=3</arg>
-</arguments>
-<assign>
-<var>${params}</var>
-</assign>
-<msg timestamp="20230811 11:05:55.971" level="INFO">${params} = {'baconNumber': '3'}</msg>
-<status status="PASS" starttime="20230811 11:05:55.971" endtime="20230811 11:05:55.971"></status>
-</kw>
-<kw name="PUT On Session" library="RequestsLibrary">
-<doc>Sends a PUT request on a previously created HTTP Session.</doc>
-<arguments>
-<arg>localhost</arg>
-<arg>/api/v1/computeBaconNumber</arg>
-<arg>json=${params}</arg>
-<arg>headers=${headers}</arg>
-<arg>expected_status=400</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20230811 11:06:00.077" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C436DBD0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computeBaconNumber</msg>
-<msg timestamp="20230811 11:06:04.388" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C436DDE0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computeBaconNumber</msg>
-<msg timestamp="20230811 11:06:06.433" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:05:55.972" endtime="20230811 11:06:06.433"></status>
-</kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:05:55.966" endtime="20230811 11:06:06.434" critical="yes">Test timeout 10 seconds exceeded.</status>
-</test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t16" name="computeBaconPathPass">
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-</arguments>
-<assign>
-<var>${headers}</var>
-</assign>
-<msg timestamp="20230811 11:06:06.442" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:06:06.440" endtime="20230811 11:06:06.442"></status>
-</kw>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>baconPath=nm1991271,nm9112231,nm9191136,nm9894331,nm0000102</arg>
-</arguments>
-<assign>
-<var>${params}</var>
-</assign>
-<msg timestamp="20230811 11:06:06.444" level="INFO">${params} = {'baconPath': 'nm1991271,nm9112231,nm9191136,nm9894331,nm0000102'}</msg>
-<status status="PASS" starttime="20230811 11:06:06.443" endtime="20230811 11:06:06.444"></status>
-</kw>
-<kw name="GET On Session" library="RequestsLibrary">
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<arguments>
-<arg>localhost</arg>
-<arg>/api/v1/computeBaconPath</arg>
-<arg>params=${params}</arg>
-<arg>headers=${headers}</arg>
-<arg>expected_status=200</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20230811 11:06:10.543" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434BCA0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computeBaconPath?baconPath=nm1991271%2Cnm9112231%2Cnm9191136%2Cnm9894331%2Cnm0000102</msg>
-<msg timestamp="20230811 11:06:14.849" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434BFD0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computeBaconPath?baconPath=nm1991271%2Cnm9112231%2Cnm9191136%2Cnm9894331%2Cnm0000102</msg>
-<msg timestamp="20230811 11:06:16.899" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:06:06.444" endtime="20230811 11:06:16.899"></status>
-</kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:06:06.436" endtime="20230811 11:06:16.900" critical="yes">Test timeout 10 seconds exceeded.</status>
-</test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t17" name="computeBaconPathFail">
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-</arguments>
-<assign>
-<var>${headers}</var>
-</assign>
-<msg timestamp="20230811 11:06:16.903" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:06:16.902" endtime="20230811 11:06:16.903"></status>
-</kw>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>baconPath=nm1991271,nm9112231,nm1234,nm9894331,nm0000102</arg>
-</arguments>
-<assign>
-<var>${params}</var>
-</assign>
-<msg timestamp="20230811 11:06:16.904" level="INFO">${params} = {'baconPath': 'nm1991271,nm9112231,nm1234,nm9894331,nm0000102'}</msg>
-<status status="PASS" starttime="20230811 11:06:16.904" endtime="20230811 11:06:16.904"></status>
-</kw>
-<kw name="GET On Session" library="RequestsLibrary">
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<arguments>
-<arg>localhost</arg>
-<arg>/api/v1/computeBaconPath</arg>
-<arg>params=${params}</arg>
-<arg>headers=${headers}</arg>
-<arg>expected_status=400</arg>
-</arguments>
-<assign>
-<var>${resp}</var>
-</assign>
-<msg timestamp="20230811 11:06:21.006" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C43490C0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computeBaconPath?baconPath=nm1991271%2Cnm9112231%2Cnm1234%2Cnm9894331%2Cnm0000102</msg>
-<msg timestamp="20230811 11:06:25.293" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4349930&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computeBaconPath?baconPath=nm1991271%2Cnm9112231%2Cnm1234%2Cnm9894331%2Cnm0000102</msg>
-<msg timestamp="20230811 11:06:27.337" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:06:16.904" endtime="20230811 11:06:27.337"></status>
-</kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:06:16.901" endtime="20230811 11:06:27.338" critical="yes">Test timeout 10 seconds exceeded.</status>
-</test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t18" name="addAwardPass">
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>Content-Type=application/json</arg>
-</arguments>
-<assign>
-<var>${headers}</var>
-</assign>
-<msg timestamp="20230811 11:06:27.339" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:06:27.339" endtime="20230811 11:06:27.339"></status>
-</kw>
-<kw name="Create Dictionary" library="BuiltIn">
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<arguments>
-<arg>awardId=aw1</arg>
-<arg>name=Oscar</arg>
-</arguments>
-<assign>
-<var>${params}</var>
-</assign>
-<msg timestamp="20230811 11:06:27.340" level="INFO">${params} = {'awardId': 'aw1', 'name': 'Oscar'}</msg>
-<status status="PASS" starttime="20230811 11:06:27.339" endtime="20230811 11:06:27.340"></status>
+<msg timestamp="20230812 11:18:10.239" level="INFO">${params} = {'awardId': 'aw2', 'name': 'Golden Globe'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.239" endtime="20230812 11:18:10.239"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -870,15 +476,24 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230811 11:06:31.402" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C43486D0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAward</msg>
-<msg timestamp="20230811 11:06:35.710" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434ACB0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAward</msg>
-<msg timestamp="20230811 11:06:37.760" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:06:27.340" endtime="20230811 11:06:37.760"></status>
+<msg timestamp="20230812 11:18:10.244" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addAward 
+ path_url=/api/v1/addAward 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '42'} 
+ body=b'{"awardId": "aw2", "name": "Golden Globe"}' 
+ </msg>
+<msg timestamp="20230812 11:18:10.244" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addAward 
+ status=400, reason=Bad Request 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '16'} 
+ body=400 BAD REQUEST
+ 
+ </msg>
+<msg timestamp="20230812 11:18:10.246" level="FAIL">Url: http://localhost:8080/api/v1/addAward Expected status: 400 != 200</msg>
+<status status="FAIL" starttime="20230812 11:18:10.239" endtime="20230812 11:18:10.246"></status>
 </kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:06:27.338" endtime="20230811 11:06:37.760" critical="yes">Test timeout 10 seconds exceeded.</status>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230812 11:18:10.237" endtime="20230812 11:18:10.247" critical="yes">Url: http://localhost:8080/api/v1/addAward Expected status: 400 != 200</status>
 </test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t19" name="addAwardFail">
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t10" name="addAwardFail">
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
@@ -887,8 +502,8 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230811 11:06:37.762" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:06:37.762" endtime="20230811 11:06:37.762"></status>
+<msg timestamp="20230812 11:18:10.250" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.249" endtime="20230812 11:18:10.250"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
@@ -899,8 +514,8 @@
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230811 11:06:37.763" level="INFO">${params} = {'awardId': 'aw1', 'name': 'Golden Globe'}</msg>
-<status status="PASS" starttime="20230811 11:06:37.763" endtime="20230811 11:06:37.764"></status>
+<msg timestamp="20230812 11:18:10.251" level="INFO">${params} = {'awardId': 'aw1', 'name': 'Golden Globe'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.250" endtime="20230812 11:18:10.251"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -914,15 +529,24 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230811 11:06:41.865" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C43495A0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAward</msg>
-<msg timestamp="20230811 11:06:46.167" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4348B20&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAward</msg>
-<msg timestamp="20230811 11:06:48.219" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:06:37.764" endtime="20230811 11:06:48.219"></status>
+<msg timestamp="20230812 11:18:10.257" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addAward 
+ path_url=/api/v1/addAward 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '42'} 
+ body=b'{"awardId": "aw1", "name": "Golden Globe"}' 
+ </msg>
+<msg timestamp="20230812 11:18:10.257" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addAward 
+ status=400, reason=Bad Request 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '16'} 
+ body=400 BAD REQUEST
+ 
+ </msg>
+<msg timestamp="20230812 11:18:10.258" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:10.252" endtime="20230812 11:18:10.258"></status>
 </kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:06:37.761" endtime="20230811 11:06:48.220" critical="yes">Test timeout 10 seconds exceeded.</status>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:10.248" endtime="20230812 11:18:10.258" critical="yes"></status>
 </test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t20" name="addAwardWinnerPass">
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t11" name="addAwardWinnerPass">
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
@@ -931,20 +555,20 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230811 11:06:48.222" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:06:48.221" endtime="20230811 11:06:48.222"></status>
+<msg timestamp="20230812 11:18:10.261" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.259" endtime="20230812 11:18:10.261"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
-<arg>awardId=aw1</arg>
-<arg>movieId=tt1</arg>
+<arg>awardId=aw2</arg>
+<arg>movieId=nm78</arg>
 </arguments>
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230811 11:06:48.223" level="INFO">${params} = {'awardId': 'aw1', 'movieId': 'tt1'}</msg>
-<status status="PASS" starttime="20230811 11:06:48.222" endtime="20230811 11:06:48.223"></status>
+<msg timestamp="20230812 11:18:10.263" level="INFO">${params} = {'awardId': 'aw2', 'movieId': 'nm78'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.262" endtime="20230812 11:18:10.263"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -958,15 +582,24 @@
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230811 11:06:52.321" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C43036D0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAwardWinner</msg>
-<msg timestamp="20230811 11:06:56.609" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4302320&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAwardWinner</msg>
-<msg timestamp="20230811 11:06:58.664" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:06:48.224" endtime="20230811 11:06:58.664"></status>
+<msg timestamp="20230812 11:18:10.275" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addAwardWinner 
+ path_url=/api/v1/addAwardWinner 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '37'} 
+ body=b'{"awardId": "aw2", "movieId": "nm78"}' 
+ </msg>
+<msg timestamp="20230812 11:18:10.275" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addAwardWinner 
+ status=200, reason=OK 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '7'} 
+ body=200 OK
+ 
+ </msg>
+<msg timestamp="20230812 11:18:10.276" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:10.264" endtime="20230812 11:18:10.276"></status>
 </kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:06:48.220" endtime="20230811 11:06:58.665" critical="yes">Test timeout 10 seconds exceeded.</status>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:10.259" endtime="20230812 11:18:10.277" critical="yes"></status>
 </test>
-<test id="s1-s1-s1-s1-s1-s1-s1-s1-t21" name="addAwardWinnerFail">
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t12" name="addAwardWinnerFail">
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
 <arguments>
@@ -975,8 +608,8 @@
 <assign>
 <var>${headers}</var>
 </assign>
-<msg timestamp="20230811 11:06:58.671" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<status status="PASS" starttime="20230811 11:06:58.668" endtime="20230811 11:06:58.672"></status>
+<msg timestamp="20230812 11:18:10.279" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.278" endtime="20230812 11:18:10.279"></status>
 </kw>
 <kw name="Create Dictionary" library="BuiltIn">
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
@@ -987,8 +620,8 @@
 <assign>
 <var>${params}</var>
 </assign>
-<msg timestamp="20230811 11:06:58.673" level="INFO">${params} = {'awardId': 'aw999', 'movieId': 'tt999'}</msg>
-<status status="PASS" starttime="20230811 11:06:58.672" endtime="20230811 11:06:58.674"></status>
+<msg timestamp="20230812 11:18:10.279" level="INFO">${params} = {'awardId': 'aw999', 'movieId': 'tt999'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.279" endtime="20230812 11:18:10.279"></status>
 </kw>
 <kw name="PUT On Session" library="RequestsLibrary">
 <doc>Sends a PUT request on a previously created HTTP Session.</doc>
@@ -997,79 +630,677 @@
 <arg>/api/v1/addAwardWinner</arg>
 <arg>json=${params}</arg>
 <arg>headers=${headers}</arg>
+<arg>expected_status=404</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.291" level="INFO">PUT Request : url=http://localhost:8080/api/v1/addAwardWinner 
+ path_url=/api/v1/addAwardWinner 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '40'} 
+ body=b'{"awardId": "aw999", "movieId": "tt999"}' 
+ </msg>
+<msg timestamp="20230812 11:18:10.291" level="INFO">PUT Response : url=http://localhost:8080/api/v1/addAwardWinner 
+ status=200, reason=OK 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '7'} 
+ body=200 OK
+ 
+ </msg>
+<msg timestamp="20230812 11:18:10.293" level="FAIL">Url: http://localhost:8080/api/v1/addAwardWinner Expected status: 200 != 404</msg>
+<status status="FAIL" starttime="20230812 11:18:10.280" endtime="20230812 11:18:10.293"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230812 11:18:10.277" endtime="20230812 11:18:10.293" critical="yes">Url: http://localhost:8080/api/v1/addAwardWinner Expected status: 200 != 404</status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t13" name="getActorPass">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.296" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.295" endtime="20230812 11:18:10.296"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>actorId=nm10</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.297" level="INFO">${params} = {'actorId': 'nm10'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.296" endtime="20230812 11:18:10.297"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/getActor</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=200</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.367" level="INFO">GET Request : url=http://localhost:8080/api/v1/getActor 
+ path_url=/api/v1/getActor 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '19'} 
+ body=b'{"actorId": "nm10"}' 
+ </msg>
+<msg timestamp="20230812 11:18:10.368" level="INFO">GET Response : url=http://localhost:8080/api/v1/getActor 
+ status=404, reason=Not Found 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '13'} 
+ body=404 NOT FOUND 
+ </msg>
+<msg timestamp="20230812 11:18:10.369" level="FAIL">Url: http://localhost:8080/api/v1/getActor Expected status: 404 != 200</msg>
+<status status="FAIL" starttime="20230812 11:18:10.297" endtime="20230812 11:18:10.369"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230812 11:18:10.294" endtime="20230812 11:18:10.370" critical="yes">Url: http://localhost:8080/api/v1/getActor Expected status: 404 != 200</status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t14" name="getActorFail">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.373" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.372" endtime="20230812 11:18:10.373"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>actorId=nm456</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.374" level="INFO">${params} = {'actorId': 'nm456'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.373" endtime="20230812 11:18:10.374"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/getActor</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=404</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.455" level="INFO">GET Request : url=http://localhost:8080/api/v1/getActor 
+ path_url=/api/v1/getActor 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '20'} 
+ body=b'{"actorId": "nm456"}' 
+ </msg>
+<msg timestamp="20230812 11:18:10.455" level="INFO">GET Response : url=http://localhost:8080/api/v1/getActor 
+ status=404, reason=Not Found 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '13'} 
+ body=404 NOT FOUND 
+ </msg>
+<msg timestamp="20230812 11:18:10.456" level="INFO">${resp} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:10.374" endtime="20230812 11:18:10.456"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:10.371" endtime="20230812 11:18:10.456" critical="yes"></status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t15" name="getMoviePass">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.458" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.457" endtime="20230812 11:18:10.458"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>movieId=nm78</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.459" level="INFO">${params} = {'movieId': 'nm78'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.459" endtime="20230812 11:18:10.459"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/getMovie</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=200</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.545" level="INFO">GET Request : url=http://localhost:8080/api/v1/getMovie 
+ path_url=/api/v1/getMovie 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '19'} 
+ body=b'{"movieId": "nm78"}' 
+ </msg>
+<msg timestamp="20230812 11:18:10.545" level="INFO">GET Response : url=http://localhost:8080/api/v1/getMovie 
+ status=404, reason=Not Found 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '13'} 
+ body=404 NOT FOUND 
+ </msg>
+<msg timestamp="20230812 11:18:10.547" level="FAIL">Url: http://localhost:8080/api/v1/getMovie Expected status: 404 != 200</msg>
+<status status="FAIL" starttime="20230812 11:18:10.459" endtime="20230812 11:18:10.547"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230812 11:18:10.457" endtime="20230812 11:18:10.548" critical="yes">Url: http://localhost:8080/api/v1/getMovie Expected status: 404 != 200</status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t16" name="getMovieFailOne">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.554" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.553" endtime="20230812 11:18:10.555"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>movieId=mov123</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.556" level="INFO">${params} = {'movieId': 'mov123'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.555" endtime="20230812 11:18:10.556"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/getMovie</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=404</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.637" level="INFO">GET Request : url=http://localhost:8080/api/v1/getMovie 
+ path_url=/api/v1/getMovie 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '21'} 
+ body=b'{"movieId": "mov123"}' 
+ </msg>
+<msg timestamp="20230812 11:18:10.637" level="INFO">GET Response : url=http://localhost:8080/api/v1/getMovie 
+ status=404, reason=Not Found 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '13'} 
+ body=404 NOT FOUND 
+ </msg>
+<msg timestamp="20230812 11:18:10.638" level="INFO">${resp} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:10.556" endtime="20230812 11:18:10.638"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:10.549" endtime="20230812 11:18:10.639" critical="yes"></status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t17" name="getMovieFailTwo">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.641" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.641" endtime="20230812 11:18:10.641"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>id=mov123</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.642" level="INFO">${params} = {'id': 'mov123'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.642" endtime="20230812 11:18:10.642"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/getMovie</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
 <arg>expected_status=400</arg>
 </arguments>
 <assign>
 <var>${resp}</var>
 </assign>
-<msg timestamp="20230811 11:07:02.768" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434AB90&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAwardWinner</msg>
-<msg timestamp="20230811 11:07:07.057" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434B1C0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAwardWinner</msg>
-<msg timestamp="20230811 11:07:09.096" level="FAIL">Test timeout 10 seconds exceeded.</msg>
-<status status="FAIL" starttime="20230811 11:06:58.674" endtime="20230811 11:07:09.096"></status>
+<msg timestamp="20230812 11:18:10.720" level="INFO">GET Request : url=http://localhost:8080/api/v1/getMovie 
+ path_url=/api/v1/getMovie 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '16'} 
+ body=b'{"id": "mov123"}' 
+ </msg>
+<msg timestamp="20230812 11:18:10.721" level="INFO">GET Response : url=http://localhost:8080/api/v1/getMovie 
+ status=400, reason=Bad Request 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '16'} 
+ body=400 BAD REQUEST
+ 
+ </msg>
+<msg timestamp="20230812 11:18:10.723" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:10.643" endtime="20230812 11:18:10.723"></status>
 </kw>
-<timeout value="10 seconds"></timeout>
-<status status="FAIL" starttime="20230811 11:06:58.666" endtime="20230811 11:07:09.097" critical="yes">Test timeout 10 seconds exceeded.</status>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:10.639" endtime="20230812 11:18:10.724" critical="yes"></status>
 </test>
-<status status="FAIL" starttime="20230811 11:03:13.111" endtime="20230811 11:07:09.098"></status>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t18" name="hasRelationshipPass">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.727" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.726" endtime="20230812 11:18:10.727"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>actorId=nm10</arg>
+<arg>movieId=nm78</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.728" level="INFO">${params} = {'actorId': 'nm10', 'movieId': 'nm78'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.727" endtime="20230812 11:18:10.728"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/hasRelationship</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=200</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.890" level="INFO">GET Request : url=http://localhost:8080/api/v1/hasRelationship 
+ path_url=/api/v1/hasRelationship 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '38'} 
+ body=b'{"actorId": "nm10", "movieId": "nm78"}' 
+ </msg>
+<msg timestamp="20230812 11:18:10.890" level="INFO">GET Response : url=http://localhost:8080/api/v1/hasRelationship 
+ status=200, reason=OK 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:10 GMT', 'Content-length': '6'} 
+ body=200 OK 
+ </msg>
+<msg timestamp="20230812 11:18:10.890" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:10.728" endtime="20230812 11:18:10.892"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:10.724" endtime="20230812 11:18:10.892" critical="yes"></status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t19" name="hasRelationshipFail">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.894" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.894" endtime="20230812 11:18:10.895"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>actorId=nm123</arg>
+<arg>movieId=nm10491843</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:10.895" level="INFO">${params} = {'actorId': 'nm123', 'movieId': 'nm10491843'}</msg>
+<status status="PASS" starttime="20230812 11:18:10.895" endtime="20230812 11:18:10.896"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/hasRelationship</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=404</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.056" level="INFO">GET Request : url=http://localhost:8080/api/v1/hasRelationship 
+ path_url=/api/v1/hasRelationship 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '45'} 
+ body=b'{"actorId": "nm123", "movieId": "nm10491843"}' 
+ </msg>
+<msg timestamp="20230812 11:18:11.056" level="INFO">GET Response : url=http://localhost:8080/api/v1/hasRelationship 
+ status=200, reason=OK 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:11 GMT', 'Content-length': '6'} 
+ body=200 OK 
+ </msg>
+<msg timestamp="20230812 11:18:11.059" level="FAIL">Url: http://localhost:8080/api/v1/hasRelationship Expected status: 200 != 404</msg>
+<status status="FAIL" starttime="20230812 11:18:10.896" endtime="20230812 11:18:11.059"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230812 11:18:10.893" endtime="20230812 11:18:11.059" critical="yes">Url: http://localhost:8080/api/v1/hasRelationship Expected status: 200 != 404</status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t20" name="computeBaconNumberPass">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.062" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:11.061" endtime="20230812 11:18:11.062"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>actorId=nm94820392</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.063" level="INFO">${params} = {'actorId': 'nm94820392'}</msg>
+<status status="PASS" starttime="20230812 11:18:11.062" endtime="20230812 11:18:11.064"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/computeBaconNumber</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=200</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.147" level="INFO">GET Request : url=http://localhost:8080/api/v1/computeBaconNumber 
+ path_url=/api/v1/computeBaconNumber 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '25'} 
+ body=b'{"actorId": "nm94820392"}' 
+ </msg>
+<msg timestamp="20230812 11:18:11.147" level="INFO">GET Response : url=http://localhost:8080/api/v1/computeBaconNumber 
+ status=200, reason=OK 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:11 GMT', 'Content-length': '6'} 
+ body=200 OK 
+ </msg>
+<msg timestamp="20230812 11:18:11.148" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:11.064" endtime="20230812 11:18:11.148"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:11.060" endtime="20230812 11:18:11.149" critical="yes"></status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t21" name="computeBaconNumberFailOne">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.151" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:11.151" endtime="20230812 11:18:11.151"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>actorId=nm49</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.152" level="INFO">${params} = {'actorId': 'nm49'}</msg>
+<status status="PASS" starttime="20230812 11:18:11.152" endtime="20230812 11:18:11.152"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/computeBaconNumber</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=400</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.222" level="INFO">GET Request : url=http://localhost:8080/api/v1/computeBaconNumber 
+ path_url=/api/v1/computeBaconNumber 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '19'} 
+ body=b'{"actorId": "nm49"}' 
+ </msg>
+<msg timestamp="20230812 11:18:11.222" level="INFO">GET Response : url=http://localhost:8080/api/v1/computeBaconNumber 
+ status=404, reason=Not Found 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:11 GMT', 'Content-length': '13'} 
+ body=404 NOT FOUND 
+ </msg>
+<msg timestamp="20230812 11:18:11.224" level="FAIL">Url: http://localhost:8080/api/v1/computeBaconNumber Expected status: 404 != 400</msg>
+<status status="FAIL" starttime="20230812 11:18:11.154" endtime="20230812 11:18:11.224"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230812 11:18:11.149" endtime="20230812 11:18:11.225" critical="yes">Url: http://localhost:8080/api/v1/computeBaconNumber Expected status: 404 != 400</status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t22" name="computeBaconNumberFailTwo">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.227" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:11.226" endtime="20230812 11:18:11.227"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>actorId=kowp20491</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.228" level="INFO">${params} = {'actorId': 'kowp20491'}</msg>
+<status status="PASS" starttime="20230812 11:18:11.227" endtime="20230812 11:18:11.228"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/computeBaconNumber</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=404</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.310" level="INFO">GET Request : url=http://localhost:8080/api/v1/computeBaconNumber 
+ path_url=/api/v1/computeBaconNumber 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '24'} 
+ body=b'{"actorId": "kowp20491"}' 
+ </msg>
+<msg timestamp="20230812 11:18:11.310" level="INFO">GET Response : url=http://localhost:8080/api/v1/computeBaconNumber 
+ status=404, reason=Not Found 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:11 GMT', 'Content-length': '13'} 
+ body=404 NOT FOUND 
+ </msg>
+<msg timestamp="20230812 11:18:11.311" level="INFO">${resp} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:11.229" endtime="20230812 11:18:11.311"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:11.225" endtime="20230812 11:18:11.312" critical="yes"></status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t23" name="computeBaconPathPass">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.317" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:11.316" endtime="20230812 11:18:11.317"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>actorId=nm94820392</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.319" level="INFO">${params} = {'actorId': 'nm94820392'}</msg>
+<status status="PASS" starttime="20230812 11:18:11.318" endtime="20230812 11:18:11.319"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/computeBaconPath</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=200</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.506" level="INFO">GET Request : url=http://localhost:8080/api/v1/computeBaconPath 
+ path_url=/api/v1/computeBaconPath 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '25'} 
+ body=b'{"actorId": "nm94820392"}' 
+ </msg>
+<msg timestamp="20230812 11:18:11.507" level="INFO">GET Response : url=http://localhost:8080/api/v1/computeBaconPath 
+ status=200, reason=OK 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:11 GMT', 'Content-length': '6'} 
+ body=200 OK 
+ </msg>
+<msg timestamp="20230812 11:18:11.508" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230812 11:18:11.319" endtime="20230812 11:18:11.508"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="PASS" starttime="20230812 11:18:11.314" endtime="20230812 11:18:11.508" critical="yes"></status>
+</test>
+<test id="s1-s1-s1-s1-s1-s1-s1-s1-t24" name="computeBaconPathFail">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.514" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230812 11:18:11.513" endtime="20230812 11:18:11.515"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>actorId=nm49</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.516" level="INFO">${params} = {'actorId': 'nm49'}</msg>
+<status status="PASS" starttime="20230812 11:18:11.515" endtime="20230812 11:18:11.517"></status>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>localhost</arg>
+<arg>/api/v1/computeBaconPath</arg>
+<arg>json=${params}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=404</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20230812 11:18:11.594" level="INFO">GET Request : url=http://localhost:8080/api/v1/computeBaconPath 
+ path_url=/api/v1/computeBaconPath 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '19'} 
+ body=b'{"actorId": "nm49"}' 
+ </msg>
+<msg timestamp="20230812 11:18:11.594" level="INFO">GET Response : url=http://localhost:8080/api/v1/computeBaconPath 
+ status=200, reason=OK 
+ headers={'Date': 'Sat, 12 Aug 2023 15:18:11 GMT', 'Content-length': '6'} 
+ body=200 OK 
+ </msg>
+<msg timestamp="20230812 11:18:11.597" level="FAIL">Url: http://localhost:8080/api/v1/computeBaconPath Expected status: 200 != 404</msg>
+<status status="FAIL" starttime="20230812 11:18:11.518" endtime="20230812 11:18:11.597"></status>
+</kw>
+<timeout value="30 seconds"></timeout>
+<status status="FAIL" starttime="20230812 11:18:11.511" endtime="20230812 11:18:11.597" critical="yes">Url: http://localhost:8080/api/v1/computeBaconPath Expected status: 200 != 404</status>
+</test>
+<status status="FAIL" starttime="20230812 11:18:09.864" endtime="20230812 11:18:11.599"></status>
 </suite>
-<status status="FAIL" starttime="20230811 11:03:13.109" endtime="20230811 11:07:09.107"></status>
+<status status="FAIL" starttime="20230812 11:18:09.859" endtime="20230812 11:18:11.604"></status>
 </suite>
-<status status="FAIL" starttime="20230811 11:03:13.106" endtime="20230811 11:07:09.113"></status>
+<status status="FAIL" starttime="20230812 11:18:09.856" endtime="20230812 11:18:11.609"></status>
 </suite>
-<status status="FAIL" starttime="20230811 11:03:13.104" endtime="20230811 11:07:09.121"></status>
+<status status="FAIL" starttime="20230812 11:18:09.851" endtime="20230812 11:18:11.614"></status>
 </suite>
-<status status="FAIL" starttime="20230811 11:03:13.100" endtime="20230811 11:07:09.130"></status>
+<status status="FAIL" starttime="20230812 11:18:09.849" endtime="20230812 11:18:11.621"></status>
 </suite>
-<status status="FAIL" starttime="20230811 11:03:13.099" endtime="20230811 11:07:09.138"></status>
+<status status="FAIL" starttime="20230812 11:18:09.846" endtime="20230812 11:18:11.627"></status>
 </suite>
-<status status="FAIL" starttime="20230811 11:03:13.096" endtime="20230811 11:07:09.145"></status>
+<status status="FAIL" starttime="20230812 11:18:09.843" endtime="20230812 11:18:11.634"></status>
 </suite>
-<status status="FAIL" starttime="20230811 11:03:13.078" endtime="20230811 11:07:09.152"></status>
+<status status="FAIL" starttime="20230812 11:18:09.811" endtime="20230812 11:18:11.639"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="4" fail="17">Critical Tests</stat>
-<stat pass="4" fail="17">All Tests</stat>
+<stat pass="14" fail="10">Critical Tests</stat>
+<stat pass="14" fail="10">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="4" fail="17" id="s1" name="Project">Project</stat>
-<stat pass="4" fail="17" id="s1-s1" name="Src">Project.Src</stat>
-<stat pass="4" fail="17" id="s1-s1-s1" name="Main">Project.Src.Main</stat>
-<stat pass="4" fail="17" id="s1-s1-s1-s1" name="Java">Project.Src.Main.Java</stat>
-<stat pass="4" fail="17" id="s1-s1-s1-s1-s1" name="Ca">Project.Src.Main.Java.Ca</stat>
-<stat pass="4" fail="17" id="s1-s1-s1-s1-s1-s1" name="Yorku">Project.Src.Main.Java.Ca.Yorku</stat>
-<stat pass="4" fail="17" id="s1-s1-s1-s1-s1-s1-s1" name="Eecs">Project.Src.Main.Java.Ca.Yorku.Eecs</stat>
-<stat pass="4" fail="17" id="s1-s1-s1-s1-s1-s1-s1-s1" name="testRobot">Project.Src.Main.Java.Ca.Yorku.Eecs.testRobot</stat>
+<stat pass="14" fail="10" id="s1" name="Project">Project</stat>
+<stat pass="14" fail="10" id="s1-s1" name="Src">Project.Src</stat>
+<stat pass="14" fail="10" id="s1-s1-s1" name="Main">Project.Src.Main</stat>
+<stat pass="14" fail="10" id="s1-s1-s1-s1" name="Java">Project.Src.Main.Java</stat>
+<stat pass="14" fail="10" id="s1-s1-s1-s1-s1" name="Ca">Project.Src.Main.Java.Ca</stat>
+<stat pass="14" fail="10" id="s1-s1-s1-s1-s1-s1" name="Yorku">Project.Src.Main.Java.Ca.Yorku</stat>
+<stat pass="14" fail="10" id="s1-s1-s1-s1-s1-s1-s1" name="Eecs">Project.Src.Main.Java.Ca.Yorku.Eecs</stat>
+<stat pass="14" fail="10" id="s1-s1-s1-s1-s1-s1-s1-s1" name="testRobot">Project.Src.Main.Java.Ca.Yorku.Eecs.testRobot</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20230811 11:04:57.448" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434A4A0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/getActor</msg>
-<msg timestamp="20230811 11:05:01.731" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4301960&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/getActor</msg>
-<msg timestamp="20230811 11:05:07.870" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434A1D0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/getMovie</msg>
-<msg timestamp="20230811 11:05:12.141" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C43492A0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/getMovie</msg>
-<msg timestamp="20230811 11:05:18.288" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434AEF0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/getMovie</msg>
-<msg timestamp="20230811 11:05:22.581" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434B100&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/getMovie</msg>
-<msg timestamp="20230811 11:05:28.717" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C43481F0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/hasRelationship?actorId=nm1&amp;movieId=tt1</msg>
-<msg timestamp="20230811 11:05:33.010" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4348FD0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/hasRelationship?actorId=nm1&amp;movieId=tt1</msg>
-<msg timestamp="20230811 11:05:39.147" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C436C520&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/hasRelationship?actorId=nm123&amp;movieId=nm10491843</msg>
-<msg timestamp="20230811 11:05:43.462" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C436C7F0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/hasRelationship?actorId=nm123&amp;movieId=nm10491843</msg>
-<msg timestamp="20230811 11:05:49.609" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4302B30&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computerBaconNumber?baconNumber=3</msg>
-<msg timestamp="20230811 11:05:53.911" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4303310&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computerBaconNumber?baconNumber=3</msg>
-<msg timestamp="20230811 11:06:00.077" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C436DBD0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computeBaconNumber</msg>
-<msg timestamp="20230811 11:06:04.388" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C436DDE0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computeBaconNumber</msg>
-<msg timestamp="20230811 11:06:10.543" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434BCA0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computeBaconPath?baconPath=nm1991271%2Cnm9112231%2Cnm9191136%2Cnm9894331%2Cnm0000102</msg>
-<msg timestamp="20230811 11:06:14.849" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434BFD0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computeBaconPath?baconPath=nm1991271%2Cnm9112231%2Cnm9191136%2Cnm9894331%2Cnm0000102</msg>
-<msg timestamp="20230811 11:06:21.006" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C43490C0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computeBaconPath?baconPath=nm1991271%2Cnm9112231%2Cnm1234%2Cnm9894331%2Cnm0000102</msg>
-<msg timestamp="20230811 11:06:25.293" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4349930&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/computeBaconPath?baconPath=nm1991271%2Cnm9112231%2Cnm1234%2Cnm9894331%2Cnm0000102</msg>
-<msg timestamp="20230811 11:06:31.402" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C43486D0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAward</msg>
-<msg timestamp="20230811 11:06:35.710" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434ACB0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAward</msg>
-<msg timestamp="20230811 11:06:41.865" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C43495A0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAward</msg>
-<msg timestamp="20230811 11:06:46.167" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4348B20&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAward</msg>
-<msg timestamp="20230811 11:06:52.321" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C43036D0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAwardWinner</msg>
-<msg timestamp="20230811 11:06:56.609" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C4302320&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAwardWinner</msg>
-<msg timestamp="20230811 11:07:02.768" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434AB90&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAwardWinner</msg>
-<msg timestamp="20230811 11:07:07.057" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x00000148C434B1C0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /api/v1/addAwardWinner</msg>
 </errors>
 </robot>

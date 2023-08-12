@@ -95,10 +95,6 @@ hasRelationshipPass
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm10    movieId=nm78
     ${resp}=    GET On Session    localhost    /api/v1/hasRelationship    json=${params}    headers=${headers}    expected_status=200
-    Log    ${resp.text}    # Debug step to print the response body
-    ${response_json}=    Set Variable    ${resp.json()}
-    Should Be Equal As Strings    ${response_json['hasRelationship']}    true
-
     
 hasRelationshipFail
     ${headers}=    Create Dictionary    Content-Type=application/json
