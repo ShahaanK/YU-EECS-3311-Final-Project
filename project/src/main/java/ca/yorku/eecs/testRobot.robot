@@ -33,7 +33,7 @@ addRelationshipPass
   
 addRelationshipFail
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    actorId=nm1    movieId=tt1
+    ${params}=    Create Dictionary    actorId=nm1    name=tt1
     ${resp}=    PUT On Session    localhost    /api/v1/addRelationship    json=${params}    headers=${headers}    expected_status=400
 
 addAwardPass
@@ -53,7 +53,7 @@ addAwardWinnerPass
 
 addAwardWinnerFail
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    awardId=aw999    movieId=tt999
+    ${params}=    Create Dictionary    awardId=aw999    name=tt999
     ${resp}=    PUT On Session    localhost    /api/v1/addAwardWinner    json=${params}    headers=${headers}    expected_status=400
         
 getActorPass
