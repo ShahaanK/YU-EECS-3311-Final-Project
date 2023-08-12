@@ -107,6 +107,7 @@ public class Utils implements HttpHandler {
 				if (pathFromRequest.equals("/api/v1/getActor")) {
 					if (!queryParameters.has("actorId")) {
 						System.out.print("for getAct: 400\n");
+						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
 						try {
