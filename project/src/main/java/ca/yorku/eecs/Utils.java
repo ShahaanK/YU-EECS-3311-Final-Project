@@ -106,18 +106,14 @@ public class Utils implements HttpHandler {
 			try {
 				if (pathFromRequest.equals("/api/v1/getActor")) {
 					if (!queryParameters.has("actorId")) {
-						System.out.print("1 for getAct: 400\n");
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
-						try {
+						if (neo4jMovies.actorIdExists(queryParameters.get("actorId").toString())) {
 							neo4jmovies.getActor(queryParameters.get("actorId").toString());
-							System.out.print("2 for getAct: 400\n");
 							sendString(request, "200 OK", 200);
 						}
-						catch (Exception e) {
-							System.out.print("3 for getAct: 404\n");
-							e.printStackTrace();
+						else {
 							sendString(request, "404 NOT FOUND", 404);
 						}
 					}
@@ -128,13 +124,12 @@ public class Utils implements HttpHandler {
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
-						try {
+						if (neo4jMovies.movieIdExists(queryParameters.get("movieId").toString()))  {
 							neo4jmovies.getMovie(queryParameters.get("movieId").toString());
 							sendString(request, "200 OK", 200);
 						}
-						catch (Exception e) {
+						else {
 							System.out.print("for getMov: 404\n");
-							e.printStackTrace();
 							sendString(request, "404 NOT FOUND", 404);
 						}
 					}
@@ -146,14 +141,14 @@ public class Utils implements HttpHandler {
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
-						try {
+						if (neo4jMovies.actorIdExists(queryParameters.get("actorId").toString()) && 
+								(neo4jMovies.movieIdExists(queryParameters.get("movieId").toString())) )  {
 							neo4jmovies.hasRelationship(queryParameters.get("actorId").toString(), 
 									queryParameters.get("movieId").toString());
 							sendString(request, "200 OK", 200);
 						}
-						catch (Exception e) {
+						else {
 							System.out.print("for hasRelationship: 404\n");
-							e.printStackTrace();
 							sendString(request, "404 NOT FOUND", 404);
 						}
 					}
@@ -165,13 +160,12 @@ public class Utils implements HttpHandler {
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
-						try {
+						if (neo4jMovies.actorIdExists(queryParameters.get("actorId").toString())) {
 							neo4jmovies.computeBaconNumber(queryParameters.get("actorId").toString());
 							sendString(request, "200 OK", 200);
 						}
-						catch (Exception e) {
+						else {
 							System.out.print("for computeBaconNumber: 404\n");
-							e.printStackTrace();
 							sendString(request, "404 NOT FOUND", 404);
 						}
 					}
@@ -183,13 +177,12 @@ public class Utils implements HttpHandler {
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
-						try {
+						if (neo4jMovies.actorIdExists(queryParameters.get("actorId").toString()))  {
 							neo4jmovies.computeBaconPath(queryParameters.get("actorId").toString());
 							sendString(request, "200 OK", 200);
 						}
-						catch (Exception e) {
+						else {
 							System.out.print("for computeBaconPath: 404 exception\n");
-							e.printStackTrace();
 							sendString(request, "404 NOT FOUND", 404);
 						}
 					}
@@ -231,7 +224,7 @@ public class Utils implements HttpHandler {
 		try {
 			JSONObject jsonObject = new JSONObject(body);
 			if (pathFromRequest.equals("/api/v1/addActor")) {
-				if (!jsonObject.has("name") || !jsonObject.has("actorId")) {
+				if (!jsonObject.has("name") || !jsonObject.has("actorId") || neo4jMovies.actorIdExists(jsonObject.getString("actorId"))) {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
@@ -244,7 +237,7 @@ public class Utils implements HttpHandler {
 
 			} 
 			else if (pathFromRequest.equals("/api/v1/addMovie")) {
-				if (!jsonObject.has("name") || !jsonObject.has("movieId")) {
+				if (!jsonObject.has("name") || !jsonObject.has("movieId") || neo4jMovies.movieIdExists(jsonObject.getString("movieId"))) {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
@@ -263,6 +256,12 @@ public class Utils implements HttpHandler {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
+				
+				else if (!neo4jMovies.actorIdExists(jsonObject.getString("actorId")) ||! neo4jMovies.movieIdExists(jsonObject.getString("movieId"))) {
+					sendString(request, "404 NOT FOUND\n", 404);
+					return;
+				}
+				
 				String actorId = jsonObject.getString("actorId");
 				String movieId = jsonObject.getString("movieId");
 
@@ -271,7 +270,7 @@ public class Utils implements HttpHandler {
 			}
 			
 			else if (pathFromRequest.equals("/api/v1/addAward")) {
-				if (!jsonObject.has("name") || !jsonObject.has("awardId")) {
+				if (!jsonObject.has("name") || !jsonObject.has("awardId") || neo4jMovies.awardIdExists(jsonObject.getString("awardId"))) {
 					sendString(request, "400 BAD REQUEST\n", 400);
 					return;
 				}
@@ -279,7 +278,7 @@ public class Utils implements HttpHandler {
 				String awardName = jsonObject.getString("name");
 				String awardId = jsonObject.getString("awardId");
 
-				neo4jMovies.addMovie(awardName, awardId);
+				neo4jMovies.addAward(awardName, awardId);
 				sendString(request, "200 OK\n", 200);
 			} 
 			
@@ -287,6 +286,11 @@ public class Utils implements HttpHandler {
 
 				if (!jsonObject.has("movieId") || !jsonObject.has("awardId")) {
 					sendString(request, "400 BAD REQUEST\n", 400);
+					return;
+				}
+				
+				else if (!neo4jMovies.awardIdExists(jsonObject.getString("awardId")) || !neo4jMovies.movieIdExists(jsonObject.getString("movieId"))) {
+					sendString(request, "404 NOT FOUND\n", 404);
 					return;
 				}
 				String movieId = jsonObject.getString("movieId");

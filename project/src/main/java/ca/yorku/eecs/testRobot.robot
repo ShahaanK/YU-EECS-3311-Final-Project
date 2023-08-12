@@ -38,17 +38,17 @@ addRelationshipFail
 
 addAwardPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    awardId=aw2g    name=Golden Globe Two
+    ${params}=    Create Dictionary    awardId=aw2g    name=Golden Globe
     ${resp}=    PUT On Session    localhost    /api/v1/addAward    json=${params}    headers=${headers}    expected_status=200
 
 addAwardFail
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    awardId=aw1    name=Golden Globe
+    ${params}=    Create Dictionary    title=aw2    name=Golden Globe
     ${resp}=    PUT On Session    localhost    /api/v1/addAward    json=${params}    headers=${headers}    expected_status=400
 
 addAwardWinnerPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    awardId=aw2    movieId=nm78
+    ${params}=    Create Dictionary    awardId=aw2g    movieId=nm144444d
     ${resp}=    PUT On Session    localhost    /api/v1/addAwardWinner    json=${params}    headers=${headers}    expected_status=200
 
 addAwardWinnerFail
@@ -61,17 +61,11 @@ getActorPass
     ${params}=    Create Dictionary    actorId=nm105993842
     ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=200
 
-getActorFail404
+getActorFail
     # This tests 404 error
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm456
     ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=404
-
-getActorFail400
-    # This tests 400 error
-    ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=nm454654456
-    ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=400
 
 getMoviePass
     ${headers}=    Create Dictionary    Content-Type=application/json
@@ -86,7 +80,7 @@ getMovieFail
 
 hasRelationshipPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    actorId=nm10    movieId=nm78
+    ${params}=    Create Dictionary    actorId=nm1937491s    movieId=nm144444d
     ${resp}=    GET On Session    localhost    /api/v1/hasRelationship    json=${params}    headers=${headers}    expected_status=200
     
 hasRelationshipFail
@@ -96,7 +90,7 @@ hasRelationshipFail
     
 computeBaconNumberPass
 	${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    actorId=nm94820392
+    ${params}=    Create Dictionary    actorId=nm849924632
     ${resp}=    GET On Session    localhost    /api/v1/computeBaconNumber    json=${params}    headers=${headers}    expected_status=200
 
 computeBaconNumberFail

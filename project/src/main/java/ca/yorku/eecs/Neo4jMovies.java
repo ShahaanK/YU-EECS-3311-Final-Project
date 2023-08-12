@@ -41,7 +41,7 @@ public class Neo4jMovies {
 	public void addActor(String name, String actorId) {
 
 		try (Session session = driver.session()) {
-			session.writeTransaction(tx -> tx.run("CREATE (a:actor { name: $name, actorId: $actorId })",
+			session.writeTransaction(tx -> tx.run("CREATE (a:actor { name: $name, id: $actorId })",
 					Values.parameters("name", name, "actorId", actorId)));
 			session.close();
 		}
@@ -51,7 +51,7 @@ public class Neo4jMovies {
 
 		try (Session session = driver.session()) {
 			session.writeTransaction(tx -> 
-			tx.run("MERGE (m:movie {name: $name, movieId: $movieId})",
+			tx.run("CREATE (m:movie {name: $name, id: $movieId})",
 					Values.parameters("movieId", movieId, "name", name)));
 			session.close();
 		}
@@ -60,17 +60,17 @@ public class Neo4jMovies {
 	public void addRelationship(String actorId, String movieId) {
 
 		try (Session session = driver.session()) {
-			session.writeTransaction(tx -> tx.run("MATCH (a:actor {actorId: $actorId})\n"
-					+ "MATCH (m:movie {movieId: $movieId})\n"
+			session.writeTransaction(tx -> tx.run("MATCH (a:actor {id: $actorId})\n"
+					+ "MATCH (m:movie {id: $movieId})\n"
 					+ "MERGE (a)-[:ACTED_IN]->(m)",
 					Values.parameters("actorId", actorId, "movieId", movieId)));
 			session.close();
 		}
 	}
 
-	public void addAward(String awardId, String name) {
+	public void addAward(String name, String awardId) {
 		try (Session session = driver.session()) {
-			session.writeTransaction(tx -> tx.run("CREATE (w:award { name: $name, awardId: $awardId })",
+			session.writeTransaction(tx -> tx.run("CREATE (w:award { name: $name, id: $awardId })",
 					Values.parameters("name", name, "awardId", awardId)));
 			session.close();
 		}
@@ -79,33 +79,14 @@ public class Neo4jMovies {
 	public void addAwardWinner(String awardId, String movieId) {
 		try (Session session = driver.session()) {
 			session.writeTransaction(tx -> {
-			tx.run("MATCH (w: award {awardId: $awardId}), (m: movie {movieId: $movieId})\n"
-					+ "RETURN (w).awardId as awardId, (m).movieId as movieId, EXISTS ((w)-[:WON_BY]-(m)) as addAwardWinner",
+			tx.run("MATCH (w:award {id: $awardId})\n" 
+					+ "MATCH (m:movie {id: $movieId})\n"
+					+ "MERGE (w)-[:WON_BY]->(m)",
 					Values.parameters("awardId", awardId, "movieId", movieId));
-			StatementResult result = tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
-					+ "RETURN (w).awardId as awardId, (m).movieId as movieId, EXISTS ((w)-[:WON_BY]-(m)) as addAwardWinner",
+			StatementResult result = tx.run("MATCH (w:award {id: $awardId})\n" 
+					+ "MATCH (m:movie {id: $movieId})\n"
+					+ "MERGE (w)-[:WON_BY]->(m)",
 					Values.parameters("awardId", awardId, "movieId", movieId));
-
-			Record record = result.next();
-
-			JSONObject json = new JSONObject();
-			try {
-				json.put("awardId", record.get("awardId"));
-				json.put("movieId", record.get("movieId"));
-				json.put("addAwardWinner", record.get("addAwardWinner"));
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				System.out.print("{\n\t \"awardId\": " + json.get("awardId") + ",\n");
-				System.out.print("\t \"movieId\": " + json.get("movieId") + ",\n");
-				System.out.print("\t \"addAwardWinner\": " + json.get("addAwardWinner").toString().toLowerCase() + "\n}");
-
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			return result;		
 		});
 			session.close();
@@ -125,14 +106,14 @@ public class Neo4jMovies {
 		try(Session session = driver.session()){
 			session.writeTransaction(tx -> 
 			{
-				tx.run("MATCH (a:actor {actorId: $actorId})\n"
+				tx.run("MATCH (a:actor {id: $actorId})\n"
 						+ "OPTIONAL MATCH (a)-[:ACTED_IN]->(m:movie)\n"
-						+ "RETURN a.actorId, a.name, COLLECT(m.movieId) AS movies",
+						+ "RETURN a.id, a.name, COLLECT(m.id) AS movies",
 						Values.parameters("actorId", actorId));
 
-				StatementResult result = tx.run("MATCH (a:actor {actorId: $actorId})\n"
+				StatementResult result = tx.run("MATCH (a:actor {id: $actorId})\n"
 						+ "OPTIONAL MATCH (a)-[:ACTED_IN]->(m:movie)\n"
-						+ "RETURN a.actorId as actorId, a.name as name, COLLECT(m.movieId) AS movies",
+						+ "RETURN a.id as actorId, a.name as name, COLLECT(m.id) AS movies",
 						Values.parameters("actorId", actorId));
 				Record record = result.next();
 
@@ -142,7 +123,6 @@ public class Neo4jMovies {
 					json.put("name", record.get("name"));
 					json.put("movies", record.get("movies"));
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				try {
@@ -169,7 +149,6 @@ public class Neo4jMovies {
 						System.out.print("]\n}");
 					}
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				return result;
@@ -184,14 +163,14 @@ public class Neo4jMovies {
 		try(Session session = driver.session()){
 			session.writeTransaction(tx -> 
 			{
-				tx.run("MATCH (m:movie {movieId: $movieId})\n"
+				tx.run("MATCH (m:movie {id: $movieId})\n"
 						+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
-						+ "RETURN m.name as name, m.movieId as movieId, collect(a.actorId) as actors",
+						+ "RETURN m.name as name, m.id as movieId, collect(a.id) as actors",
 						Values.parameters("movieId", movieId));
 
-				StatementResult result = tx.run("MATCH (m:movie {movieId: $movieId})\n"
+				StatementResult result = tx.run("MATCH (m:movie {id: $movieId})\n"
 						+ "OPTIONAL MATCH (a:actor)-[:ACTED_IN]->(m)\n"
-						+ "RETURN m.name as name, m.movieId as movieId, collect(a.actorId) as actors",
+						+ "RETURN m.name as name, m.id as movieId, collect(a.id) as actors",
 						Values.parameters("movieId", movieId));
 
 				Record record = result.next();
@@ -243,11 +222,11 @@ public class Neo4jMovies {
 
 		try (Session session = driver.session()) {
 			session.writeTransaction(tx -> {
-				tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
-						+ "RETURN (a).actorId as actorId, (m).movieId as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
+				tx.run("MATCH (a: actor {id: $actorId}), (m: movie {id: $movieId})\n"
+						+ "RETURN (a).id as actorId, (m).id as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
 						Values.parameters("actorId", actorId, "movieId", movieId));
-				StatementResult result = tx.run("MATCH (a: actor {actorId: $actorId}), (m: movie {movieId: $movieId})\n"
-						+ "RETURN (a).actorId as actorId, (m).movieId as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
+				StatementResult result = tx.run("MATCH (a: actor {id: $actorId}), (m: movie {id: $movieId})\n"
+						+ "RETURN (a).id as actorId, (m).id as movieId, EXISTS ((a)-[:ACTED_IN]-(m)) as hasRelationship",
 						Values.parameters("actorId", actorId, "movieId", movieId));
 				
 				JSONObject json = new JSONObject();
@@ -281,27 +260,13 @@ public class Neo4jMovies {
 		try (Session session = driver.session()) {
 			if (!actorId.equals("nm0000102")) {
 				session.writeTransaction(tx -> {
-					tx.run("MATCH p=shortestPath((k:actor {actorId: $kevin})-[ACTED_IN*]-(k:actor {actorId: $actorId}))\n"
+					tx.run("MATCH p=shortestPath((k:actor {id: $kevin})-[ACTED_IN*]-(k:actor {id: $actorId}))\n"
 							+ "RETURN length(p) as baconNumber",
 							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
-					StatementResult result = tx.run("MATCH p=shortestPath((k:actor {actorId: $kevin})-[ACTED_IN*]-(a:actor {actorId: $actorId}))\n"
+					StatementResult result = tx.run("MATCH p=shortestPath((k:actor {id: $kevin})-[ACTED_IN*]-(k:actor {id: $actorId}))\n"
 							+ "RETURN length(p) as baconNumber",
 							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
 
-					Record record = result.single();
-
-					JSONObject json = new JSONObject();
-					try {
-						json.put("baconNumber", record.get("baconNumber"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					try {
-						System.out.print("{\n\t \"baconNumber\": " + json.get("baconNumber") + "\n}");
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
 					return result;		
 				});
 				session.close();
@@ -313,13 +278,13 @@ public class Neo4jMovies {
 		try (Session session = driver.session()) {
 			if (!actorId.equals("nm0000102")) {
 				session.writeTransaction(tx -> {
-					tx.run("MATCH p=shortestPath((a:actor {actorId: $actorId})-[ACTED_IN*]-(k:actor {actorId: $kevin}))\n"
+					tx.run("MATCH p=shortestPath((a:actor {id: $actorId})-[ACTED_IN*]-(k:actor {id: 'nm0000102'}))\n"
 							+ "RETURN nodes(p) as baconPath",
-							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
+							Values.parameters("actorId", actorId));
 
-					StatementResult result = tx.run("MATCH p=shortestPath((a:actor {actorId: $actorId})-[ACTED_IN*]-(k:actor {actorId: $kevin}))\n"
+					StatementResult result = tx.run("MATCH p=shortestPath((a:actor {id: $actorId})-[ACTED_IN*]-(k:actor {id: 'nm0000102'}))\n"
 							+ "RETURN nodes(p) as baconPath",
-							Values.parameters("actorId", actorId, "kevin", "nm0000102"));
+							Values.parameters("actorId", actorId));
 
 					return result;	
 
@@ -329,31 +294,54 @@ public class Neo4jMovies {
 		}
 	}
 	
-	public boolean entityExists(String actorId, String movieId) {
+	public boolean actorIdExists(String actorId) {
 	    try (Session session = driver.session()) {
-	        // Check if the actor ID exists
+
 	        if (actorId != null) {
 	            StatementResult actorResult = session.writeTransaction(tx -> 
-	                tx.run("MATCH (a:actor {actorId: $actorId}) RETURN COUNT(a) > 0 as exists",
-	                       Values.parameters("actorId", actorId)));
-	            if (actorResult.single().get("exists").asBoolean()) {
-	                return true; // Actor ID exists
+	                tx.run("MATCH (a:actor {id: $actorId})\n" +  
+	                		"RETURN COUNT(a) > 0 as existingValue",
+	                			Values.parameters("actorId", actorId)));
+	            if (actorResult.single().get("existingValue").asBoolean()) {
+	                return true;
 	            }
 	        }
-
-	        // Check if the movie ID exists
-	        if (movieId != null) {
-	            StatementResult movieResult = session.writeTransaction(tx -> 
-	                tx.run("MATCH (m:movie {movieId: $movieId}) RETURN COUNT(m) > 0 as exists",
-	                       Values.parameters("movieId", movieId)));
-	            if (movieResult.single().get("exists").asBoolean()) {
-	                return true; // Movie ID exists
-	            }
-	        }
-
-	        // Neither actor ID nor movie ID exists
 	        return false;
 	    }
 	}
+	
+	public boolean movieIdExists(String movieId) {
+	    try (Session session = driver.session()) {
+	    	
+	        if (movieId != null) {
+	            StatementResult movieResult = session.writeTransaction(tx -> 
+	                tx.run("MATCH (m:movie {id: $movieId})\n" + 
+	                		"RETURN COUNT(m) > 0 as existingValue",
+	                			Values.parameters("movieId", movieId)));
+	            if (movieResult.single().get("existingValue").asBoolean()) {
+	                return true;
+	            }
+	        }
+	        return false;
+	    }
+	}
+	
+	public boolean awardIdExists(String awardId) {
+	    try (Session session = driver.session()) {
+	    	
+	        if (awardId != null) {
+	            StatementResult movieResult = session.writeTransaction(tx -> 
+	                tx.run("MATCH (a:award {id: $awardId})\n" + 
+	                		"RETURN COUNT(a) > 0 as existingValue",
+	                			Values.parameters("awardId", awardId)));
+	            if (movieResult.single().get("existingValue").asBoolean()) {
+	                return true;
+	            }
+	        }
+	        return false;
+	    }
+	}
+	
+
 
 }
