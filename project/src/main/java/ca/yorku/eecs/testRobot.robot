@@ -60,25 +60,32 @@ addAwardWinnerFail
     
 getActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    actorId=nm10
+    ${params}=    Create Dictionary    actorId=nm105993842
     ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=200
 
-getActorFail
+getActorFail404
+    # This tests 404 error
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm456
-     ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=400
-    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/getActor    params=${params}    headers=${headers}    expected_status=404  
+    ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=404
+
+getActorFail400
+    # This tests 400 error
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${params}=    Create Dictionary    name=nm454654456
+    ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=400
 
 getMoviePass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    movieId=nm78
+    ${params}=    Create Dictionary    movieId=nm19329423
     ${resp}=    GET On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=200
 
 getMovieFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    movieId=mov123
     ${resp}=    GET On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=400
-    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/getMovie    params=${params}    headers=${headers}    expected_status=404
+    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/getMovie    params=${params}    headers=${headers}    expected_status=
+
 
 hasRelationshipPass
     ${headers}=    Create Dictionary    Content-Type=application/json

@@ -106,16 +106,17 @@ public class Utils implements HttpHandler {
 			try {
 				if (pathFromRequest.equals("/api/v1/getActor")) {
 					if (!queryParameters.has("actorId")) {
-						System.out.print("for getAct: 400\n");
+						System.out.print("1 for getAct: 400\n");
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
 					else {
 						try {
 							neo4jmovies.getActor(queryParameters.get("actorId").toString());
+							System.out.print("2 for getAct: 400\n");
 							sendString(request, "200 OK", 200);
 						}
 						catch (Exception e) {
-							System.out.print("for getAct: 404\n");
+							System.out.print("3 for getAct: 404\n");
 							e.printStackTrace();
 							sendString(request, "404 NOT FOUND", 404);
 						}
