@@ -328,4 +328,32 @@ public class Neo4jMovies {
 			}
 		}
 	}
+	
+	public boolean entityExists(String actorId, String movieId) {
+	    try (Session session = driver.session()) {
+	        // Check if the actor ID exists
+	        if (actorId != null) {
+	            StatementResult actorResult = session.writeTransaction(tx -> 
+	                tx.run("MATCH (a:actor {actorId: $actorId}) RETURN COUNT(a) > 0 as exists",
+	                       Values.parameters("actorId", actorId)));
+	            if (actorResult.single().get("exists").asBoolean()) {
+	                return true; // Actor ID exists
+	            }
+	        }
+
+	        // Check if the movie ID exists
+	        if (movieId != null) {
+	            StatementResult movieResult = session.writeTransaction(tx -> 
+	                tx.run("MATCH (m:movie {movieId: $movieId}) RETURN COUNT(m) > 0 as exists",
+	                       Values.parameters("movieId", movieId)));
+	            if (movieResult.single().get("exists").asBoolean()) {
+	                return true; // Movie ID exists
+	            }
+	        }
+
+	        // Neither actor ID nor movie ID exists
+	        return false;
+	    }
+	}
+
 }
