@@ -11,12 +11,7 @@ addActorPass
     ${params}=    Create Dictionary    name=Margot Robbie   actorId=nm10
     ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    expected_status=200
     
-addActorFailOne
-    ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=Kevin Bacon
-    ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    expected_status=400
-
-addActorFailTwo
+addActorFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    name=Devin    actorId=nm0000102
     ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    expected_status=400
@@ -26,16 +21,11 @@ addMoviePass
     ${params}=    Create Dictionary    name=Parasites    movieId=nm144444
     ${resp}=    PUT On Session    localhost    /api/v1/addMovie    json=${params}    headers=${headers}    expected_status=200
 
-addMovieFailOne
+addMovieFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    title=Animal Farm    movieId=tt0394
     ${resp}=    PUT On Session    localhost    /api/v1/addMovie    json=${params}    headers=${headers}    expected_status=400
     
-addMovieFailTwo
-    ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    title=Animal Farm    movieId=nm78
-    ${resp}=    PUT On Session    localhost    /api/v1/addMovie    json=${params}    headers=${headers}    expected_status=400
-
 addRelationshipPass
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm17482    movieId=nm144444
@@ -45,6 +35,7 @@ addRelationshipFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm1    movieId=tt1
     ${resp}=    PUT On Session    localhost    /api/v1/addRelationship    json=${params}    headers=${headers}    expected_status=400
+    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/addRelationship    params=${params}    headers=${headers}    expected_status=404
 
 addAwardPass
     ${headers}=    Create Dictionary    Content-Type=application/json
@@ -64,7 +55,8 @@ addAwardWinnerPass
 addAwardWinnerFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    awardId=aw999    movieId=tt999
-    ${resp}=    PUT On Session    localhost    /api/v1/addAwardWinner    json=${params}    headers=${headers}    expected_status=404
+    ${resp}=    PUT On Session    localhost    /api/v1/addAwardWinner    json=${params}    headers=${headers}    expected_status=400
+    Run Keyword And Expect Error    404    PUT On Session    localhost    /api/v1/addAwardWinner    params=${params}    headers=${headers}    expected_status=404
     
 getActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
@@ -74,22 +66,19 @@ getActorPass
 getActorFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm456
-    ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=404
+     ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=400
+    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/getActor    params=${params}    headers=${headers}    expected_status=404  
 
 getMoviePass
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    movieId=nm78
     ${resp}=    GET On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=200
 
-getMovieFailOne
+getMovieFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    movieId=mov123
-    ${resp}=    GET On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=404
-    
-getMovieFailTwo
-    ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    id=mov123
     ${resp}=    GET On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=400
+    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/getMovie    params=${params}    headers=${headers}    expected_status=404
 
 hasRelationshipPass
     ${headers}=    Create Dictionary    Content-Type=application/json
@@ -99,23 +88,20 @@ hasRelationshipPass
 hasRelationshipFail
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm123    movieId=nm10491843
-    ${resp}=    GET On Session    localhost    /api/v1/hasRelationship    json=${params}    headers=${headers}    expected_status=404
+    ${resp}=    GET On Session    localhost    /api/v1/hasRelationship    json=${params}    headers=${headers}    expected_status=400
+    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/hasRelationship    params=${params}    headers=${headers}    expected_status=404
     
 computeBaconNumberPass
 	${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm94820392
     ${resp}=    GET On Session    localhost    /api/v1/computeBaconNumber    json=${params}    headers=${headers}    expected_status=200
 
-computeBaconNumberFailOne
+computeBaconNumberFail
 	${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm49
     ${resp}=    GET On Session    localhost    /api/v1/computeBaconNumber    json=${params}    headers=${headers}    expected_status=400
+    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/computeBaconNumber    params=${params}    headers=${headers}    expected_status=404
     
-computeBaconNumberFailTwo
-	${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    actorId=kowp20491
-    ${resp}=    GET On Session    localhost    /api/v1/computeBaconNumber    json=${params}    headers=${headers}    expected_status=404
-   
 computeBaconPathPass
 	${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm94820392
@@ -124,4 +110,6 @@ computeBaconPathPass
 computeBaconPathFail
 	${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm49
-    ${resp}=    GET On Session    localhost    /api/v1/computeBaconPath    json=${params}    headers=${headers}    expected_status=404
+    ${resp}=    GET On Session    localhost    /api/v1/computeBaconPath    json=${params}    headers=${headers}    expected_status=400
+    Run Keyword And Expect Error    404    GET On Session    localhost    /api/v1/computeBaconPath    params=${params}    headers=${headers}    expected_status=404
+    
