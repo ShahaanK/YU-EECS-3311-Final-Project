@@ -230,7 +230,9 @@ public class Neo4jMovies {
 						Values.parameters("actorId", actorId, "movieId", movieId));
 				
 				JSONObject json = new JSONObject();
-							
+				
+				Utils utils = new Utils();
+				
 				try {
 					Record record = result.next();
 					json.put("actorId", record.get("actorId"));
@@ -239,8 +241,15 @@ public class Neo4jMovies {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				System.out.print(json.toString());
-				return json;		
+				try {
+					System.out.print("{\n\t \"actorId\": " + json.get("actorId") + ",\n");
+					System.out.print("\t \"movieId\": " + json.get("movieId") + ",\n");
+					System.out.print("\t \"hasRelationship\": " + json.get("hasRelationship").toString().toLowerCase() + "\n}");
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return result;		
 			});
 			session.close();
 		}
