@@ -77,7 +77,6 @@ getMovieFail
     ${params}=    Create Dictionary    name=tt999
     ${resp}=    GET On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=400
 
-
 hasRelationshipPass
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm1937491s    movieId=nm144444d
@@ -100,7 +99,7 @@ computeBaconNumberFail
     
 computeBaconPathPass
 	${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    actorId=nm94820392
+    ${params}=    Create Dictionary    actorId=nm0000102
     ${resp}=    GET On Session    localhost    /api/v1/computeBaconPath    json=${params}    headers=${headers}    expected_status=200
     
 computeBaconPathFail
