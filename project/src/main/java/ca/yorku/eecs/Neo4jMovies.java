@@ -294,6 +294,16 @@ public class Neo4jMovies {
 		}
 	}
 	
+	
+	
+	
+	/*
+	 * 
+	 * HELPER METHODS
+	 * 
+	 */
+	
+	
 	public boolean actorIdExists(String actorId) {
 	    try (Session session = driver.session()) {
 
