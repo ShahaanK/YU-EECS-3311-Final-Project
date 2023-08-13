@@ -155,7 +155,7 @@ public class Utils implements HttpHandler {
 				}
 
 				else if (pathFromRequest.equals("/api/v1/computeBaconNumber")) {
-					if (!queryParameters.has("actorId")) {
+					if (!queryParameters.has("actorId") || queryParameters.get("actorId").toString().equals("nm0000102")) {
 						System.out.print("for computeBaconNumber: 400\n");
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}
@@ -172,7 +172,7 @@ public class Utils implements HttpHandler {
 				}
 
 				else if (pathFromRequest.equals("/api/v1/computeBaconPath")) {
-					if (!queryParameters.has("actorId")) {
+					if (!queryParameters.has("actorId") || queryParameters.get("actorId").toString().equals("nm0000102")) {
 						System.out.print("for computeBaconPath: 400 key\n");
 						sendString(request, "400 BAD REQUEST\n", 400);
 					}

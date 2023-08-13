@@ -13,7 +13,7 @@ addActorPass
     
 addActorFail
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=Devin    actorId=nm0000102
+    ${params}=    Create Dictionary    name=Ilir Second    actorId=nm1937491s
     ${resp}=    PUT On Session    localhost    /api/v1/addActor    json=${params}    headers=${headers}    expected_status=400
 
 addMoviePass
@@ -58,23 +58,23 @@ addAwardWinnerFail
         
 getActorPass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    actorId=nm105993842
+    ${params}=    Create Dictionary    actorId=nm1937491s
     ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=200
 
 getActorFail
     # This tests 404 error
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    actorId=nm456
+    ${params}=    Create Dictionary    actorId=tt999
     ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=404
 
 getMoviePass
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    movieId=nm19329423
+    ${params}=    Create Dictionary    movieId=nm144444d
     ${resp}=    GET On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=200
 
 getMovieFail
     ${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=mov123
+    ${params}=    Create Dictionary    name=tt999
     ${resp}=    GET On Session    localhost    /api/v1/getMovie    json=${params}    headers=${headers}    expected_status=400
 
 
@@ -95,7 +95,7 @@ computeBaconNumberPass
 
 computeBaconNumberFail
 	${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=nm49
+    ${params}=    Create Dictionary    name=nm0000102
     ${resp}=    GET On Session    localhost    /api/v1/computeBaconNumber    json=${params}    headers=${headers}    expected_status=400
     
 computeBaconPathPass
@@ -105,6 +105,6 @@ computeBaconPathPass
     
 computeBaconPathFail
 	${headers}=    Create Dictionary    Content-Type=application/json
-    ${params}=    Create Dictionary    name=nm49
-    ${resp}=    GET On Session    localhost    /api/v1/computeBaconPath    json=${params}    headers=${headers}    expected_status=400
+    ${params}=    Create Dictionary    actorId=tt999
+    ${resp}=    GET On Session    localhost    /api/v1/computeBaconPath    json=${params}    headers=${headers}    expected_status=404
     
