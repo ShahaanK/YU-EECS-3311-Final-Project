@@ -80,6 +80,7 @@ hasRelationshipPass
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=nm1937491s    movieId=nm144444d
     ${resp}=    GET On Session    localhost    /api/v1/hasRelationship    json=${params}    headers=${headers}    expected_status=200
+   	Log to console    ${resp.json()}
     
 hasRelationshipFail
     ${headers}=    Create Dictionary    Content-Type=application/json
