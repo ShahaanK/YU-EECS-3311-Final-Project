@@ -62,7 +62,6 @@ getActorPass
     ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=200
 
 getActorFail
-    # This tests 404 error
     ${headers}=    Create Dictionary    Content-Type=application/json
     ${params}=    Create Dictionary    actorId=tt999
     ${resp}=    GET On Session    localhost    /api/v1/getActor    json=${params}    headers=${headers}    expected_status=404
